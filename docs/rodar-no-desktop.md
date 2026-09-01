@@ -12,11 +12,13 @@ O agente funciona igual na nuvem e no desktop — o que muda é o que ele
 | Navegador para o portal da Caixa | Depende de liberar o domínio | Instalável, sem restrição |
 | `pipeline.csv` e fichas | Container é reciclado — some se não commitar | **Fica no disco** |
 | Agendamento (varredura semanal) | Routines na nuvem | cron / Agendador do Windows |
-| Acesso pelo celular | Sim | Não |
+| Acesso pelo celular | Sim | A sessão roda na máquina; o resultado chega por git e pelo painel |
 
-O melhor arranjo é híbrido: **desktop coleta e analisa**, nuvem/celular
-consulta e gera documentos, e o **git é a memória compartilhada** entre os dois
-e com quem mais entrar no projeto.
+O melhor arranjo é híbrido: **o desktop coleta**, os demais dispositivos
+consultam, e o **git é a memória compartilhada** entre eles e com quem mais
+entrar no projeto. Rodar no desktop não tira o projeto do celular — só a sessão
+do CLI é que fica presa à máquina; o pipeline e o painel continuam acessíveis de
+qualquer lugar.
 
 ## Instalação
 
@@ -103,20 +105,69 @@ foi analisado, inclusive os descartes e os valores vencedores dos lotes
 perdidos. É ele que impede reanalisar o mesmo lixo todo mês e o que calibra a
 agressividade dos próximos lances.
 
-## Varredura recorrente
+## Automação: rodar sozinho e chegar em todos os dispositivos
 
-Dentro do Claude Code, para uma sessão de trabalho:
+A arquitetura é esta — a máquina faz o trabalho pesado, o resultado viaja:
 
 ```
-/loop 6h varra os lotes novos da Caixa em MG e me avise o que passar de 75 pontos
+  desktop (agendado)                       qualquer dispositivo
+  ------------------                       --------------------
+  varre os portais                         abre o projeto na nuvem
+  atualiza pipeline.csv        ──git──>    lê o pipeline atualizado
+  commita e sobe                           pede análise, gera documento
+  republica o painel           ──link──>   abre o painel no celular
 ```
 
-Para rodar sem ninguém na frente da tela, agende no sistema operacional:
+O desktop é o **coletor**. Os dispositivos consomem o resultado por dois canais
+que não dependem dele: o repositório e o link do painel.
+
+### 1. O agendamento
+
+Execução desassistida exige modo de permissão explícito — sem isso o Claude
+para no primeiro pedido de confirmação e o cron fica pendurado até estourar o
+tempo. Use `--permission-mode auto`, que aprova o rotineiro e ainda barra o
+que foge do esperado:
 
 ```bash
-# cron, toda segunda às 7h
-0 7 * * 1 cd ~/Luiz-Arthur && claude -p "varra os lotes novos da Caixa em MG, atualize o pipeline.csv e comite" >> ~/leilao.log 2>&1
+# cron — toda segunda às 7h
+0 7 * * 1 cd ~/Luiz-Arthur && claude -p --permission-mode auto \
+  "Varra os lotes novos da Caixa na minha praça-alvo, atualize o pipeline.csv, \
+   republique o painel de oportunidades e comite tudo" \
+  >> ~/leilao.log 2>&1
 ```
+
+No Windows, o Agendador de Tarefas com a mesma linha (programa `claude`,
+argumentos idênticos, iniciar em `C:\...\Luiz-Arthur`).
+
+`bypassPermissions` também funciona e pula toda checagem — evite: uma
+automação que varre sites externos e escreve no repositório é exatamente o tipo
+de coisa que você quer com freio.
+
+### 2. Os dois canais de entrega
+
+**Repositório.** O `git push` no fim de cada varredura é o que leva o pipeline
+para todos os lugares. Do celular, você abre o projeto na nuvem e ele já vem com
+a lista atualizada — pode pedir análise de um lote, rodar viabilidade, gerar
+documento.
+
+**Painel.** O agendamento republica um painel de oportunidades **no mesmo link**
+a cada rodada: os lotes ranqueados, score, CTA, lance máximo e o que mudou desde
+a semana passada. Abre em qualquer navegador, sem sessão, sem login — é o link
+que você manda para o Marco Antônio e ele consulta de onde estiver.
+
+### 3. A limitação real
+
+Cron só roda com a máquina ligada e acordada. Notebook fechado às 7h da segunda
+não varre nada. Duas saídas:
+
+- Agende para um horário em que a máquina costuma estar ligada.
+- Não se preocupe demais: a varredura é diferencial — compara os portais contra
+  o `pipeline.csv`. Uma rodada perdida é recuperada na seguinte, sem furo no
+  histórico.
+
+Se um dia quiser automação que roda mesmo com tudo desligado, é o caminho da
+nuvem — Routines na infraestrutura da Anthropic — e aí volta a depender de
+liberar os domínios na política de rede do ambiente.
 
 ## Trabalhando junto com o Marco Antônio
 
