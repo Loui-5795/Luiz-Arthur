@@ -78,6 +78,19 @@ Descarte sem dó, antes de gastar análise, o lote que bater em qualquer um:
 - Prazo até o certame insuficiente para due diligence mínima (< 3 dias úteis)
   quando o valor for relevante.
 
+Para listas grandes (o export por UF do portal traz milhares de linhas), use
+`scripts/triagem.py` em vez de ler lote a lote — ele normaliza o arquivo, aplica
+os cortes do mandato e devolve os lotes ordenados por prioridade de pesquisa,
+já gravando o `pipeline.csv` com os descartes e seus motivos:
+
+```bash
+python3 .claude/skills/leilao-imoveis/scripts/triagem.py lista_MG.csv \
+  --cidade "Belo Horizonte" --ate 250000 --desconto-min 25 --pipeline pipeline.csv
+```
+
+A prioridade que ele devolve **não é margem** — é onde gastar a próxima hora de
+pesquisa. Margem exige VVR, e VVR exige comparáveis que não estão no arquivo.
+
 Um lote que sobrevive vira **ficha de oportunidade** (`templates/ficha-oportunidade.md`).
 
 ### 4. Due diligence
@@ -158,6 +171,8 @@ agressividade dos próximos lances na mesma praça.
 | `references/03-due-diligence-checklist.md` | Checklist item a item, com fonte de consulta |
 | `references/04-fontes-e-plataformas.md` | Onde buscar, por banco e por Judiciário |
 | `references/05-analise-financeira.md` | Rubricas de custo, fórmulas, pesos do score |
+| `scripts/triagem.py` | Normaliza a lista exportada do portal e aplica os cortes |
+| `scripts/viabilidade.py` | CTA, margem e lance máximo de um lote ou carteira |
 | `templates/ficha-oportunidade.md` | Modelo de ficha por lote |
 | `templates/pipeline-schema.md` | Colunas do `pipeline.csv` |
 
