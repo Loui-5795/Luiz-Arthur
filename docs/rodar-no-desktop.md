@@ -105,6 +105,62 @@ foi analisado, inclusive os descartes e os valores vencedores dos lotes
 perdidos. É ele que impede reanalisar o mesmo lixo todo mês e o que calibra a
 agressividade dos próximos lances.
 
+## Começando agora (praça definida: Palhoça / Bela Vista)
+
+Sequência completa, do zero ao agendado. São cinco comandos.
+
+```bash
+# 1. instalar o Claude Code  (macOS / Linux / WSL)
+curl -fsSL https://claude.ai/install.sh | bash
+
+# 2. clonar e entrar
+git clone https://github.com/Loui-5795/Luiz-Arthur.git
+cd Luiz-Arthur && git checkout claude/imoveis-leilao-agent-olmf6r
+
+# 3. primeira sessão: fecha o perfil e levanta o mercado do bairro
+claude "Complete o perfil-investidor.md com meu capital e tese de saída,
+        depois levante a referência de mercado de Bela Vista, Palhoça:
+        mediana de anúncio por tipologia, com no mínimo 5 comparáveis cada"
+
+# 4. primeira varredura de verdade
+claude "Rode a varredura completa da minha praça-alvo e me traga os lotes
+        ranqueados com lance máximo"
+
+# 5. deixar rodando sozinho, toda segunda às 7h
+.claude/skills/leilao-imoveis/scripts/varredura.sh --agendar
+```
+
+O passo 3 não é burocracia: sem a referência de mercado do bairro, o VVR não
+existe, e sem VVR nenhum score é real — é o passo que transforma "imóvel barato"
+em "desconto de verdade".
+
+Para conferir o agendamento, desfazer ou rodar uma vez na mão:
+
+```bash
+crontab -l                                              # ver
+.claude/skills/leilao-imoveis/scripts/varredura.sh --remover   # desfazer
+.claude/skills/leilao-imoveis/scripts/varredura.sh             # rodar agora
+```
+
+### No Windows
+
+O `varredura.sh` roda sem alteração dentro do WSL — é o caminho mais simples.
+No Windows nativo, use o Agendador de Tarefas apontando para o mesmo ciclo:
+
+```powershell
+$repo = "C:\caminho\para\Luiz-Arthur"
+$acao = New-ScheduledTaskAction -Execute "claude" `
+  -Argument '-p --permission-mode auto "Rode a varredura semanal de imoveis em leilao seguindo a skill leilao-imoveis, usando o perfil-investidor.md; atualize o pipeline.csv, escreva o relatorio e republique o painel"' `
+  -WorkingDirectory $repo
+$gatilho = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday -At 7am
+$cfg = New-ScheduledTaskSettingsSet -StartWhenAvailable -WakeToRun
+Register-ScheduledTask -TaskName "LeilaoImoveis-Varredura" -Action $acao `
+  -Trigger $gatilho -Settings $cfg -Force
+```
+
+`-StartWhenAvailable` recupera a rodada se a máquina estava desligada na hora
+marcada — resolve a limitação de agendamento local descrita adiante.
+
 ## Automação: rodar sozinho e chegar em todos os dispositivos
 
 A arquitetura é esta — a máquina faz o trabalho pesado, o resultado viaja:
