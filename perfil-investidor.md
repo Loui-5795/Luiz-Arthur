@@ -32,17 +32,18 @@ lê daqui. Mudou a estratégia? Muda este arquivo, não os scripts.
 
 | | |
 |---|---|
-| Tese principal | `A DEFINIR` — revenda (flip) / renda (locação) / uso próprio |
-| Ciclo aceitável | revenda: 6–12 meses |
-| Margem líquida mínima | 25% sobre o CTA (padrão; revisar com a tese) |
-| Cap rate mínimo | 7% a.a. (se tese de renda) |
+| Tese principal | **Revenda (flip)** |
+| Ciclo aceitável | 6 – 12 meses da arrematação à venda |
+| Margem líquida mínima | **25% sobre o CTA** — abaixo disso, descarta |
+| Custo de venda a considerar | 6% de corretagem |
+| Fator de deságio do VVR | 0,88 (venda em 90 dias) |
 
 ## Tolerâncias
 
 | | |
 |---|---|
-| Ocupação | `A DEFINIR` — só desocupado / aceita ex-devedor / aceita qualquer |
-| Risco jurídico | `A DEFINIR` — só venda direta e licitação / aceita 2º Leilão SFI / aceita judicial |
+| Ocupação | `A DEFINIR` — mas na tese de flip, imóvel ocupado come o ciclo inteiro: prazo de desocupação acima de 6 meses inviabiliza a margem |
+| Risco jurídico | `A DEFINIR` — em flip, anulação de arrematação trava o capital por anos; começar por Venda Direta, Venda Online e Licitação Aberta |
 | Tipologia | apartamento e casa residencial; terreno só com acesso e matrícula limpa |
 
 ## Cortes automáticos
@@ -50,6 +51,7 @@ lê daqui. Mudou a estratégia? Muda este arquivo, não os scripts.
 Aplicados pelo `scripts/triagem.py` em toda varredura:
 
 - desconto anunciado mínimo: **25%**
+- margem líquida projetada abaixo de 25% sobre o CTA: descarta
 - fora da praça-alvo (núcleo + 1º anel): descarta
 - acima do ticket máximo: descarta
 - sem matrícula individualizada: descarta
