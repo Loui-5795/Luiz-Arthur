@@ -23,10 +23,35 @@ lê daqui. Mudou a estratégia? Muda este arquivo, não os scripts.
 
 | | |
 |---|---|
-| Capital à vista | `A DEFINIR` |
-| Ticket máximo por lote | `A DEFINIR` |
-| Aceita financiamento Caixa | `A DEFINIR` |
+| Capital à vista | **R$ 50.000 a R$ 100.000** |
+| Ticket máximo por lote | **decorre do capital, não é fixo** — ver tabela abaixo |
+| Aceita financiamento Caixa | `A DEFINIR` — mas é o que muda o jogo, ver nota |
 | Aceita usar FGTS | `A DEFINIR` |
+
+### Teto de lance por cenário, com R$ 100 mil de caixa
+
+Calculado por `scripts/viabilidade.py`. O lance não é o custo: comissão de 5%,
+ITBI, registro, dívidas, desocupação, reforma e carrego saem do mesmo bolso.
+
+| Cenário | Custos fixos | **Teto de lance** | Limitado por |
+|---|---|---|---|
+| Apto 45 m², desocupado, sem dívidas | R$ 24,7 mil | **R$ 69,0 mil** | caixa |
+| Apto 60 m², ocupado pelo ex-devedor, condomínio atrasado | R$ 75,5 mil | **R$ 22,4 mil** | caixa |
+| Apto 60 m², ocupado por terceiro, dívida alta | R$ 113,3 mil | **inviável** | o capital não cobre nem os custos |
+| Apto 60 m² desocupado, **financiado com 20% de entrada** | R$ 37,8 mil | **R$ 144,2 mil** | margem |
+
+Com R$ 50 mil, todos os tetos à vista caem para menos da metade — na prática,
+sobra terreno e lote de valor muito baixo.
+
+> **Nota sobre financiamento.** É a única alavanca que coloca um apartamento de
+> Bela Vista ao alcance deste capital. Mas vale só onde o edital do lote admite:
+> Venda Online e Venda Direta com mais frequência; modalidades com leiloeiro
+> costumam exigir pagamento à vista em prazo curto. Exige **crédito
+> pré-aprovado antes do certame**.
+>
+> Limite do modelo atual: as parcelas do financiamento durante o ciclo ainda não
+> entram no cálculo do carrego. Antes de dar lance financiado, somar
+> `parcela × meses` ao desembolso.
 
 ## Tese de saída
 
@@ -45,6 +70,24 @@ lê daqui. Mudou a estratégia? Muda este arquivo, não os scripts.
 | Ocupação | `A DEFINIR` — mas na tese de flip, imóvel ocupado come o ciclo inteiro: prazo de desocupação acima de 6 meses inviabiliza a margem |
 | Risco jurídico | `A DEFINIR` — em flip, anulação de arrematação trava o capital por anos; começar por Venda Direta, Venda Online e Licitação Aberta |
 | Tipologia | apartamento e casa residencial; terreno só com acesso e matrícula limpa |
+
+### O que consome o capital, por bloco
+
+Ordem de grandeza para triagem; substituir por cotação real na due diligence.
+
+| Bloco | Faixa | Como descobrir o valor real |
+|---|---|---|
+| Comissão do leiloeiro | 5% do lance, à parte | Edital do lote |
+| ITBI | 2% a 3% | Prefeitura de Palhoça |
+| Registro e escritura | 1% a 1,5% | Tabela de emolumentos de SC |
+| Condomínio atrasado | R$ 0 a R$ 20 mil | Administradora, **por escrito e com data** |
+| IPTU atrasado | R$ 1 a 5 mil | Prefeitura. Em hasta pública, sub-roga no preço (Tema 1.134 STJ) |
+| Desocupação por acordo | R$ 5 a 25 mil | Depende de quem ocupa |
+| Desocupação litigiosa | R$ 10 a 40 mil + 12 a 36 meses | Advogado |
+| Reforma leve | R$ 400 a 700 /m² | Orçamento após vistoria |
+| Reforma pesada | R$ 900 a 1.800 /m² | Orçamento após vistoria |
+| Regularização de área não averbada | R$ 8 a 30 mil + 6 a 18 meses | Projeto, ART, taxas |
+| Carrego | mensal × meses | Condomínio + IPTU + consumo |
 
 ## Cortes automáticos
 

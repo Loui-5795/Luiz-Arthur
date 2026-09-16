@@ -35,6 +35,8 @@ Campos aceitos no JSON (todos opcionais, exceto `lance` e a origem do VVR):
     custo_venda_pct      float  corretagem na saída             (padrão 6.0)
     margem_alvo_pct      float  margem líquida exigida          (padrão 25.0)
     aluguel_mensal       float  opcional, para cap rate
+    capital_disponivel   float  caixa que voce tem para esta operacao
+    entrada_pct          float  % do lance pago a vista (100 = sem financiamento)
 """
 
 import argparse
@@ -51,6 +53,7 @@ PADROES = {
     "fator_desagio": 0.88,
     "custo_venda_pct": 6.0,
     "margem_alvo_pct": 25.0,
+    "entrada_pct": 100.0,
 }
 
 EXEMPLO = {
@@ -142,6 +145,13 @@ def calcular(dados):
     cta_max = receita_liquida / (1 + margem_alvo)
     lance_max = (cta_max / (1 + fator_capital) - fixos) / (1 + k)
 
+    # Restricao de caixa: quanto sai do bolso ate a revenda. O custo de capital
+    # e custo de oportunidade, nao desembolso, entao fica de fora desta conta.
+    capital = _num(dados, "capital_disponivel")
+    entrada = _num(dados, "entrada_pct") / 100.0
+    desembolso = lance * (entrada + k) + fixos
+    lance_max_caixa = ((capital - fixos) / (entrada + k)) if capital else None
+
     aluguel = _num(dados, "aluguel_mensal")
     cap_rate = (aluguel * 12 / cta) if (aluguel and cta) else None
 
@@ -172,6 +182,11 @@ def calcular(dados):
         "retorno_anualizado": anualizado,
         "desconto_real": desconto_real,
         "lance_maximo": lance_max,
+        "desembolso": desembolso,
+        "capital_disponivel": capital,
+        "lance_max_caixa": lance_max_caixa,
+        "entrada_pct": entrada * 100,
+        "fixos": fixos,
         "folga_do_lance": lance_max - lance,
         "cap_rate": cap_rate,
         "perc_da_avaliacao": perc_avaliacao,
@@ -182,6 +197,16 @@ def calcular(dados):
 
 def alertas(r):
     saida = []
+    if r["capital_disponivel"] and r["desembolso"] > r["capital_disponivel"]:
+        saida.append(
+            "Desembolso de {} excede o capital de {}. Faltam {}.".format(
+                brl(r["desembolso"]), brl(r["capital_disponivel"]),
+                brl(r["desembolso"] - r["capital_disponivel"])))
+    if r["lance_max_caixa"] is not None and r["lance_max_caixa"] < 0:
+        saida.append(
+            "O capital nao cobre nem os custos fixos ({} de debitos, desocupacao, "
+            "reforma e carrego). Nenhum lance viabiliza este lote.".format(
+                brl(r["fixos"])))
     if r["margem_liquida"] < r["margem_alvo"]:
         saida.append(
             "Margem abaixo do alvo: {:.1f}% contra {:.1f}% exigidos. "
@@ -262,8 +287,29 @@ def imprimir(r):
         print("  {:<26} {:>19.1f}%".format("cap rate a.a.", r["cap_rate"] * 100))
     print("  {:<26} {:>19.0f}".format("meses do ciclo", r["meses_ciclo"]))
     print()
-    print("LANCE MAXIMO (margem alvo de {:.0f}%): {}".format(
-        r["margem_alvo"] * 100, brl(r["lance_maximo"])))
+    if r["capital_disponivel"]:
+        print("Caixa")
+        print("-" * 68)
+        print("  {:<26} {:>20}".format("capital disponivel", brl(r["capital_disponivel"])))
+        print("  {:<26} {:>20}".format(
+            "desembolso ate a venda", brl(r["desembolso"])))
+        if r["entrada_pct"] < 100:
+            print("  {:<26} {:>19.0f}%".format("entrada sobre o lance", r["entrada_pct"]))
+        print("  {:<26} {:>20}".format(
+            "sobra de caixa", brl(r["capital_disponivel"] - r["desembolso"])))
+        print()
+
+    teto_margem = r["lance_maximo"]
+    teto_caixa = r["lance_max_caixa"]
+    if teto_caixa is not None and teto_caixa < teto_margem:
+        print("LANCE MAXIMO: {}  (limitado pelo CAIXA)".format(brl(teto_caixa)))
+        print("  teto pela margem de {:.0f}% seria {}".format(
+            r["margem_alvo"] * 100, brl(teto_margem)))
+    else:
+        print("LANCE MAXIMO: {}  (limitado pela MARGEM de {:.0f}%)".format(
+            brl(teto_margem), r["margem_alvo"] * 100))
+        if teto_caixa is not None:
+            print("  teto pelo caixa seria {}".format(brl(teto_caixa)))
     print("  folga sobre o lance simulado: {}".format(brl(r["folga_do_lance"])))
     avisos = alertas(r)
     if avisos:
