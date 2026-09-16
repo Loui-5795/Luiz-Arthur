@@ -101,17 +101,53 @@ Aplicados pelo `scripts/triagem.py` em toda varredura:
 
 ## Referência de mercado — Bela Vista, Palhoça
 
-Preencher e manter atualizado; é a base do VVR e, sem ele, nenhum score é real.
+Levantado em **16/09/2026** a partir de anúncios ativos no portal
+imoveis-sc.com.br (Bela Vista, Palhoça/SC). Anúncio é preço pedido, não preço
+fechado — daí o fator de deságio de 0,88 da tese de saída.
 
 | Tipologia | Mediana de anúncio | Data | Nº de comparáveis | Fonte |
 |---|---|---|---|---|
-| Apto 2 dorm. | `A LEVANTAR` | | | |
-| Apto 3 dorm. | `A LEVANTAR` | | | |
-| Casa | `A LEVANTAR` | | | |
-| Aluguel apto 2 dorm. | `A LEVANTAR` | | | |
+| Apto 2 dorm. | **R$ 278.000** | 16/09/2026 | 23 | imoveis-sc.com.br |
+| Apto 3 dorm. | `INSUFICIENTE` — n=1, R$ 515.000 | 16/09/2026 | 1 | imoveis-sc.com.br |
+| Casa | **R$ 480.000** | 16/09/2026 | 54 | imoveis-sc.com.br |
+| Aluguel apto 2 dorm. | `A LEVANTAR` — fonte não entrega locação | — | 0 | — |
 
-Levantamento inicial (setembro/2026): a faixa praticada em Palhoça como um todo
-aparece entre R$ 175 mil e R$ 750 mil para apartamentos, com Bela Vista
-posicionado como bairro em expansão e de entrada mais acessível. Faixa larga
-demais para servir de VVR — a primeira tarefa da primeira varredura é fechar
-esses números por tipologia, com no mínimo 5 comparáveis cada.
+### O número que realmente entra no VVR
+
+A mediana simples de R$ 278.000 se refere a uma área mediana de **46,9 m²**. O
+estoque da Caixa em Bela Vista é menor (43,80 a 45,61 m²), então usar a mediana
+crua superestima o VVR. Normalizado por área:
+
+| Métrica | Valor | Base |
+|---|---|---|
+| R$/m² mediano — apto 2 dorm. | **R$ 5.859** | n=22 com área declarada |
+| R$/m² mediano — banda 42 a 49 m² | **R$ 5.920** | n=14 — **é esta que se usa** |
+| Faixa de R$/m² observada | R$ 4.426 a R$ 7.348 | n=22 |
+| Preço mediano na banda 42–49 m² | R$ 262.000 | n=14 |
+| Área mediana anunciada | 46,9 m² | n=22 |
+| Condomínio mediano | R$ 400/mês (R$ 311 a R$ 700) | n=16 |
+
+**Fórmula do VVR em Bela Vista:** `área privativa × R$ 5.920 × 0,88`.
+
+### Leituras do levantamento
+
+- **Bela Vista é mercado de 2 dormitórios.** Dos 24 apartamentos anunciados, 23
+  são de 2 dormitórios. Não há amostra para precificar 3 dormitórios, e a
+  tipologia provavelmente não existe em volume no bairro — o que também
+  significa que ela não tem liquidez comprovada para a tese de flip.
+- A faixa de R$ 175 mil a R$ 750 mil do levantamento inicial era de Palhoça
+  inteira. Fechada em Bela Vista e por tipologia, a dispersão cai para
+  R$ 230.000 – R$ 350.000 nos 2 dormitórios.
+- **A avaliação da Caixa não é o mercado, nos dois sentidos.** Dois lotes no
+  mesmo endereço (Av. Paulo Roberto Vidal, 2050), mesma metragem (50,87 m²
+  totais / 43,80 m² privativos) e mesmo CEP foram avaliados em R$ 258.000 e
+  R$ 223.000 — **15,7% de diferença entre unidades aparentemente iguais**. E a
+  Caixa rotulou um como Bela Vista e o outro como Lot. Pq. Vale Verde.
+
+### A revisar na próxima varredura
+
+- Locação: nenhuma fonte liberada na política de rede entrega anúncios de
+  aluguel do bairro. Sem isso não há cap rate nem plano B de renda enquanto o
+  flip não sai.
+- Os comparáveis são anúncios, não transações. Preço fechado exigiria ITBI da
+  Prefeitura de Palhoça ou consulta a corretor local.

@@ -52,7 +52,10 @@ lote ou uma lista, e ranqueia. Sem dependências além do Python 3.
 │   ├── 03-due-diligence-checklist.md     # checklist item a item
 │   ├── 04-fontes-e-plataformas.md        # onde buscar, por banco e por tribunal
 │   └── 05-analise-financeira.md          # fórmulas, faixas de custo, pesos do score
-├── scripts/viabilidade.py                # calculadora de CTA e lance máximo
+├── scripts/
+│   ├── coletar_portal.py                 # coleta a lista da Caixa pelos endpoints do portal
+│   ├── triagem.py                        # aplica os cortes do mandato à lista
+│   └── viabilidade.py                    # calculadora de CTA e lance máximo
 └── templates/
     ├── ficha-oportunidade.md             # ficha por lote
     └── pipeline-schema.md                # schema do pipeline.csv
