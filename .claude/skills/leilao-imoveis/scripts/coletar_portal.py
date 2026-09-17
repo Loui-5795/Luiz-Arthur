@@ -80,6 +80,9 @@ def extrai(d, cod, uf, nome_cidade):
     medt = re.search(r"ExibeDoc\('(/editais/(?!matricula)[^']*?\.PDF)'\)", d, re.I)
     mplat = re.search(r'SiteLeiloeiro\("([^"]+)"\)', d)
     datas = re.findall(r"Data d[aoe][^<]*?-\s*(\d{2}/\d{2}/\d{4})[^<]*", d)
+    # O portal traz a situacao de ocupacao dentro de um comentario HTML: nao
+    # aparece na tela, mas esta na fonte e e' informacao declarada pela Caixa.
+    situacao = rx(r"Situa\w+o:\s*<strong>(.*?)</strong>")
 
     return {
         "Numero do imovel": campo(d, r"N\w+mero do im\w+vel") or cod,
@@ -94,8 +97,11 @@ def extrai(d, cod, uf, nome_cidade):
         "Matricula": campo(d, r"Matr\w+cula\(s\)"),
         "Comarca": campo(d, r"Comarca"),
         "Oficio": campo(d, r"Of\w+cio"),
-        "Situacao": rx(r"Situa\w+o:\s*<strong>(.*?)</strong>"),
-        "Descricao": rx(r"<strong>Descri\w+o:</strong><br>(.*?)</p>"),
+        "Situacao": situacao,
+        # A situacao entra tambem na descricao porque e' dali que o triagem.py
+        # le a ocupacao. Sem isso todo lote sai como DESCONHECIDO.
+        "Descricao": (rx(r"<strong>Descri\w+o:</strong><br>(.*?)</p>")
+                      + " " + situacao).strip(),
         "Modalidade": rx(r"font-size: 14pt;'><b>(.*?)</b>"),
         "Edital": rx(r"Edital:&nbsp;([^<]+)"),
         "Leiloeiro": rx(r"Leiloeiro\(a\):\s*([^<]+)"),

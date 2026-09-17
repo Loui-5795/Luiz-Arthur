@@ -61,6 +61,12 @@ lote ou uma lista, e ranqueia. Sem dependências além do Python 3.
     └── pipeline-schema.md                # schema do pipeline.csv
 ```
 
+## Rotina automática
+
+A varredura roda sozinha **às 07h e às 19h**, todos os dias: coleta o estoque da
+Caixa, tria pelo mandato, precifica, gera a planilha `.xlsx` e entrega na
+conversa. Passo a passo e critérios em [`docs/rotina-varredura.md`](docs/rotina-varredura.md).
+
 ## Os dois princípios
 
 1. **Desconto não é lucro.** O número que decide é o Custo Total de Aquisição
