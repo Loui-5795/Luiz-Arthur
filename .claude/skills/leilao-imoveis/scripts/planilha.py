@@ -265,6 +265,7 @@ def aba_leiame(wb, data, n_total, n_aprov, n_comp):
         "Aprovados na triagem — lotes dentro da praça-alvo, com a viabilidade calculada por fórmula.",
         "Todos os lotes — tudo que a varredura coletou, inclusive o que foi descartado e por quê.",
         "Comparáveis — os anúncios de mercado que formam o VVR.",
+        "Saíram da lista — lotes que deixaram o portal, para calibrar lance futuro.",
         "Premissas — os inputs.",
         "",
         "NÚMEROS DESTA RODADA",
@@ -292,12 +293,14 @@ def main():
     p.add_argument("--lotes", required=True)
     p.add_argument("--comparaveis")
     p.add_argument("--pipeline")
+    p.add_argument("--historico", help="dados/historico-saidas.csv")
     p.add_argument("--saida", required=True)
     p.add_argument("--data", default=datetime.date.today().strftime("%d/%m/%Y"))
     a = p.parse_args()
 
     lotes = ler(a.lotes)
     comps = ler(a.comparaveis)
+    saidas = ler(a.historico)
     pipe = {l["id"]: l for l in ler(a.pipeline)} if a.pipeline else {}
 
     aprovados, descartados = [], []
@@ -325,6 +328,12 @@ def main():
                "Inclui os descartados, com o motivo. %d lotes." % len(lotes), cols_todos)
     aba_tabela(wb, "Comparáveis", comps, "Anúncios ativos que formam o VVR",
                "Preço pedido, não preço fechado. %d anúncios." % len(comps))
+    aba_tabela(wb, "Saíram da lista", list(reversed(saidas)),
+               "Lotes que deixaram o portal",
+               "Histórico acumulado. O portal não declara a causa da saída — pode ser "
+               "arremate, suspensão ou retirada. Serve para calibrar lance futuro: em que "
+               "faixa de preço e depois de qual data de certame os lotes somem. "
+               "%d registro(s)." % len(saidas))
 
     wb.save(a.saida)
     print("planilha gravada: %s" % a.saida)

@@ -12,7 +12,7 @@ saia igual e para que você possa conferir o que foi feito.
 | Entrega | Um `.xlsx` enviado **nesta conversa**, com aviso de que está pronto |
 | Branch | `claude/venda-imoveis-caixa-access-22lqqc` |
 
-## Os sete passos
+## Os oito passos
 
 1. **Ler `perfil-investidor.md`.** Praça-alvo, cortes, tolerâncias e capital saem
    de lá — nunca de memória. Parâmetro em `A DEFINIR` roda com o padrão da skill
@@ -37,22 +37,35 @@ saia igual e para que você possa conferir o que foi feito.
      --pipeline pipeline.csv
    ```
 
-4. **Precificar os aprovados** com `scripts/viabilidade.py`, usando o VVR do
+4. **Registrar quem saiu da lista.**
+   ```bash
+   python3 .claude/skills/leilao-imoveis/scripts/historico.py \
+     --anterior dados/caixa-lotes-<rodada anterior>.csv \
+     --atual dados/caixa-lotes-AAAA-MM-DD-HHh.csv \
+     --historico dados/historico-saidas.csv --data DD/MM/AAAA
+   ```
+   O `triagem.py` reescreve o `pipeline.csv` a partir da lista corrente, então
+   lote que sai do portal sumiria sem deixar rastro. É justamente esse o dado
+   que calibra lance futuro. O portal **não declara a causa da saída** — o
+   registro guarda o fato observado e nunca supõe arremate.
+
+5. **Precificar os aprovados** com `scripts/viabilidade.py`, usando o VVR do
    perfil (`área privativa × R$/m² da banda × 0,88`).
 
-5. **Atualizar os comparáveis de mercado** se o levantamento tiver mais de
+6. **Atualizar os comparáveis de mercado** se o levantamento tiver mais de
    **7 dias**. Menos que isso, reaproveita — anúncio não muda de manhã para a
    noite, e refazer a cada 12 horas só gasta requisição.
 
-6. **Gerar a planilha.**
+7. **Gerar a planilha.**
    ```bash
    python3 .claude/skills/leilao-imoveis/scripts/planilha.py \
      --lotes dados/caixa-lotes-AAAA-MM-DD.csv \
      --comparaveis dados/comparaveis-bela-vista-AAAA-MM-DD.csv \
+     --historico dados/historico-saidas.csv \
      --pipeline pipeline.csv --saida planilhas/varredura-AAAA-MM-DD-HHh.xlsx
    ```
 
-7. **Entregar:** enviar o `.xlsx` na conversa, escrever um resumo curto do que
+8. **Entregar:** enviar o `.xlsx` na conversa, escrever um resumo curto do que
    **mudou** desde a rodada anterior, e comitar tudo na branch designada.
 
 ## O resumo que acompanha a planilha
