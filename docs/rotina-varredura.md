@@ -52,18 +52,32 @@ saia igual e para que você possa conferir o que foi feito.
 5. **Precificar os aprovados** com `scripts/viabilidade.py`, usando o VVR do
    perfil (`área privativa × R$/m² da banda × 0,88`).
 
-6. **Atualizar os comparáveis de mercado** se o levantamento tiver mais de
-   **7 dias**. Menos que isso, reaproveita — anúncio não muda de manhã para a
-   noite, e refazer a cada 12 horas só gasta requisição.
+6. **Atualizar os comparáveis de mercado** se o levantamento tiver **7 dias ou
+   mais**. Menos que isso, reaproveita — anúncio não muda de manhã para a noite,
+   e refazer a cada 12 horas só gasta requisição.
+   ```bash
+   python3 .claude/skills/leilao-imoveis/scripts/comparaveis.py \
+     --cidade palhoca --bairro bela-vista --banda 42-49 \
+     --saida dados/comparaveis-bela-vista-AAAA-MM-DD.csv
+   ```
+   Depois: atualizar o R$/m² da banda e o condomínio mediano na premissa do
+   `planilha.py`, acrescentar a linha à série histórica do `perfil-investidor.md`
+   e **avisar no resumo** que o VVR mudou por causa do mercado, e não por
+   movimento no portal — senão a usuária confunde as duas coisas.
 
-7. **Gerar a planilha.**
+7. **Gerar e conferir a planilha.**
    ```bash
    python3 .claude/skills/leilao-imoveis/scripts/planilha.py \
      --lotes dados/caixa-lotes-AAAA-MM-DD.csv \
      --comparaveis dados/comparaveis-bela-vista-AAAA-MM-DD.csv \
      --historico dados/historico-saidas.csv \
      --pipeline pipeline.csv --saida planilhas/varredura-AAAA-MM-DD-HHh.xlsx
+   python3 .claude/skills/leilao-imoveis/scripts/conferir_planilha.py \
+     planilhas/varredura-AAAA-MM-DD-HHh.xlsx
    ```
+   O `conferir_planilha.py` avalia as fórmulas como estão gravadas no arquivo.
+   O recálculo canônico seria o LibreOffice, que neste ambiente não carrega nem
+   um arquivo trivial. **Nenhuma planilha se entrega com célula em erro.**
 
 8. **Entregar:** enviar o `.xlsx` na conversa, escrever um resumo curto do que
    **mudou** desde a rodada anterior, e comitar tudo na branch designada.

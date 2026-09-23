@@ -59,6 +59,25 @@ def num(t):
         return 0.0
 
 
+def modalidade(d, rx):
+    """Le a modalidade do lote.
+
+    Leilao SFI e Licitacao Aberta trazem um bloco de titulo com o nome do
+    certame. Venda Online e Venda Direta nao trazem bloco nenhum -- a pagina
+    so se distingue pelos endpoints que usa. Sem isto a modalidade sai vazia
+    e o triagem.py pontua o lote com a nota neutra, justamente nas duas
+    modalidades que o mandato prefere.
+    """
+    titulo = rx(r"font-size: 14pt;'><b>(.*?)</b>")
+    if titulo:
+        return titulo
+    if "/venda-online/" in d or "Fazer uma proposta" in d:
+        return "Venda Online"
+    if "venda-direta" in d or "Compra Direta" in d:
+        return "Venda Direta"
+    return ""
+
+
 def extrai(d, cod, uf, nome_cidade):
     def rx(p, g=1):
         m = re.search(p, d, re.S)
@@ -102,7 +121,7 @@ def extrai(d, cod, uf, nome_cidade):
         # le a ocupacao. Sem isso todo lote sai como DESCONHECIDO.
         "Descricao": (rx(r"<strong>Descri\w+o:</strong><br>(.*?)</p>")
                       + " " + situacao).strip(),
-        "Modalidade": rx(r"font-size: 14pt;'><b>(.*?)</b>"),
+        "Modalidade": modalidade(d, rx),
         "Edital": rx(r"Edital:&nbsp;([^<]+)"),
         "Leiloeiro": rx(r"Leiloeiro\(a\):\s*([^<]+)"),
         "Plataforma": mplat.group(1) if mplat else "",

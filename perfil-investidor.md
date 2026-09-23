@@ -101,50 +101,57 @@ Aplicados pelo `scripts/triagem.py` em toda varredura:
 
 ## Referência de mercado — Bela Vista, Palhoça
 
-Levantado em **16/09/2026** a partir de anúncios ativos no portal
+Levantado em **23/09/2026** a partir de anúncios ativos no portal
 imoveis-sc.com.br (Bela Vista, Palhoça/SC). Anúncio é preço pedido, não preço
-fechado — daí o fator de deságio de 0,88 da tese de saída.
+fechado — daí o fator de deságio de 0,88 da tese de saída. Renovado a cada sete
+dias pela rotina de varredura.
 
 | Tipologia | Mediana de anúncio | Data | Nº de comparáveis | Fonte |
 |---|---|---|---|---|
-| Apto 2 dorm. | **R$ 278.000** | 16/09/2026 | 23 | imoveis-sc.com.br |
-| Apto 3 dorm. | `INSUFICIENTE` — n=1, R$ 515.000 | 16/09/2026 | 1 | imoveis-sc.com.br |
-| Casa | **R$ 480.000** | 16/09/2026 | 54 | imoveis-sc.com.br |
+| Apto 2 dorm. | **R$ 275.000** | 23/09/2026 | 26 | imoveis-sc.com.br |
+| Apto 3 dorm. | `INEXISTENTE` — nenhum anúncio no bairro | 23/09/2026 | 0 | imoveis-sc.com.br |
+| Casa | **R$ 479.000** | 23/09/2026 | 53 | imoveis-sc.com.br |
 | Aluguel apto 2 dorm. | `A LEVANTAR` — fonte não entrega locação | — | 0 | — |
 
 ### O número que realmente entra no VVR
 
-A mediana simples de R$ 278.000 se refere a uma área mediana de **46,9 m²**. O
-estoque da Caixa em Bela Vista é menor (43,80 a 45,61 m²), então usar a mediana
-crua superestima o VVR. Normalizado por área:
+A mediana simples se refere a uma área mediana de 49 m². O estoque da Caixa em
+Bela Vista é menor (43,80 a 45,61 m²), então usar a mediana crua superestima o
+VVR. Normalizado por área:
 
 | Métrica | Valor | Base |
 |---|---|---|
-| R$/m² mediano — apto 2 dorm. | **R$ 5.859** | n=22 com área declarada |
-| R$/m² mediano — banda 42 a 49 m² | **R$ 5.920** | n=14 — **é esta que se usa** |
-| Faixa de R$/m² observada | R$ 4.426 a R$ 7.348 | n=22 |
-| Preço mediano na banda 42–49 m² | R$ 262.000 | n=14 |
-| Área mediana anunciada | 46,9 m² | n=22 |
-| Condomínio mediano | R$ 400/mês (R$ 311 a R$ 700) | n=16 |
+| R$/m² mediano — banda 42 a 49 m² | **R$ 5.913** | n=13 — **é esta que se usa** |
+| Preço mediano na banda 42–49 m² | R$ 270.000 | n=13 |
+| Área mediana anunciada — 2 dorm. | 49 m² | n=26 |
+| Condomínio mediano | R$ 399/mês | n=20 |
 
-**Fórmula do VVR em Bela Vista:** `área privativa × R$ 5.920 × 0,88`.
+**Fórmula do VVR em Bela Vista:** `área privativa × R$ 5.913 × 0,88`.
+
+### Série histórica do R$/m² da banda
+
+| Data | R$/m² | n | Variação |
+|---|---|---|---|
+| 16/09/2026 | R$ 5.920 | 14 | — |
+| 23/09/2026 | R$ 5.913 | 13 | −0,1% |
+
+Uma semana de dados não é tendência. A série existe para que, daqui a alguns
+meses, se saiba se Bela Vista está valorizando ou não — e para que uma queda
+de VVR não seja confundida com mudança no estoque da Caixa.
 
 ### Leituras do levantamento
 
-- **Bela Vista é mercado de 2 dormitórios.** Dos 24 apartamentos anunciados, 23
-  são de 2 dormitórios. Não há amostra para precificar 3 dormitórios, e a
-  tipologia provavelmente não existe em volume no bairro — o que também
-  significa que ela não tem liquidez comprovada para a tese de flip.
-- A faixa de R$ 175 mil a R$ 750 mil do levantamento inicial era de Palhoça
-  inteira. Fechada em Bela Vista e por tipologia, a dispersão cai para
-  R$ 230.000 – R$ 350.000 nos 2 dormitórios.
-- **A avaliação da Caixa não é o mercado, nos dois sentidos.** Dois lotes no
-  mesmo endereço (Av. Paulo Roberto Vidal, 2050), mesma metragem (50,87 m²
-  totais / 43,80 m² privativos) e mesmo CEP foram avaliados em R$ 258.000 e
-  R$ 223.000 — **15,7% de diferença entre unidades aparentemente iguais**. E a
-  Caixa rotulou um como Bela Vista e o outro como Lot. Pq. Vale Verde.
+- **Bela Vista é mercado de 2 dormitórios.** Na segunda medição não há **nenhum**
+  apartamento de 3 dormitórios anunciado no bairro. A tipologia não tem
+  liquidez comprovada ali e não serve à tese de flip.
+- A dispersão dos 2 dormitórios permanece entre R$ 230.000 e R$ 350.000.
+- **A avaliação da Caixa não é o mercado.** Dois lotes no mesmo endereço (Av.
+  Paulo Roberto Vidal, 2050), mesma metragem (50,87 m² totais / 43,80 m²
+  privativos) e mesmo CEP foram avaliados em R$ 258.000 e R$ 223.000 —
+  **15,7% de diferença entre unidades aparentemente iguais**. E a Caixa rotulou
+  um como Bela Vista e o outro como Lot. Pq. Vale Verde.
 
-### A revisar na próxima varredura
+### A revisar
 
 - Locação: nenhuma fonte liberada na política de rede entrega anúncios de
   aluguel do bairro. Sem isso não há cap rate nem plano B de renda enquanto o
