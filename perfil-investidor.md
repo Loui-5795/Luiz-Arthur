@@ -89,6 +89,32 @@ Ordem de grandeza para triagem; substituir por cotação real na due diligence.
 | Regularização de área não averbada | R$ 8 a 30 mil + 6 a 18 meses | Projeto, ART, taxas |
 | Carrego | mensal × meses | Condomínio + IPTU + consumo |
 
+### O que a modalidade determina — observado no estoque de SC
+
+Levantado a cada varredura sobre os lotes coletados. Amostra pequena; serve de
+indício, não de regra.
+
+| Modalidade | Lotes | Teto de condomínio atrasado | Permite financiamento |
+|---|---|---|---|
+| Leilão SFI | 15 | **0** | **0** |
+| Licitação Aberta | 1 | 1 | 0 |
+| Venda Online | 2 | 2 | 1 |
+
+Duas leituras, com pesos diferentes:
+
+1. **O teto de condomínio acompanha a modalidade.** Nenhum Leilão SFI tem teto;
+   todos os lotes fora do SFI têm — "sob responsabilidade do comprador, **até o
+   limite de 10% do valor de avaliação**", com a Caixa pagando o excedente.
+   Atenção ao que isso é e ao que não é: num lote avaliado em R$ 240 mil, o teto
+   é R$ 24 mil. Ele **não melhora o cenário base** (a premissa de triagem é
+   R$ 12 mil, abaixo do teto) — ele **elimina a cauda**, o cenário de R$ 20 mil
+   ou mais que hoje leva a margem a −18,7%.
+2. **O financiamento não acompanha a modalidade.** Dos dois lotes de Venda
+   Online, um permite SBPE e o outro é "exclusivamente à vista". A nota de
+   estratégia deste perfil diz "Venda Online e Venda Direta com mais
+   frequência", e é assim que deve ser lido: **frequência, não garantia**. A
+   forma de pagamento se confere lote a lote, na ficha e no edital.
+
 ## Cortes automáticos
 
 Aplicados pelo `scripts/triagem.py` em toda varredura:
