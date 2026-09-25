@@ -115,6 +115,29 @@ Duas leituras, com pesos diferentes:
    frequência", e é assim que deve ser lido: **frequência, não garantia**. A
    forma de pagamento se confere lote a lote, na ficha e no edital.
 
+### Como os lotes saem da lista — observado na Grande Florianópolis
+
+Acumulado em `dados/historico-saidas.csv`. Cinco saídas até 25/09/2026, todas no
+2º anel. O portal **não declara a causa** da saída: pode ser arremate,
+suspensão ou retirada.
+
+| Constatação | n | O que se conclui |
+|---|---|---|
+| Saiu somente depois de esgotar **as duas** datas de certame | 5 de 5 | Nenhum lote saiu entre o 1º e o 2º leilão |
+| Preço de piso na saída, sobre a avaliação | mediana 60,0% | É o piso do 2º leilão, não o do 1º |
+| Atraso do portal entre o certame e a baixa do lote | 1 dia, 2 vezes | Lote ainda na lista no dia seguinte não significa deserto |
+
+**A leitura que importa para o lance.** Se um lote tivesse sido arrematado no
+1º leilão, ele teria deixado a lista antes da segunda data. Nenhum dos cinco
+deixou. Ou seja: **na prática, nesta praça, o 1º leilão não fecha** — o preço
+que interessa é o do 2º, tipicamente 60% da avaliação. Isso justifica o
+critério que a varredura já adota, de tomar o piso do 2º leilão como preço de
+entrada na triagem.
+
+Cinco casos não são estatística. A tabela se atualiza a cada saída, e a
+conclusão deve ser revista quando a amostra crescer — ou quando um lote sair
+entre as duas datas, o que a derrubaria.
+
 ## Cortes automáticos
 
 Aplicados pelo `scripts/triagem.py` em toda varredura:
