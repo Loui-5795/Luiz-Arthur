@@ -117,26 +117,59 @@ Duas leituras, com pesos diferentes:
 
 ### Como os lotes saem da lista — observado na Grande Florianópolis
 
-Acumulado em `dados/historico-saidas.csv`. Cinco saídas até 25/09/2026, todas no
-2º anel. O portal **não declara a causa** da saída: pode ser arremate,
-suspensão ou retirada.
+Acumulado em `dados/historico-saidas.csv`. **Seis saídas** até 29/09/2026. O
+portal **não declara a causa**: arremate, suspensão, retirada e purgação da mora
+são indistinguíveis daqui.
 
-| Constatação | n | O que se conclui |
+| Constatação | n | Situação |
 |---|---|---|
-| Saiu somente depois de esgotar **as duas** datas de certame | 5 de 5 | Nenhum lote saiu entre o 1º e o 2º leilão |
-| Preço de piso na saída, sobre a avaliação | mediana 60,0% | É o piso do 2º leilão, não o do 1º |
-| Atraso do portal entre o certame e a baixa do lote | 1 dia, 2 vezes | Lote ainda na lista no dia seguinte não significa deserto |
+| Nenhum lote saiu entre o 1º e o 2º leilão | 6 de 6 | **mantida** |
+| Piso na saída, sobre a avaliação | mediana 60,0% | mantida |
+| Atraso do portal entre certame e baixa | ~1 dia, 3 vezes | mantida |
+| Saiu somente depois de esgotar as duas datas | 5 de 6 | **DERRUBADA em 29/09** |
 
-**A leitura que importa para o lance.** Se um lote tivesse sido arrematado no
-1º leilão, ele teria deixado a lista antes da segunda data. Nenhum dos cinco
-deixou. Ou seja: **na prática, nesta praça, o 1º leilão não fecha** — o preço
-que interessa é o do 2º, tipicamente 60% da avaliação. Isso justifica o
-critério que a varredura já adota, de tomar o piso do 2º leilão como preço de
-entrada na triagem.
+#### A conclusão que caiu, e a que não caiu
 
-Cinco casos não são estatística. A tabela se atualiza a cada saída, e a
-conclusão deve ser revista quando a amostra crescer — ou quando um lote sair
-entre as duas datas, o que a derrubaria.
+Até 25/09 as cinco saídas observadas tinham esgotado as duas datas de certame, e
+daí se concluiu que lote só sai depois do 2º leilão. Ficou registrado que **um
+único caso contrário derrubaria a conclusão**. Em 29/09 ele apareceu: o lote
+**878770360836-7**, em Bela Vista, deixou a lista **nove dias antes do seu 1º
+leilão**, marcado para 08/10.
+
+O que **se mantém**: o 1º leilão não fecha. Os quatro lotes cujo 1º leilão
+ocorreu em 28/09 seguiam na lista no dia seguinte, e nenhuma das seis saídas
+ocorreu no intervalo entre as duas datas. O piso do 2º leilão continua sendo o
+preço de entrada correto para a triagem.
+
+O que **caiu**: a ideia de que a lista só se esvazia por certame. **Existe uma
+via de saída antes de qualquer leilão**, e ela tem consequência prática direta —
+um lote pode desaparecer durante a due diligence, depois de gasto dinheiro em
+matrícula, vistoria e consulta a advogado.
+
+#### Hipótese sobre a causa, declarada como hipótese
+
+Na alienação fiduciária, o devedor pode **purgar a mora** até a assinatura do
+auto de arrematação (Lei 9.514/1997, art. 34 e correlatos): quita o débito e
+recupera o imóvel, e o lote sai do leilão. É a explicação mais provável para uma
+saída anterior ao certame, e não pode ser arremate, porque o certame não
+ocorreu. Suspensão judicial e retirada pela Caixa também explicariam.
+
+**Nada disso foi confirmado.** Confirmar exigiria consultar a matrícula
+atualizada (a baixa da consolidação da propriedade apareceria averbada) ou o
+leiloeiro. Enquanto não se confirmar, o registro guarda o fato — saiu antes do
+certame — e nomeia a hipótese como hipótese.
+
+#### O que isso muda no mandato
+
+Quem investe em Leilão SFI **compete com o direito do ex-devedor de recuperar o
+imóvel até o último momento**. Isso não é risco de execução, é risco de
+existência do ativo, e ele não aparece em nenhuma planilha de viabilidade. Duas
+consequências para a operação:
+
+1. **Não adiantar dinheiro de due diligence** em lote cujo certame esteja
+   distante. Quanto maior o prazo até o 1º leilão, maior a janela de purgação.
+2. **Reconferir a existência do lote no portal na véspera** de qualquer
+   desembolso — inclusive o de vistoria e o de honorários.
 
 ## Cortes automáticos
 
@@ -199,6 +232,9 @@ de VVR não seja confundida com mudança no estoque da Caixa.
   privativos) e mesmo CEP foram avaliados em R$ 258.000 e R$ 223.000 —
   **15,7% de diferença entre unidades aparentemente iguais**. E a Caixa rotulou
   um como Bela Vista e o outro como Lot. Pq. Vale Verde.
+- **O estoque de Bela Vista caiu de 3 para 2 lotes em 29/09**, com a saída do
+  878770360836-7 — que era o único dos três com margem positiva. Ver a seção
+  sobre saídas: ele deixou a lista antes do próprio certame.
 
 ### A revisar
 
