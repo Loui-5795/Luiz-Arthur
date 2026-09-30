@@ -236,6 +236,29 @@ de VVR não seja confundida com mudança no estoque da Caixa.
   878770360836-7 — que era o único dos três com margem positiva. Ver a seção
   sobre saídas: ele deixou a lista antes do próprio certame.
 
+### A referência de mercado está congelada desde 23/09/2026
+
+Em 30/09 a renovação dos comparáveis **falhou**. As três fontes de anúncios
+disponíveis — `imoveis-sc.com.br`, `zapimoveis.com.br` e `vivareal.com.br` —
+passaram a responder **HTTP 403 com página de desafio Cloudflare**. Três
+tentativas, três bloqueios, em todas elas. A `imoveis-sc.com.br`, que vinha
+funcionando desde 16/09, foi a última a cair.
+
+**Consequência:** o R$/m² de R$ 5.913 e a mediana de R$ 275.000 são de
+23/09/2026 e **não estão sendo atualizados**. Todo VVR e toda margem calculada
+depois dessa data repousam sobre uma referência que envelhece. A cada rodada, a
+idade do levantamento deve ser declarada.
+
+**O que isso não é:** não é mercado sem anúncios. A fonte respondeu — apenas
+barrou a coleta. O `comparaveis.py` passou a distinguir os dois casos e a falhar
+em voz alta, sem gravar arquivo: um CSV de zero linhas gravado em silêncio seria
+pior que a falha, porque pareceria um bairro vazio.
+
+**Remédio possível, não implementado:** o ambiente tem Chromium e Playwright
+instalados. Um coletor que dirija o navegador de verdade costuma vencer o
+desafio do Cloudflare, onde o `curl` não vence. É trabalho de porte e não há
+garantia de que funcione — decisão da investidora.
+
 ### A revisar
 
 - Locação: nenhuma fonte liberada na política de rede entrega anúncios de

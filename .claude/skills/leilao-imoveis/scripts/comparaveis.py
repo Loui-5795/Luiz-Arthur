@@ -14,21 +14,35 @@ existe justamente por isso.
 import argparse, csv, json, re, statistics, subprocess, sys, time
 
 BASE = "https://www.imoveis-sc.com.br"
+
+
+class BloqueioDaFonte(RuntimeError):
+    """A fonte respondeu, mas barrou a coleta. Nunca confundir com zero anuncios."""
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
 
 
 def baixar(url, tentativas=3):
+    """Devolve o HTML, ou levanta BloqueioDaFonte se a fonte barrar."""
+    ultimo = ""
     for n in range(tentativas):
-        r = subprocess.run(["curl", "-sS", "--max-time", "45",
+        r = subprocess.run(["curl", "-sS", "--max-time", "45", "-w", "\n%{http_code}",
                             "-H", "User-Agent: " + UA,
                             "-H", "Accept-Language: pt-BR,pt;q=0.9", url],
                            capture_output=True)
-        t = r.stdout.decode("utf-8", "replace")
-        if len(t) > 2000:
-            return t
+        saida = r.stdout.decode("utf-8", "replace")
+        corpo, _, codigo = saida.rpartition("\n")
+        ultimo = codigo.strip()
+        if ultimo == "200" and len(corpo) > 2000:
+            return corpo
+        # Cloudflare e afins devolvem 403 com pagina de desafio
+        if ultimo in ("403", "429", "503") or "Just a moment" in corpo:
+            raise BloqueioDaFonte(
+                "%s respondeu HTTP %s com pagina de desafio. A fonte esta "
+                "barrando a coleta -- nao e' mercado vazio." % (url, ultimo))
         time.sleep(2 * (n + 1))
-    return ""
+    raise BloqueioDaFonte("%s nao devolveu conteudo utilizavel (ultimo HTTP %s)."
+                          % (url, ultimo or "?"))
 
 
 def itens(html):
@@ -113,8 +127,20 @@ def main():
     a = p.parse_args()
 
     raiz = "%s/%s/comprar" % (BASE, a.cidade)
-    aptos = detalhar(listar("%s/apartamento/%s" % (raiz, a.bairro), a.paginas))
-    casas = listar("%s/casa/%s" % (raiz, a.bairro), a.paginas)
+    try:
+        aptos = detalhar(listar("%s/apartamento/%s" % (raiz, a.bairro), a.paginas))
+        casas = listar("%s/casa/%s" % (raiz, a.bairro), a.paginas)
+    except BloqueioDaFonte as e:
+        print("\nFALHA NA FONTE DE COMPARAVEIS: %s" % e, file=sys.stderr)
+        print("Nenhum arquivo foi gravado. O levantamento anterior segue valido "
+              "e a rodada deve declarar a idade dele.", file=sys.stderr)
+        return 2
+
+    if not aptos and not casas:
+        print("\nFALHA: a fonte respondeu mas nao devolveu anuncio nenhum. "
+              "Bairro sem estoque e' possivel, porem improvavel -- trate como "
+              "falha de coleta e confira a fonte antes de gravar.", file=sys.stderr)
+        return 2
     for c in casas:
         c.setdefault("area", None); c.setdefault("condominio", None)
 
@@ -157,4 +183,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main() or 0)
