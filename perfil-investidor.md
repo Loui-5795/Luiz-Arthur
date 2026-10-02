@@ -123,10 +123,16 @@ são indistinguíveis daqui.
 
 | Constatação | n | Situação |
 |---|---|---|
-| Nenhum lote saiu entre o 1º e o 2º leilão | 6 de 6 | **mantida** |
+| Nenhum lote saiu entre o 1º e o 2º leilão | 7 de 7 (dos que têm duas datas) | **mantida** |
 | Piso na saída, sobre a avaliação | mediana 60,0% | mantida |
 | Atraso do portal entre certame e baixa | ~1 dia, 3 vezes | mantida |
-| Saiu somente depois de esgotar as duas datas | 5 de 6 | **DERRUBADA em 29/09** |
+| Saiu somente depois de esgotar as duas datas | 5 de 7 | **DERRUBADA em 29/09** |
+
+Oito saídas até 02/10: seis em Leilão SFI, uma em Licitação Aberta (data única,
+esgotada) e uma em Venda Online — esta última **sem data de certame nenhuma**,
+porque Venda Online é oferta contínua por proposta. A moldura "esgotar as datas"
+só se aplica às modalidades com certame; na Venda Online o lote sai quando uma
+proposta é aceita, a qualquer momento.
 
 #### A conclusão que caiu, e a que não caiu
 
