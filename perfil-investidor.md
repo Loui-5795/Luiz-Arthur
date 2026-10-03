@@ -133,8 +133,17 @@ Uma retratação a registrar. Em 02/10 anotei como saída o lote de Venda Online
 Estreito (`000001028634-4`); em 03/10 ele **reapareceu na lista**, inalterado. A
 ausência de uma rodada era indisponibilidade da fonte, não saída, e o registro
 está marcado como `RETRATADO` em `historico-saidas.csv`. A lição é de método:
-**uma única ausência não constitui saída** — daqui em diante só se registra o
-lote ausente em duas rodadas consecutivas.
+**uma única ausência não constitui saída** — só se registra o lote ausente em
+duas rodadas consecutivas.
+
+A regra deixou de depender da memória de quem executa. Desde 03/10 ela está
+**embutida no `historico.py`**, que mantém `dados/ausencias-pendentes.csv`: a
+primeira ausência fica em quarentena, a segunda confirma a saída, e o reaparecimento
+limpa a quarentena sem ter sujado o histórico. A planilha declara as pendências
+na aba Saíram da lista. **Já na primeira aplicação a regra evitou um erro:** na
+rodada das 19h de 03/10 faltou o lote de Venda Online do Centro de Florianópolis
+(`144440299841-6`, R$ 809.389,16) — exatamente o mesmo padrão, Venda Online e
+sem data de certame. Ficou pendente, não registrado.
 
 #### A conclusão que caiu, e a que não caiu
 

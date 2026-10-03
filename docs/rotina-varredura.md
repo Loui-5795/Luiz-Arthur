@@ -42,12 +42,21 @@ saia igual e para que você possa conferir o que foi feito.
    python3 .claude/skills/leilao-imoveis/scripts/historico.py \
      --anterior dados/caixa-lotes-<rodada anterior>.csv \
      --atual dados/caixa-lotes-AAAA-MM-DD-HHh.csv \
-     --historico dados/historico-saidas.csv --data DD/MM/AAAA
+     --historico dados/historico-saidas.csv \
+     --quarentena dados/ausencias-pendentes.csv --data DD/MM/AAAA
    ```
    O `triagem.py` reescreve o `pipeline.csv` a partir da lista corrente, então
    lote que sai do portal sumiria sem deixar rastro. É justamente esse o dado
    que calibra lance futuro. O portal **não declara a causa da saída** — o
    registro guarda o fato observado e nunca supõe arremate.
+
+   **A regra das duas rodadas é obrigatória.** O `--quarentena` a aplica: a
+   primeira ausência não vale saída, fica pendente; confirma-se quando o lote
+   falta em duas rodadas consecutivas. Reaparecendo, sai da quarentena sem ter
+   sujado o histórico. A regra nasceu de uma retratação — em 02/10/2026 um lote
+   de Venda Online foi registrado como saída e reapareceu intacto na rodada
+   seguinte. **Nunca rodar o `historico.py` sem o `--quarentena`**, e passar o
+   mesmo arquivo ao `planilha.py`, que declara as pendências na aba de saídas.
 
 5. **Precificar os aprovados** com `scripts/viabilidade.py`, usando o VVR do
    perfil (`área privativa × R$/m² da banda × 0,88`).
@@ -71,6 +80,7 @@ saia igual e para que você possa conferir o que foi feito.
      --lotes dados/caixa-lotes-AAAA-MM-DD.csv \
      --comparaveis dados/comparaveis-bela-vista-AAAA-MM-DD.csv \
      --historico dados/historico-saidas.csv \
+     --quarentena dados/ausencias-pendentes.csv \
      --pipeline pipeline.csv --saida planilhas/varredura-AAAA-MM-DD-HHh.xlsx
    python3 .claude/skills/leilao-imoveis/scripts/conferir_planilha.py \
      planilhas/varredura-AAAA-MM-DD-HHh.xlsx
