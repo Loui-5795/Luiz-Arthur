@@ -288,6 +288,28 @@ def aba_leiame(wb, data, n_total, n_aprov, n_comp):
     return ws
 
 
+def idade_comparaveis(caminho):
+    """Declara a idade do levantamento. Comparavel velho nao se entrega calado:
+    a fonte de anuncios ja ficou barrada por dias e a planilha precisa dizer
+    que o VVR esta parado, senao a usuaria le preco de hoje onde nao ha."""
+    if not caminho:
+        return "Levantamento sem data identificavel."
+    m = re.search(r"(\d{4})-(\d{2})-(\d{2})", caminho)
+    if not m:
+        return "Levantamento sem data identificavel."
+    coleta = datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+    dias = (datetime.date.today() - coleta).days
+    rotulo = "Levantado em %s" % coleta.strftime("%d/%m/%Y")
+    if dias <= 0:
+        return rotulo + " (hoje)."
+    if dias == 1:
+        return rotulo + " (1 dia)."
+    if dias < 7:
+        return rotulo + " (%d dias)." % dias
+    return (rotulo + " (%d DIAS — levantamento vencido; a fonte de anuncios "
+            "respondeu com bloqueio e o R$/m2 segue congelado nessa data)." % dias)
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--lotes", required=True)
@@ -327,7 +349,8 @@ def main():
     aba_tabela(wb, "Todos os lotes", lotes, "Tudo que a varredura coletou",
                "Inclui os descartados, com o motivo. %d lotes." % len(lotes), cols_todos)
     aba_tabela(wb, "Comparáveis", comps, "Anúncios ativos que formam o VVR",
-               "Preço pedido, não preço fechado. %d anúncios." % len(comps))
+               "Preço pedido, não preço fechado. %d anúncios. %s"
+               % (len(comps), idade_comparaveis(a.comparaveis)))
     aba_tabela(wb, "Saíram da lista", list(reversed(saidas)),
                "Lotes que deixaram o portal",
                "Histórico acumulado. O portal não declara a causa da saída — pode ser "

@@ -117,22 +117,24 @@ Duas leituras, com pesos diferentes:
 
 ### Como os lotes saem da lista — observado na Grande Florianópolis
 
-Acumulado em `dados/historico-saidas.csv`. **Seis saídas** até 29/09/2026. O
-portal **não declara a causa**: arremate, suspensão, retirada e purgação da mora
-são indistinguíveis daqui.
+Acumulado em `dados/historico-saidas.csv`. **Doze saídas** até 03/10/2026, em
+onze Leilões SFI e uma Licitação Aberta. O portal **não declara a causa**:
+arremate, suspensão, retirada e purgação da mora são indistinguíveis daqui.
 
 | Constatação | n | Situação |
 |---|---|---|
-| Nenhum lote saiu entre o 1º e o 2º leilão | 7 de 7 (dos que têm duas datas) | **mantida** |
-| Piso na saída, sobre a avaliação | mediana 60,0% | mantida |
-| Atraso do portal entre certame e baixa | ~1 dia, 3 vezes | mantida |
-| Saiu somente depois de esgotar as duas datas | 5 de 7 | **DERRUBADA em 29/09** |
+| Nenhum lote saiu entre o 1º e o 2º leilão | 8 de 8 (dos que têm duas datas) | **mantida** |
+| Piso na saída, sobre a avaliação | mediana 60,0% (n=12) | mantida |
+| Saída exatamente no piso do 2º leilão | 7 de 12 | nova, 03/10 |
+| Atraso do portal entre certame e baixa | ~1 dia, 4 vezes | mantida |
+| Saiu somente depois de esgotar as duas datas | 10 de 12 | **DERRUBADA — 2 casos contrários** |
 
-Oito saídas até 02/10: seis em Leilão SFI, uma em Licitação Aberta (data única,
-esgotada) e uma em Venda Online — esta última **sem data de certame nenhuma**,
-porque Venda Online é oferta contínua por proposta. A moldura "esgotar as datas"
-só se aplica às modalidades com certame; na Venda Online o lote sai quando uma
-proposta é aceita, a qualquer momento.
+Uma retratação a registrar. Em 02/10 anotei como saída o lote de Venda Online do
+Estreito (`000001028634-4`); em 03/10 ele **reapareceu na lista**, inalterado. A
+ausência de uma rodada era indisponibilidade da fonte, não saída, e o registro
+está marcado como `RETRATADO` em `historico-saidas.csv`. A lição é de método:
+**uma única ausência não constitui saída** — daqui em diante só se registra o
+lote ausente em duas rodadas consecutivas.
 
 #### A conclusão que caiu, e a que não caiu
 
@@ -140,12 +142,23 @@ Até 25/09 as cinco saídas observadas tinham esgotado as duas datas de certame,
 daí se concluiu que lote só sai depois do 2º leilão. Ficou registrado que **um
 único caso contrário derrubaria a conclusão**. Em 29/09 ele apareceu: o lote
 **878770360836-7**, em Bela Vista, deixou a lista **nove dias antes do seu 1º
-leilão**, marcado para 08/10.
+leilão**, marcado para 08/10. Em 03/10 apareceu o segundo: o lote
+**160000012143-0**, no João Paulo, em Florianópolis, saiu **dois dias antes do
+seu 1º leilão**, marcado para 05/10. Dois casos não são mais exceção isolada —
+é uma via de saída recorrente, e passa a contar como regra de operação.
 
-O que **se mantém**: o 1º leilão não fecha. Os quatro lotes cujo 1º leilão
-ocorreu em 28/09 seguiam na lista no dia seguinte, e nenhuma das seis saídas
-ocorreu no intervalo entre as duas datas. O piso do 2º leilão continua sendo o
-preço de entrada correto para a triagem.
+O que **se mantém**: o 1º leilão não fecha. São agora oito lotes cujo 1º leilão
+ocorreu enquanto estavam na lista, e nenhum deles saiu no intervalo entre as duas
+datas — o último caso é o lote de São Sebastião (`878771537674-1`), cujo 1º
+leilão foi em 02/10 e que segue listado para o 2º, em 08/10. O piso do 2º leilão
+continua sendo o preço de entrada correto para a triagem.
+
+E uma constatação nova: **sete das doze saídas ocorreram com o lote marcado
+exatamente no piso do 2º leilão**, 60,0% da avaliação. Ou seja, nesta praça o
+lote costuma deixar a lista no mínimo legal, não acima dele. Para a formação de
+lance isso significa que **pagar prêmio sobre o piso do 2º leilão não é
+necessário na mediana dos casos** — ainda que nada garanta o resultado de um
+certame individual.
 
 O que **caiu**: a ideia de que a lista só se esvazia por certame. **Existe uma
 via de saída antes de qualquer leilão**, e ela tem consequência prática direta —
@@ -176,6 +189,31 @@ consequências para a operação:
    distante. Quanto maior o prazo até o 1º leilão, maior a janela de purgação.
 2. **Reconferir a existência do lote no portal na véspera** de qualquer
    desembolso — inclusive o de vistoria e o de honorários.
+
+### O campo "Desconto" do portal pode ser negativo — e o de 03/10 foi
+
+O lote **000001018127-9**, uma sala comercial no Kobrasol, em São José, saiu da
+lista anunciando **R$ 395.960,11 sobre uma avaliação de R$ 250.000,00** —
+desconto de **−58,38%**, isto é, um prêmio de 58% sobre o valor avaliado.
+
+Não é erro de coleta: é o mecanismo do SFI. O piso do 2º leilão não é um
+percentual da avaliação, e sim **o valor da dívida consolidada somada aos
+encargos e às despesas do procedimento** (Lei 9.514/1997, art. 27, §2º, II).
+Quando a dívida supera o valor do imóvel — exatamente o caso de uma garantia que
+se deteriorou mais rápido que o saldo devedor —, o piso legal sobe acima da
+avaliação, e o portal exibe desconto negativo.
+
+Três consequências práticas:
+
+1. O corte de desconto mínimo de 25% da triagem **já descarta esses lotes
+   automaticamente**, e é bom que descarte. Nenhum ajuste é necessário.
+2. **Desconto alto não significa imóvel barato, e desconto negativo não
+   significa erro.** Os dois lados do campo são informação sobre a dívida, não
+   sobre o imóvel. O preço de referência é sempre o VVR, nunca a avaliação da
+   Caixa — que, como já registrado nesta praça, divergiu 15,7% entre duas
+   unidades de mesma metragem e mesmo endereço.
+3. Para a perícia, é o indicador de que **a avaliação da Caixa e o saldo devedor
+   são grandezas independentes**, e que uma não valida a outra.
 
 ## Cortes automáticos
 
@@ -253,7 +291,9 @@ funcionando desde 16/09, foi a última a cair.
 **Consequência:** o R$/m² de R$ 5.913 e a mediana de R$ 275.000 são de
 23/09/2026 e **não estão sendo atualizados**. Todo VVR e toda margem calculada
 depois dessa data repousam sobre uma referência que envelhece. A cada rodada, a
-idade do levantamento deve ser declarada.
+idade do levantamento deve ser declarada — e desde 03/10 a própria planilha a
+declara sozinha, na aba Comparáveis, com advertência de levantamento vencido a
+partir do sétimo dia. Em 03/10/2026 o levantamento completou **dez dias**.
 
 **O que isso não é:** não é mercado sem anúncios. A fonte respondeu — apenas
 barrou a coleta. O `comparaveis.py` passou a distinguir os dois casos e a falhar
