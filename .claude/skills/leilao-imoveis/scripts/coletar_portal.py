@@ -166,23 +166,41 @@ def coletar_detalhe(cod, uf, nome_cidade, tentativas=4):
     return None
 
 
+def buscar_ids(uf, cod_cidade, tentativas=4):
+    """Devolve os codigos dos lotes que a busca lista para a cidade.
+
+    A busca responde 200 com zero lotes de forma intermitente: em 04/10/2026
+    Florianopolis veio vazia tres vezes e completa na quarta, com dois lotes
+    inalterados. Zero lote e' praca vazia ou antirrobo, e daqui as duas se
+    parecem -- por isso se repete a consulta antes de concluir que esta vazia,
+    com a sessao reaquecida a cada volta."""
+    for n in range(tentativas):
+        curl(BASE + "/busca-imovel.asp")                   # aquece a sessao
+        pesq = curl(BASE + "/carregaPesquisaImoveis.asp",
+                    "hdn_estado=%s&hdn_cidade=%s&hdn_bairro=&hdn_tp_imovel=Selecione"
+                    "&hdn_area_util=&hdn_faixa_vlr=&hdn_quartos=&hdn_vg_garagem="
+                    "&hdn_modalidade=&strValorSimulador=&strAceitaFGTS="
+                    "&strAceitaFinanciamento=" % (uf, cod_cidade))
+        ids = []
+        for v in re.findall(r"hdnImov\d+'\s+value=([\d_]+)", pesq):
+            ids += [x for x in v.split("_") if x.strip()]
+        if ids:
+            return sorted(set(ids)), n + 1
+        time.sleep(2.0 * (n + 1))
+    return [], tentativas
+
+
 def coletar(uf, cod_cidade, nome_cidade):
-    curl(BASE + "/busca-imovel.asp")                       # aquece a sessao
-    pesq = curl(BASE + "/carregaPesquisaImoveis.asp",
-                "hdn_estado=%s&hdn_cidade=%s&hdn_bairro=&hdn_tp_imovel=Selecione"
-                "&hdn_area_util=&hdn_faixa_vlr=&hdn_quartos=&hdn_vg_garagem="
-                "&hdn_modalidade=&strValorSimulador=&strAceitaFGTS="
-                "&strAceitaFinanciamento=" % (uf, cod_cidade))
-    ids = []
-    for v in re.findall(r"hdnImov\d+'\s+value=([\d_]+)", pesq):
-        ids += [x for x in v.split("_") if x.strip()]
-    ids = sorted(set(ids))
+    ids, voltas = buscar_ids(uf, cod_cidade)
     if not ids:
         raise ColetaIncompleta(
-            "%s/%s: a busca nao devolveu lote nenhum. Pode ser praca vazia, "
-            "pode ser o antirrobo barrando a consulta -- e daqui as duas se "
-            "parecem. Nada foi gravado." % (nome_cidade, uf))
-    print("%s/%s: %d lotes no portal" % (nome_cidade, uf, len(ids)), file=sys.stderr)
+            "%s/%s: a busca nao devolveu lote nenhum em %d tentativas. Pode ser "
+            "praca vazia, pode ser o antirrobo barrando a consulta -- e daqui as "
+            "duas se parecem. Nada foi gravado." % (nome_cidade, uf, voltas))
+    print("%s/%s: %d lotes no portal%s" % (
+        nome_cidade, uf, len(ids),
+        "" if voltas == 1 else " (busca vazia em %d tentativa(s) antes)" % (voltas - 1)),
+        file=sys.stderr)
 
     linhas, falhos = [], []
     for i, cod in enumerate(ids, 1):

@@ -36,8 +36,9 @@ saia igual e para que você possa conferir o que foi feito.
 
    **Nunca aceitar coleta parcial.** Desde 04/10/2026 o coletor exige bairro,
    preço, avaliação e área privativa em cada lote, repete a página de detalhe até
-   quatro vezes e **falha em voz alta** se um lote não completar ou se a busca de
-   uma cidade devolver zero lotes. Antes dessa correção ele gravava a linha em
+   quatro vezes, **repete também a busca da cidade até quatro vezes quando ela
+   volta vazia** — o portal responde 200 com zero lotes de forma intermitente — e
+   **falha em voz alta** se um lote não completar ou se a busca não se recuperar. Antes dessa correção ele gravava a linha em
    branco, o lote entrava na planilha sem bairro nem preço, a triagem o
    descartava como `fora_do_bairro` e o diff lia a lista encurtada como saída.
    Código de saída 2 significa **refazer**, nunca seguir com o que veio.

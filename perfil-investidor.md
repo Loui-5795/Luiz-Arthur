@@ -213,7 +213,11 @@ toda, o diff leria a lista encurtada como **saída de lote que nunca saiu**.
 
 Foi o que quase ocorreu: na mesma rodada, a busca de Florianópolis devolveu
 **zero lotes**, o que o antirrobô e uma praça vazia produzem de forma
-indistinguível daqui.
+indistinguível daqui. **A intermitência se confirmou nas 19h do mesmo dia:** a
+busca de Florianópolis voltou vazia duas vezes consecutivas e, na terceira,
+entregou os dois lotes inalterados. Não é praça vazia — é o portal respondendo
+200 sem conteúdo. O coletor passou a repetir também a busca da cidade, até
+quatro vezes, e a informar quantas voltas em branco precederam o resultado.
 
 A correção exige, de cada lote, **bairro, preço, avaliação e área privativa**;
 repete a página de detalhe até quatro vezes; e **falha em voz alta**, sem gravar
