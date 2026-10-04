@@ -138,6 +138,34 @@ def extrai(d, cod, uf, nome_cidade):
     }
 
 
+class ColetaIncompleta(RuntimeError):
+    """O portal listou o lote e nao entregou o detalhe. Nunca confundir com
+    lote que saiu da lista."""
+
+
+ESSENCIAIS = ("Bairro", "Preco", "Valor de avaliacao", "Area privativa")
+
+
+def completa(linha):
+    """A pagina de detalhe as vezes responde 200 com o corpo vazio. O curl()
+    aceita (nao e' 302 e tem corpo), o extrai() devolve a linha toda em branco
+    e o lote entra na planilha sem bairro e sem preco -- que a triagem descarta
+    como fora_do_bairro e o diff le como alteracao. Linha incompleta nao e'
+    dado: ou se recoleta, ou a rodada falha em voz alta."""
+    return all(linha.get(c) for c in ESSENCIAIS)
+
+
+def coletar_detalhe(cod, uf, nome_cidade, tentativas=4):
+    for n in range(tentativas):
+        d = curl(BASE + "/detalhe-imovel.asp", "hdnImovel=%s&hdnOrigem=index" % cod)
+        if d:
+            linha = extrai(d, cod, uf, nome_cidade)
+            if completa(linha):
+                return linha
+        time.sleep(1.5 * (n + 1))
+    return None
+
+
 def coletar(uf, cod_cidade, nome_cidade):
     curl(BASE + "/busca-imovel.asp")                       # aquece a sessao
     pesq = curl(BASE + "/carregaPesquisaImoveis.asp",
@@ -149,29 +177,46 @@ def coletar(uf, cod_cidade, nome_cidade):
     for v in re.findall(r"hdnImov\d+'\s+value=([\d_]+)", pesq):
         ids += [x for x in v.split("_") if x.strip()]
     ids = sorted(set(ids))
+    if not ids:
+        raise ColetaIncompleta(
+            "%s/%s: a busca nao devolveu lote nenhum. Pode ser praca vazia, "
+            "pode ser o antirrobo barrando a consulta -- e daqui as duas se "
+            "parecem. Nada foi gravado." % (nome_cidade, uf))
     print("%s/%s: %d lotes no portal" % (nome_cidade, uf, len(ids)), file=sys.stderr)
 
-    linhas = []
+    linhas, falhos = [], []
     for i, cod in enumerate(ids, 1):
-        d = curl(BASE + "/detalhe-imovel.asp", "hdnImovel=%s&hdnOrigem=index" % cod)
-        if not d:
-            print("  [%d/%d] %s FALHOU" % (i, len(ids), cod), file=sys.stderr)
+        linha = coletar_detalhe(cod, uf, nome_cidade)
+        if linha is None:
+            falhos.append(cod)
+            print("  [%d/%d] %s FALHOU - detalhe incompleto em 4 tentativas"
+                  % (i, len(ids), cod), file=sys.stderr)
             continue
-        linha = extrai(d, cod, uf, nome_cidade)
         linhas.append(linha)
         print("  [%d/%d] %-14s %-22s %-12s %s" % (
             i, len(ids), cod, linha["Bairro"][:22], linha["Preco"],
             linha["Modalidade"][:20]), file=sys.stderr)
         time.sleep(0.4)
+
+    if falhos:
+        raise ColetaIncompleta(
+            "%s/%s: %d de %d lotes sem detalhe (%s). O portal listou o lote e "
+            "nao entregou a pagina. Nada foi gravado: lista parcial faria o "
+            "diff acusar saida que nao houve."
+            % (nome_cidade, uf, len(falhos), len(ids), ", ".join(falhos)))
     return linhas
 
 
 if __name__ == "__main__":
     uf, saida = sys.argv[1], sys.argv[-1]
     todas = []
-    for par in sys.argv[2:-1]:
-        cod, nome = par.split(":", 1)
-        todas += coletar(uf, cod, nome)
+    try:
+        for par in sys.argv[2:-1]:
+            cod, nome = par.split(":", 1)
+            todas += coletar(uf, cod, nome)
+    except ColetaIncompleta as e:
+        print("FALHA NA COLETA DO PORTAL: %s" % e, file=sys.stderr)
+        sys.exit(2)
     if todas:
         with open(saida, "w", newline="", encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=list(todas[0].keys()), delimiter=";")

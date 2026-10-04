@@ -140,7 +140,10 @@ A regra deixou de depender da memória de quem executa. Desde 03/10 ela está
 **embutida no `historico.py`**, que mantém `dados/ausencias-pendentes.csv`: a
 primeira ausência fica em quarentena, a segunda confirma a saída, e o reaparecimento
 limpa a quarentena sem ter sujado o histórico. A planilha declara as pendências
-na aba Saíram da lista. **Já na primeira aplicação a regra evitou um erro:** na
+na aba Saíram da lista. **Em 04/10 a regra se fechou:** o lote do Centro
+reapareceu e saiu da quarentena sem nunca ter entrado no histórico — que segue
+com os mesmos doze registros. É o primeiro ciclo completo da regra, do alerta à
+absolvição. **Já na primeira aplicação a regra evitou um erro:** na
 rodada das 19h de 03/10 faltou o lote de Venda Online do Centro de Florianópolis
 (`144440299841-6`, R$ 809.389,16) — exatamente o mesmo padrão, Venda Online e
 sem data de certame. Ficou pendente, não registrado.
@@ -198,6 +201,25 @@ consequências para a operação:
    distante. Quanto maior o prazo até o 1º leilão, maior a janela de purgação.
 2. **Reconferir a existência do lote no portal na véspera** de qualquer
    desembolso — inclusive o de vistoria e o de honorários.
+
+### O portal responde 200 com a página vazia — e a coleta não pode aceitar
+
+Em 04/10/2026, na rodada das 07h, três lotes tiveram a página de detalhe
+respondida **com status 200 e corpo vazio**. O coletor aceitava: não era redireção
+e havia corpo. A linha saía inteira em branco, com apenas o número do imóvel, e
+dali em diante o erro se propagava em silêncio — a triagem descartava o lote como
+`fora_do_bairro`, a planilha o exibia sem preço e, se a falha atingisse a cidade
+toda, o diff leria a lista encurtada como **saída de lote que nunca saiu**.
+
+Foi o que quase ocorreu: na mesma rodada, a busca de Florianópolis devolveu
+**zero lotes**, o que o antirrobô e uma praça vazia produzem de forma
+indistinguível daqui.
+
+A correção exige, de cada lote, **bairro, preço, avaliação e área privativa**;
+repete a página de detalhe até quatro vezes; e **falha em voz alta**, sem gravar
+nada, se algum lote não completar ou se a busca de uma cidade vier vazia. É o
+mesmo princípio já adotado para os comparáveis de mercado: **dado que falta não
+pode parecer dado que é zero.**
 
 ### O campo "Desconto" do portal pode ser negativo — e o de 03/10 foi
 

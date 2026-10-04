@@ -19,14 +19,28 @@ saia igual e para que você possa conferir o que foi feito.
    e é registrado como pendência no resumo.
 
 2. **Coletar o estoque da Caixa.**
+   **Uma cidade por arquivo.** O coletor é tudo-ou-nada por execução: se um lote
+   não vier completo, ele não grava nada e sai com código 2. Juntar cidades numa
+   só chamada faz a instabilidade de uma descartar o trabalho das outras.
    ```bash
-   python3 .claude/skills/leilao-imoveis/scripts/coletar_portal.py SC \
-     8761:PALHOCA dados/caixa-palhoca-AAAA-MM-DD.csv
-   python3 .claude/skills/leilao-imoveis/scripts/coletar_portal.py SC \
-     8873:SAO_JOSE 8621:FLORIANOPOLIS dados/caixa-anel2-AAAA-MM-DD.csv
+   S=.claude/skills/leilao-imoveis/scripts
+   python3 $S/coletar_portal.py SC 8761:PALHOCA        dados/caixa-palhoca-AAAA-MM-DD-HHh.csv
+   python3 $S/coletar_portal.py SC 8873:SAO_JOSE       dados/caixa-saojose-AAAA-MM-DD-HHh.csv
+   python3 $S/coletar_portal.py SC 8621:FLORIANOPOLIS  dados/caixa-floripa-AAAA-MM-DD-HHh.csv
    ```
+   Depois concatena-se o 2º anel em `caixa-anel2-...csv` e tudo em
+   `caixa-lotes-...csv`, que é o arquivo do diff e da planilha.
+
    O download estático por UF continua barrado pelo antirrobô do portal; a coleta
    vai pelos endpoints POST do formulário de busca.
+
+   **Nunca aceitar coleta parcial.** Desde 04/10/2026 o coletor exige bairro,
+   preço, avaliação e área privativa em cada lote, repete a página de detalhe até
+   quatro vezes e **falha em voz alta** se um lote não completar ou se a busca de
+   uma cidade devolver zero lotes. Antes dessa correção ele gravava a linha em
+   branco, o lote entrava na planilha sem bairro nem preço, a triagem o
+   descartava como `fora_do_bairro` e o diff lia a lista encurtada como saída.
+   Código de saída 2 significa **refazer**, nunca seguir com o que veio.
 
 3. **Triar com os cortes do mandato.**
    ```bash
