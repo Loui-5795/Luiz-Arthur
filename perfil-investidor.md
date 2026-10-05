@@ -335,10 +335,42 @@ barrou a coleta. O `comparaveis.py` passou a distinguir os dois casos e a falhar
 em voz alta, sem gravar arquivo: um CSV de zero linhas gravado em silêncio seria
 pior que a falha, porque pareceria um bairro vazio.
 
-**Remédio possível, não implementado:** o ambiente tem Chromium e Playwright
-instalados. Um coletor que dirija o navegador de verdade costuma vencer o
-desafio do Cloudflare, onde o `curl` não vence. É trabalho de porte e não há
-garantia de que funcione — decisão da investidora.
+**O remédio do navegador foi testado em 05/10/2026 e não funciona aqui.** Fica
+registrado o diagnóstico, para que ninguém volte a gastar tempo com ele sem
+antes mudar a configuração do ambiente.
+
+O que se fez: instalou-se o Playwright, apontou-se o Chromium do ambiente e
+autorizou-se exclusivamente a chave do CA do proxy da sessão, por fixação de
+SPKI — sem desligar a verificação de TLS, que permanece recusando qualquer
+outro certificado inválido. O navegador passou a dialogar com a fonte de fato:
+a resposta deixou de ser erro de certificado e passou a ser uma página real de
+31 KB.
+
+Onde parou: a página é o desafio do Cloudflare, e o texto dela próprio diz a
+causa — *"as configurações de internet ou firewall bloquearam o acesso do seu
+dispositivo a challenges.cloudflare.com"*. Esse é o host que executa a
+verificação. A política de rede do ambiente **não o permite** e responde 403 à
+tentativa de conexão. **O desafio não pode ser resolvido porque o verificador
+não pode ser carregado** — e isso nenhum navegador contorna.
+
+Testadas na mesma data, todas barradas: `imoveis-sc.com.br`, `vivareal.com.br` e
+`zapimoveis.com.br` com 403 de antirrobô; `chavesnamao.com.br`, `olx.com.br`,
+`imovelweb.com.br` e `quintoandar.com.br` sem completar conexão.
+
+**O que destravaria:** acrescentar `challenges.cloudflare.com` — e o domínio da
+fonte escolhida — aos domínios permitidos do ambiente, em Network access, pela
+opção Custom, preservando a lista padrão dos gerenciadores de pacote
+(`code.claude.com/docs/en/cloud-environments#network-access`). A alteração só
+vale em **sessão nova**. É decisão da investidora, mas agora com o custo
+conhecido: uma configuração, não um desenvolvimento.
+
+**Nota de método, porque houve erro meu no caminho.** O diagnóstico do proxy
+exibe `"selective": false`, e eu o li como ausência de lista de domínios
+permitidos — cheguei a afirmar à investidora que o bloqueio era só dos sites.
+A primeira tentativa de sair para um host não previsto desmentiu-me: *"Host not
+in allowlist"*. **A lista existe.** O campo do diagnóstico não significava o que
+supus, e a lição é que configuração se comprova por tentativa de uso, nunca por
+leitura de um campo de estado.
 
 ### A revisar
 
