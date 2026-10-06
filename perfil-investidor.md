@@ -262,6 +262,76 @@ Três consequências práticas:
 3. Para a perícia, é o indicador de que **a avaliação da Caixa e o saldo devedor
    são grandezas independentes**, e que uma não valida a outra.
 
+### O teto de lance do mandato, por metro quadrado — e a distância até o piso da Caixa
+
+Apurado em 06/10/2026, quando três editais novos (0050, 0051 e 0052 — CPA/RE)
+trouxeram dois lotes inéditos em Bela Vista e permitiram, pela primeira vez,
+comparar unidades do mesmo bairro com metragens diferentes.
+
+Com as premissas vigentes e o R$/m² de mercado em R$ 5.913, o lance máximo que
+cumpre o mandato é este:
+
+| Área privativa | Lance para margem de 25% | R$/m² | Lance de equilíbrio (margem zero) | R$/m² |
+|---|---|---|---|---|
+| 43,80 m² | R$ 100.541 | **R$ 2.295** | R$ 139.778 | R$ 3.191 |
+| 48,49 m² | R$ 114.985 | **R$ 2.371** | R$ 158.423 | R$ 3.267 |
+| 52,85 m² | R$ 128.412 | **R$ 2.430** | R$ 175.757 | R$ 3.326 |
+| 60,00 m² | R$ 150.432 | **R$ 2.507** | R$ 204.181 | R$ 3.403 |
+
+O teto por metro quadrado **sobe com a área**, porque os custos fixos da operação
+— dívidas, desocupação, carrego — se diluem em mais metros. Unidade pequena é
+penalizada por aritmética, não por mercado.
+
+#### A constatação que isto produz, e que é estrutural
+
+O piso do 2º leilão em Bela Vista, a 60% da avaliação, equivale a cerca de
+**R$ 3.452/m²** nas unidades de 43,80 m². O teto do mandato, para a mesma área, é
+**R$ 2.295/m²**. **A Caixa pede 50% acima do que o mandato admite.**
+
+Isso não é característica de um lote nem azar de uma rodada: é a relação entre o
+piso legal do 2º leilão e a margem exigida, nesta praça, com estas premissas.
+Enquanto as três grandezas não mudarem, **nenhum lote de Bela Vista passará** —
+e a varredura seguirá reprovando por aritmética, não por falta de oportunidade.
+
+As três grandezas que poderiam mudar isso, nomeadas para que a decisão seja
+consciente:
+
+1. **A margem exigida.** Baixar de 25% para 15% elevaria o teto, sem eliminar a
+   distância. É decisão de apetite, não de cálculo.
+2. **Os custos fixos.** Condomínio atrasado (R$ 12.000) e desocupação
+   (R$ 15.000) são estimativas de premissa, não valores apurados. Um lote com
+   condomínio em dia e ocupante que desocupe sem ação muda o teto de modo
+   relevante — e **só a due diligence apura isso**.
+3. **O R$/m² de mercado**, congelado em 23/09 por bloqueio da fonte. Se o mercado
+   real estiver acima de R$ 5.913, todo o quadro se desloca a favor; se estiver
+   abaixo, contra. **É a maior incerteza aberta do acompanhamento.**
+
+#### O primeiro lote com margem positiva de toda a série
+
+O lote **878771176139-0** (Av. Paulo Roberto Vidal, 475, apto. 611, bl. A),
+48,49 m² a R$ 153.000, apurou margem de **+2,6%** — a primeira positiva desde
+16/09. Reprova no mandato, por estar muito abaixo dos 25%, e segue fora do
+alcance do caixa; mas a causa do resultado é a lição que fica.
+
+Os quatro lotes aprovados na triagem têm desconto declarado entre 34,5% e 40%, e
+todos os quatro estão em Bela Vista. O que separa o de margem positiva dos de
+margem negativa **não é o desconto, nem o preço absoluto**: é o preço por metro
+quadrado de área privativa.
+
+| Lote | Endereço | R$/m² de entrada | Margem |
+|---|---|---|---|
+| 878771176139-0 | Paulo Roberto Vidal, 475, ap. 611 | **R$ 3.155** | **+2,6%** |
+| 878770561220-5 | Sebastião Alzemiro, 387, ap. 104 | R$ 3.452 | −5,5% |
+| 878770638651-9 | Sebastião Alzemiro, 387, ap. 401 | R$ 3.452 | −5,5% |
+| 878771588251-5 | Paulo Roberto Vidal, 2050, ap. 102 | R$ 3.857 | −12,9% |
+
+**Regra de seleção que decorre disto:** ordenar candidatos por **preço por metro
+quadrado de área privativa**, e não pelo desconto sobre a avaliação da Caixa. O
+desconto mede a relação entre preço e avaliação — e a avaliação, como já
+registrado em 03/10, acompanha a dívida consolidada, não o valor do imóvel. O
+preço por metro quadrado mede a relação entre o que se paga e o que se vai
+vender. É a única das duas que informa a margem.
+
 ## Cortes automáticos
 
 Aplicados pelo `scripts/triagem.py` em toda varredura:
