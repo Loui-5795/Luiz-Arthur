@@ -123,7 +123,7 @@ arremate, suspensão, retirada e purgação da mora são indistinguíveis daqui.
 
 | Constatação | n | Situação |
 |---|---|---|
-| Nenhum lote saiu entre o 1º e o 2º leilão | 8 de 8 (dos que têm duas datas) | **mantida** |
+| Nenhum lote saiu entre o 1º e o 2º leilão | 10 de 10 (dos que têm duas datas) | **mantida** |
 | Piso na saída, sobre a avaliação | mediana 60,0% (n=12) | mantida |
 | Saída exatamente no piso do 2º leilão | 7 de 12 | nova, 03/10 |
 | Atraso do portal entre certame e baixa | ~1 dia, 4 vezes | mantida |
@@ -159,10 +159,22 @@ leilão**, marcado para 08/10. Em 03/10 apareceu o segundo: o lote
 seu 1º leilão**, marcado para 05/10. Dois casos não são mais exceção isolada —
 é uma via de saída recorrente, e passa a contar como regra de operação.
 
-O que **se mantém**: o 1º leilão não fecha. São agora oito lotes cujo 1º leilão
-ocorreu enquanto estavam na lista, e nenhum deles saiu no intervalo entre as duas
-datas — o último caso é o lote de São Sebastião (`878771537674-1`), cujo 1º
-leilão foi em 02/10 e que segue listado para o 2º, em 08/10. O piso do 2º leilão
+O que **se mantém**: o 1º leilão não fecha. São agora **dez** lotes cujo 1º
+leilão ocorreu enquanto estavam na lista, e nenhum deles saiu no intervalo entre
+as duas datas. Os dois últimos casos foram observados em 06/10, e são os mais
+limpos da série porque o 1º leilão foi acompanhado em tempo real: o lote de
+**Bela Vista** (`878770561220-5`, R$ 151.200) e o do **Pagani**
+(`144441088173-5`, R$ 330.300) tiveram 1º leilão em 05/10 e seguiam listados,
+com preço, desconto e datas inalterados, na manhã seguinte. O 2º leilão de ambos
+é em 09/10. Antes deles, o lote de São Sebastião (`878771537674-1`), 1º leilão em
+02/10, segue listado para o 2º em 08/10.
+
+A constatação já se sustenta em dez observações e **ainda assim não é lei**: ela
+descreve o comportamento desta praça neste período, e um único caso contrário a
+derruba — como ocorreu, em 29/09, com a conclusão vizinha sobre esgotamento das
+datas. O que ela autoriza é operacional e limitado: **não há razão para formar
+lance para o 1º leilão nesta praça**, porque o preço de entrada relevante é o
+piso do 2º. O piso do 2º leilão
 continua sendo o preço de entrada correto para a triagem.
 
 E uma constatação nova: **sete das doze saídas ocorreram com o lote marcado
