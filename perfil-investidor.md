@@ -94,11 +94,13 @@ Ordem de grandeza para triagem; substituir por cotação real na due diligence.
 Levantado a cada varredura sobre os lotes coletados. Amostra pequena; serve de
 indício, não de regra.
 
-| Modalidade | Lotes | Teto de condomínio atrasado | Permite financiamento |
-|---|---|---|---|
-| Leilão SFI | 15 | **0** | **0** |
-| Licitação Aberta | 1 | 1 | 0 |
-| Venda Online | 2 | 2 | 1 |
+Acumulado sobre **32 lotes distintos** já observados, de 16/09 a 07/10/2026.
+
+| Modalidade | Lotes | Teto de condomínio atrasado | Permite financiamento | Aceita FGTS |
+|---|---|---|---|---|
+| Leilão SFI | 28 | **0** | **1** | 22 |
+| Licitação Aberta | 1 | 1 | 0 | 1 |
+| Venda Online | 3 | 3 | 2 | 1 |
 
 Duas leituras, com pesos diferentes:
 
@@ -109,11 +111,31 @@ Duas leituras, com pesos diferentes:
    é R$ 24 mil. Ele **não melhora o cenário base** (a premissa de triagem é
    R$ 12 mil, abaixo do teto) — ele **elimina a cauda**, o cenário de R$ 20 mil
    ou mais que hoje leva a margem a −18,7%.
-2. **O financiamento não acompanha a modalidade.** Dos dois lotes de Venda
-   Online, um permite SBPE e o outro é "exclusivamente à vista". A nota de
-   estratégia deste perfil diz "Venda Online e Venda Direta com mais
-   frequência", e é assim que deve ser lido: **frequência, não garantia**. A
-   forma de pagamento se confere lote a lote, na ficha e no edital.
+2. **O financiamento não acompanha a modalidade — e em 07/10 isto ficou
+   demonstrado nos dois sentidos.** Dos três lotes de Venda Online, dois
+   permitem financiamento e um é "exclusivamente à vista". E, sobretudo,
+   **apareceu o primeiro Leilão SFI que aceita financiamento**: o lote
+   `810110001631-4`, apartamento no Córrego Grande, em Florianópolis,
+   R$ 480.000 — um em vinte e oito. A nota de estratégia deste perfil diz
+   "Venda Online e Venda Direta com mais frequência", e é assim que deve ser
+   lida: **frequência, não garantia, nem exclusividade**. A forma de pagamento
+   se confere lote a lote, na ficha e no edital — e nunca se presume pela
+   modalidade, em nenhuma das duas direções.
+
+   **Correção de registro.** Até 06/10 esta tabela anotava zero financiamentos
+   em Leilão SFI, e eu afirmei à investidora que nenhum lote de Palhoça aceitava
+   financiamento. A segunda afirmação segue verdadeira — nenhum dos sete lotes
+   de Palhoça aceita. A primeira **era verdadeira para a amostra de então e
+   deixou de ser**: o estoque mudou, e é por isso que esta tabela se recalcula a
+   cada varredura em lugar de ser consultada de memória.
+
+3. **O par FGTS + financiamento no mesmo lote apareceu uma única vez.** O lote
+   `160000016077-0`, apartamento em Areias, São José, 186,64 m² a R$ 555.738,07,
+   Venda Online, aceita **os dois**. É o primeiro de 32 nessa condição. Está
+   fora do bairro-alvo e muito acima do ticket, e por isso a triagem o descarta;
+   registra-se porque demonstra que a combinação existe nesta praça — e é
+   justamente ela que romperia a restrição de capital que hoje reprova todos os
+   lotes de Bela Vista.
 
 ### Como os lotes saem da lista — observado na Grande Florianópolis
 
