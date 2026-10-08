@@ -94,12 +94,13 @@ Ordem de grandeza para triagem; substituir por cotação real na due diligence.
 Levantado a cada varredura sobre os lotes coletados. Amostra pequena; serve de
 indício, não de regra.
 
-Acumulado sobre **32 lotes distintos** já observados, de 16/09 a 07/10/2026.
+Acumulado sobre **33 lotes distintos** já observados, de 16/09 a 08/10/2026.
+Recalculado pelo `scripts/panorama.py` em cada varredura — nunca à mão.
 
 | Modalidade | Lotes | Teto de condomínio atrasado | Permite financiamento | Aceita FGTS |
 |---|---|---|---|---|
 | Leilão SFI | 28 | **0** | **1** | 22 |
-| Licitação Aberta | 1 | 1 | 0 | 1 |
+| Licitação Aberta | 2 | 2 | **1** | 2 |
 | Venda Online | 3 | 3 | 2 | 1 |
 
 Duas leituras, com pesos diferentes:
