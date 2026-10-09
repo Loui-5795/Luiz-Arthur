@@ -140,8 +140,12 @@ Duas leituras, com pesos diferentes:
 
 ### Como os lotes saem da lista — observado na Grande Florianópolis
 
-Acumulado em `dados/historico-saidas.csv`. **Doze saídas** até 03/10/2026, em
-onze Leilões SFI e uma Licitação Aberta. O portal **não declara a causa**:
+Acumulado em `dados/historico-saidas.csv`. **Treze saídas** até 09/10/2026, em
+doze Leilões SFI e uma Licitação Aberta. A décima terceira é a primeira
+**verificada prospectivamente**: o lote de São Sebastião (`878771537674-1`,
+R$ 186.000, 52,85 m²) teve 1º leilão em 02/10 e 2º em 08/10, permaneceu listado
+entre as duas datas, e deixou a lista na manhã seguinte ao 2º — tudo anunciado
+antes de ocorrer e conferido depois. O portal **não declara a causa**:
 arremate, suspensão, retirada e purgação da mora são indistinguíveis daqui.
 
 | Constatação | n | Situação |
@@ -211,6 +215,39 @@ O que **caiu**: a ideia de que a lista só se esvazia por certame. **Existe uma
 via de saída antes de qualquer leilão**, e ela tem consequência prática direta —
 um lote pode desaparecer durante a due diligence, depois de gasto dinheiro em
 matrícula, vistoria e consulta a advogado.
+
+#### A data não identifica a rodada — defeito encontrado em 09/10/2026
+
+A regra das duas rodadas, criada em 03/10 e embutida no `historico.py`, tinha
+dois defeitos que só a primeira confirmação real revelou. Ficam registrados
+porque ambos produziam erro silencioso.
+
+**Primeiro: a quarentena nunca se esvaziava.** O script procurava os ausentes na
+*diferença* entre a coleta anterior e a atual. Um lote já em quarentena estava
+ausente de ambas, logo nunca reaparecia nesse conjunto — e ficava preso
+indefinidamente. A regra prometia confirmar a saída em duas rodadas e **não
+confirmava nenhuma**. O critério correto é a ausência na coleta **atual**, não a
+diferença entre duas.
+
+**Segundo, e mais sutil: a data não identifica uma rodada.** São duas por dia,
+às 07h e às 19h, e a quarentena guardava apenas `09/10/2026`. Ao comparar essa
+marca com a data corrente, o script não distinguia manhã de noite: um lote
+ausente pela primeira vez às 19h era tratado como ausente desde rodada anterior
+e **confirmado como saída na mesma rodada em que faltou** — precisamente o erro
+que a regra existia para impedir. Foi o que aconteceu com o lote de Areias, cuja
+confirmação indevida foi desfeita pelo histórico do repositório.
+
+A correção identifica a rodada **pelo nome do arquivo de coleta**
+(`2026-10-09-19h`), não pela data, e o script passou a ser idempotente:
+reexecutar a mesma rodada não duplica nem antecipa nada. Quatro cenários
+verificados em dados sintéticos antes de voltar ao dado real — primeira falta,
+reexecução da mesma rodada, confirmação na rodada seguinte e reaparecimento.
+
+**A lição, que vale além deste script:** uma regra de controle precisa de
+**identificador de evento**, não de data. Em escrituração, é a diferença entre
+numerar o lançamento e datá-lo — dois lançamentos do mesmo dia são
+indistinguíveis pela data, e qualquer conferência que se apoie nela confundirá
+um com o outro.
 
 #### Hipótese sobre a causa, declarada como hipótese
 

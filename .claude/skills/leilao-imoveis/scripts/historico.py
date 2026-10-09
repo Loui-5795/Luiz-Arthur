@@ -21,15 +21,28 @@ ser esta: a primeira ausencia nao vale saida, vai para a quarentena. Confirma-se
 a saida quando o lote falta em duas rodadas consecutivas. Reaparecendo, sai da
 quarentena sem nunca ter sujado o historico.
 """
-import argparse, csv, os
+import argparse, csv, os, re
 
 CAMPOS = ["data_saida", "id", "cidade", "bairro", "endereco", "tipo",
           "area_privativa", "valor_avaliacao", "ultimo_preco", "modalidade",
           "situacao", "datas_certame", "edital", "observacao"]
 
-CAMPOS_Q = ["primeira_ausencia", "id", "cidade", "bairro", "endereco", "tipo",
+CAMPOS_Q = ["primeira_rodada", "primeira_ausencia", "id", "cidade", "bairro",
+            "endereco", "tipo",
             "area_privativa", "valor_avaliacao", "ultimo_preco", "modalidade",
             "situacao", "datas_certame", "edital"]
+
+
+def rodada_de(caminho):
+    """Identifica a rodada pelo nome do arquivo de coleta, nao pela data.
+
+    A data NAO identifica uma rodada: ha duas por dia, as 07h e as 19h, e em
+    09/10/2026 foi exatamente isso que quebrou a regra das duas rodadas. Um
+    lote ausente pela primeira vez as 19h foi confirmado como saida na mesma
+    rodada, porque a quarentena so' guardava "09/10/2026" e a comparacao com a
+    data corrente nao distinguia manha de noite. O nome do arquivo distingue."""
+    m = re.search(r"(\d{4}-\d{2}-\d{2}(?:-\d{2}h)?)", os.path.basename(caminho))
+    return m.group(1) if m else os.path.basename(caminho)
 
 
 def ler(caminho):
@@ -79,7 +92,7 @@ def main():
     a = p.parse_args()
 
     antes, agora = ler(a.anterior), ler(a.atual)
-    ausentes = {k: antes[k] for k in antes if k not in agora}
+    rodada = rodada_de(a.atual)
     quarentena = ler_quarentena(a.quarentena)
 
     # Quem estava em quarentena e voltou a aparecer nunca saiu. Limpa sem registrar.
@@ -87,30 +100,50 @@ def main():
     for i in voltaram:
         del quarentena[i]
 
+    # Ausente = estava na coleta anterior ou na quarentena, e nao esta na atual.
+    # O criterio e' a ausencia na coleta ATUAL -- nunca a diferenca entre duas
+    # coletas, que deixava o lote preso na quarentena para sempre.
+    ausentes = {k: v for k, v in antes.items() if k not in agora}
+
     confirmadas, novas_em_quarentena = [], []
-    for i, r in ausentes.items():
-        if a.quarentena and i not in quarentena:
-            quarentena[i] = {c: do_portal(r, a.data).get(c, "") for c in CAMPOS_Q}
-            quarentena[i]["primeira_ausencia"] = a.data
-            novas_em_quarentena.append(quarentena[i])
-            continue
-        reg = do_portal(r, a.data)
-        if i in quarentena:
-            reg["observacao"] = ("saiu da lista do portal; ausente desde %s, "
-                                 "confirmado em duas rodadas consecutivas; causa "
-                                 "nao declarada pela fonte"
-                                 % quarentena[i]["primeira_ausencia"])
-            del quarentena[i]
-        else:
+
+    if not a.quarentena:
+        for i, r in ausentes.items():
+            reg = do_portal(r, a.data)
             reg["observacao"] = ("saiu da lista do portal; causa nao declarada "
                                  "pela fonte")
-        confirmadas.append(reg)
+            confirmadas.append(reg)
+    else:
+        for i, r in ausentes.items():
+            if i not in quarentena:
+                q = {c: do_portal(r, a.data).get(c, "") for c in CAMPOS_Q}
+                q["primeira_rodada"] = rodada
+                q["primeira_ausencia"] = a.data
+                quarentena[i] = q
+                novas_em_quarentena.append(q)
+
+        # Confirma quem ja faltava numa rodada ANTERIOR a esta e segue ausente.
+        for i in [k for k in quarentena if k not in agora]:
+            q = quarentena[i]
+            if q.get("primeira_rodada", "") == rodada:
+                continue            # faltou nesta rodada; aguarda a proxima
+            reg = {c: q.get(c, "") for c in CAMPOS}
+            reg["data_saida"] = a.data
+            reg["id"] = i
+            reg["observacao"] = ("saiu da lista do portal; ausente desde %s, "
+                                 "confirmado em duas rodadas consecutivas; "
+                                 "causa nao declarada pela fonte"
+                                 % q["primeira_ausencia"])
+            confirmadas.append(reg)
+            del quarentena[i]
 
     ja = set()
     if os.path.exists(a.historico):
         with open(a.historico, encoding="utf-8-sig") as f:
-            ja = {(r["data_saida"], r["id"]) for r in csv.DictReader(f, delimiter=";")}
-    novas = [r for r in confirmadas if (r["data_saida"], r["id"]) not in ja]
+            ja = {(r["data_saida"], r["id"]) for r in csv.DictReader(f, delimiter=";")
+                  if "RETRATADO" not in r.get("observacao", "")}
+    ja_ids = {r[1] for r in ja}
+    novas = [r for r in confirmadas if r["id"] not in ja_ids]
 
     existe = os.path.exists(a.historico)
     with open(a.historico, "a", newline="", encoding="utf-8") as f:
