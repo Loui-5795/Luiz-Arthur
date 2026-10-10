@@ -140,21 +140,34 @@ Duas leituras, com pesos diferentes:
 
 ### Como os lotes saem da lista — observado na Grande Florianópolis
 
-Acumulado em `dados/historico-saidas.csv`. **Treze saídas** até 09/10/2026, em
-doze Leilões SFI e uma Licitação Aberta. A décima terceira é a primeira
-**verificada prospectivamente**: o lote de São Sebastião (`878771537674-1`,
-R$ 186.000, 52,85 m²) teve 1º leilão em 02/10 e 2º em 08/10, permaneceu listado
-entre as duas datas, e deixou a lista na manhã seguinte ao 2º — tudo anunciado
-antes de ocorrer e conferido depois. O portal **não declara a causa**:
+Acumulado em `dados/historico-saidas.csv`. **Dezesseis saídas** até
+10/10/2026, em quatorze Leilões SFI, uma Licitação Aberta e uma Venda Online.
+
+**Três delas foram verificadas prospectivamente**, e são as de maior valor
+probatório de toda a série, porque a data foi anunciada antes e conferida
+depois:
+
+| Lote | Bairro | Preço | 1º leilão | 2º leilão | Ausente em |
+|---|---|---|---|---|---|
+| `878771537674-1` | São Sebastião | R$ 186.000 | 02/10 | 08/10 | 09/10, manhã |
+| `144441088173-5` | Pagani | R$ 330.300 | 05/10 | 09/10 | 10/10, manhã |
+| `878770561220-5` | **Bela Vista** | R$ 151.200 | 05/10 | 09/10 | 10/10, manhã |
+
+Os três permaneceram listados entre as duas datas e saíram na manhã seguinte ao
+2º leilão. O terceiro era **um dos lotes aprovados na triagem** — o melhor
+colocado da praça-alvo. Sua saída não representa perda de oportunidade: ele
+reprovava no mandato por margem de −5,5% e estava fora do alcance do caixa.
+Representa, isso sim, que **a janela existe e se fecha**, e que o acompanhamento
+mede essa janela com precisão de um dia. O portal **não declara a causa**:
 arremate, suspensão, retirada e purgação da mora são indistinguíveis daqui.
 
 | Constatação | n | Situação |
 |---|---|---|
 | Nenhum lote saiu entre o 1º e o 2º leilão | 10 de 10 (dos que têm duas datas) | **mantida** |
-| Piso na saída, sobre a avaliação | mediana 60,0% (n=12) | mantida |
-| Saída exatamente no piso do 2º leilão | 7 de 12 | nova, 03/10 |
-| Atraso do portal entre certame e baixa | ~1 dia, 4 vezes | mantida |
-| Saiu somente depois de esgotar as duas datas | 10 de 12 | **DERRUBADA — 2 casos contrários** |
+| Piso na saída, sobre a avaliação | mediana 60,0% (n=16) | mantida |
+| Saída exatamente no piso do 2º leilão | 10 de 16 | mantida |
+| Atraso do portal entre certame e baixa | **~1 dia, 7 vezes** — 3 delas previstas | **reforçada em 10/10** |
+| Saiu somente depois de esgotar as duas datas | 14 de 16 | **DERRUBADA — 2 casos contrários** |
 
 Uma retratação a registrar. Em 02/10 anotei como saída o lote de Venda Online do
 Estreito (`000001028634-4`); em 03/10 ele **reapareceu na lista**, inalterado. A
