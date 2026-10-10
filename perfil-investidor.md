@@ -216,6 +216,44 @@ via de saída antes de qualquer leilão**, e ela tem consequência prática dire
 um lote pode desaparecer durante a due diligence, depois de gasto dinheiro em
 matrícula, vistoria e consulta a advogado.
 
+#### A Caixa deixou de publicar a ocupação — 10/10/2026
+
+Na rodada das 07h, **os dezessete lotes perderam o campo `Situação` ao mesmo
+tempo**. Não é fato do mercado: nenhum evento desocupa dezessete imóveis entre
+as 19h e as 07h. Verifiquei três páginas de detalhe e a palavra "Situa" não
+aparece mais no HTML; no lugar surgiram dois campos novos, **"Averbação dos
+leilões negativos"** e **"Inscrição imobiliária"**. A Caixa reformulou a página
+e **deixou de declarar a situação de ocupação**.
+
+O que se fez, em três frentes:
+
+1. **Não se supõe ocupação nenhuma.** O coletor grava `NAO DECLARADO`, nunca
+   vazio — campo vazio se confunde com desocupado, e supor desocupação é supor
+   em favor da operação. Os dois campos novos passaram a ser coletados; a
+   averbação dos leilões negativos interessa diretamente à due diligence.
+
+2. **Corrigiu-se um viés que o silêncio criou.** A triagem dava nota 5 a
+   ocupação desconhecida e 4 a ocupação declarada, de modo que a omissão da
+   fonte **melhorou o escore de todos os lotes** — um deles subiu de 47,9 para
+   50,4 sem que nada no imóvel tivesse mudado. A ausência de informação não pode
+   valer mais que a informação ruim. A nota passou a ser a de ocupado, com o
+   rótulo `OCUP. PRESUMIDA`, e a justificativa é a base observada, não
+   pessimismo: **dos 33 lotes distintos coletados nesta praça enquanto o campo
+   existia, 33 estavam ocupados — nenhuma exceção.** Quem desfaz a presunção é a
+   vistoria, nunca o silêncio do portal.
+
+3. **Criou-se o controle que detecta esta classe de perda**, em
+   `scripts/conferir_coleta.py`: compara o preenchimento de cada campo entre
+   duas coletas e **para a rodada** quando um campo que vinha em 80% ou mais dos
+   lotes cai abaixo de 20%. Também avisa quando um campo passa a vir preenchido,
+   que é sinal de dado novo a aproveitar. Verificado contra a coleta defeituosa
+   desta manhã: acusou `Situacao` de 100% para 0% e saiu com erro.
+
+**A regra que isto firma:** campo que esvazia para todos os lotes de uma vez é
+mudança na fonte, não fato do mercado. Vale para qualquer base de dados de
+terceiro — e para a perícia, é o teste que distingue alteração de realidade de
+alteração de critério de registro.
+
 #### A data não identifica a rodada — defeito encontrado em 09/10/2026
 
 A regra das duas rodadas, criada em 03/10 e embutida no `historico.py`, tinha

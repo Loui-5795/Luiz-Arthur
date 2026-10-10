@@ -113,12 +113,25 @@ def percentual(t):
 
 
 def ocupacao(texto):
+    """Nota de ocupacao. A ausencia de informacao NAO pode valer mais que a
+    informacao ruim.
+
+    Em 10/10/2026 a Caixa deixou de publicar a situacao de ocupacao. A nota de
+    DESCONHECIDO era 5 e a de OCUPADO era 4, de modo que o silencio da fonte
+    MELHOROU o escore de todos os lotes -- um deles subiu de 47,9 para 50,4 sem
+    que nada no imovel tivesse mudado. Isso inverte o sentido da prudencia.
+
+    A correcao usa a base observada, nao o pessimismo: dos 33 lotes distintos
+    coletados nesta praca enquanto o campo existia, **33 estavam ocupados** --
+    nenhuma excecao. Logo, na falta de declaracao, presume-se ocupado, com a
+    nota de ocupado, e o rotulo diz que e' presuncao. Quem desfaz a presuncao e'
+    a vistoria, nunca o silencio do portal."""
     t = sem_acento(texto)
     if "desocupado" in t or "vazio" in t:
         return "DESOCUPADO", 10
     if "ocupado" in t:
         return "OCUPADO", 4
-    return "DESCONHECIDO", 5
+    return "OCUP. PRESUMIDA", 4
 
 
 def nota_modalidade(texto):

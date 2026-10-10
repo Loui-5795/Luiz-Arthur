@@ -101,7 +101,13 @@ def extrai(d, cod, uf, nome_cidade):
     datas = re.findall(r"Data d[aoe][^<]*?-\s*(\d{2}/\d{2}/\d{4})[^<]*", d)
     # O portal traz a situacao de ocupacao dentro de um comentario HTML: nao
     # aparece na tela, mas esta na fonte e e' informacao declarada pela Caixa.
-    situacao = rx(r"Situa\w+o:\s*<strong>(.*?)</strong>")
+    # Ate 09/10/2026 a pagina publicava "Situacao: Ocupado/Desocupado". Em
+    # 10/10 o campo desapareceu de todos os lotes -- verificado em tres paginas
+    # e confirmado pela ausencia da palavra "Situa" no HTML inteiro. Nao e'
+    # falha de coleta: a fonte deixou de declarar a ocupacao. Quando nao vier,
+    # grava-se NAO DECLARADO, nunca vazio: campo vazio se confunde com
+    # desocupado, e supor desocupacao e' supor a seu favor.
+    situacao = rx(r"Situa\w+o:\s*<strong>(.*?)</strong>") or "NAO DECLARADO"
 
     return {
         "Numero do imovel": campo(d, r"N\w+mero do im\w+vel") or cod,
@@ -114,13 +120,23 @@ def extrai(d, cod, uf, nome_cidade):
         "Area total": campo(d, r"\w+rea total"),
         "Area privativa": campo(d, r"\w+rea privativa"),
         "Matricula": campo(d, r"Matr\w+cula\(s\)"),
+        # Apareceram em 10/10/2026, na mesma reformulacao que retirou a
+        # situacao de ocupacao. "Averbacao dos leiloes negativos" diz se os
+        # leiloes negativos anteriores foram averbados na matricula -- dado de
+        # interesse direto para a due diligence.
+        "Averbacao leiloes negativos": campo(d, r"Averba\w+o dos leil\w+es negativos"),
+        "Inscricao imobiliaria": campo(d, r"Inscri\w+o imobili\w+ria"),
         "Comarca": campo(d, r"Comarca"),
         "Oficio": campo(d, r"Of\w+cio"),
         "Situacao": situacao,
         # A situacao entra tambem na descricao porque e' dali que o triagem.py
         # le a ocupacao. Sem isso todo lote sai como DESCONHECIDO.
+        # A situacao entra tambem na descricao porque e' dali que o triagem.py
+        # le a ocupacao. Com o campo nao declarado, nao se acrescenta nada --
+        # a triagem deve cair no seu padrao e a rodada deve dizer isso.
         "Descricao": (rx(r"<strong>Descri\w+o:</strong><br>(.*?)</p>")
-                      + " " + situacao).strip(),
+                      + ("" if situacao == "NAO DECLARADO"
+                         else " " + situacao)).strip(),
         "Modalidade": modalidade(d, rx),
         "Edital": rx(r"Edital:&nbsp;([^<]+)"),
         "Leiloeiro": rx(r"Leiloeiro\(a\):\s*([^<]+)"),

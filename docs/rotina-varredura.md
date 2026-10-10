@@ -12,7 +12,7 @@ saia igual e para que você possa conferir o que foi feito.
 | Entrega | Um `.xlsx` enviado **nesta conversa**, com aviso de que está pronto |
 | Branch | `claude/venda-imoveis-caixa-access-22lqqc` |
 
-## Os nove passos
+## Os dez passos
 
 1. **Ler `perfil-investidor.md`.** Praça-alvo, cortes, tolerâncias e capital saem
    de lá — nunca de memória. Parâmetro em `A DEFINIR` roda com o padrão da skill
@@ -43,7 +43,19 @@ saia igual e para que você possa conferir o que foi feito.
    descartava como `fora_do_bairro` e o diff lia a lista encurtada como saída.
    Código de saída 2 significa **refazer**, nunca seguir com o que veio.
 
-3. **Triar com os cortes do mandato.**
+3. **Conferir a coleta contra a anterior**, antes de triar.
+   ```bash
+   python3 .claude/skills/leilao-imoveis/scripts/conferir_coleta.py \
+     --anterior dados/caixa-lotes-<rodada anterior>.csv \
+     --atual dados/caixa-lotes-AAAA-MM-DD-HHh.csv
+   ```
+   Acusa campo que esvaziou em bloco e sai com erro. **Campo que esvazia para
+   todos os lotes de uma vez é mudança na fonte, não fato do mercado** — em
+   10/10/2026 a Caixa retirou a situação de ocupação de todos os dezessete
+   lotes. Erro aqui significa **ir olhar a página da fonte**, nunca seguir com a
+   coleta.
+
+4. **Triar com os cortes do mandato.**
    ```bash
    python3 .claude/skills/leilao-imoveis/scripts/triagem.py dados/lotes.csv \
      --uf SC --cidade PALHOCA --desconto-min 25 \
@@ -52,7 +64,7 @@ saia igual e para que você possa conferir o que foi feito.
      --pipeline pipeline.csv
    ```
 
-4. **Registrar quem saiu da lista.**
+5. **Registrar quem saiu da lista.**
    ```bash
    python3 .claude/skills/leilao-imoveis/scripts/historico.py \
      --anterior dados/caixa-lotes-<rodada anterior>.csv \
@@ -73,7 +85,7 @@ saia igual e para que você possa conferir o que foi feito.
    seguinte. **Nunca rodar o `historico.py` sem o `--quarentena`**, e passar o
    mesmo arquivo ao `planilha.py`, que declara as pendências na aba de saídas.
 
-5. **Recalcular o panorama de modalidade**, nunca atualizá-lo de memória.
+6. **Recalcular o panorama de modalidade**, nunca atualizá-lo de memória.
    ```bash
    python3 .claude/skills/leilao-imoveis/scripts/panorama.py \
      --dados dados --saida dados/panorama-modalidade.csv
@@ -85,10 +97,10 @@ saia igual e para que você possa conferir o que foi feito.
    já trazia um. **Se a tabela do perfil divergir da saída do script, o script
    está certo.**
 
-6. **Precificar os aprovados** com `scripts/viabilidade.py`, usando o VVR do
+7. **Precificar os aprovados** com `scripts/viabilidade.py`, usando o VVR do
    perfil (`área privativa × R$/m² da banda × 0,88`).
 
-7. **Atualizar os comparáveis de mercado** se o levantamento tiver **7 dias ou
+8. **Atualizar os comparáveis de mercado** se o levantamento tiver **7 dias ou
    mais**. Menos que isso, reaproveita — anúncio não muda de manhã para a noite,
    e refazer a cada 12 horas só gasta requisição.
    ```bash
@@ -101,7 +113,7 @@ saia igual e para que você possa conferir o que foi feito.
    e **avisar no resumo** que o VVR mudou por causa do mercado, e não por
    movimento no portal — senão a usuária confunde as duas coisas.
 
-8. **Gerar e conferir a planilha.**
+9. **Gerar e conferir a planilha.**
    ```bash
    python3 .claude/skills/leilao-imoveis/scripts/planilha.py \
      --lotes dados/caixa-lotes-AAAA-MM-DD.csv \
@@ -116,7 +128,7 @@ saia igual e para que você possa conferir o que foi feito.
    O recálculo canônico seria o LibreOffice, que neste ambiente não carrega nem
    um arquivo trivial. **Nenhuma planilha se entrega com célula em erro.**
 
-9. **Entregar:** enviar o `.xlsx` na conversa, escrever um resumo curto do que
+10. **Entregar:** enviar o `.xlsx` na conversa, escrever um resumo curto do que
    **mudou** desde a rodada anterior, e comitar tudo na branch designada.
 
 ## O resumo que acompanha a planilha
