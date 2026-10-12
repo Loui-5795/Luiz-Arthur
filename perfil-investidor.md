@@ -565,6 +565,32 @@ in allowlist"*. **A lista existe.** O campo do diagnóstico não significava o q
 supus, e a lição é que configuração se comprova por tentativa de uso, nunca por
 leitura de um campo de estado.
 
+#### Fontes de preço FECHADO: tentadas em 12/10/2026, nenhuma disponível
+
+Com a referência de mercado congelada há dezenove dias, tentei a via que este
+perfil sempre apontou como superior — **preço de transação, não preço pedido**.
+O resultado, para que não se repita o esforço:
+
+| Fonte | Resultado | Natureza do obstáculo |
+|---|---|---|
+| `servicodados.ibge.gov.br` | 403 no CONNECT | **política de rede** do ambiente |
+| `servicos.ibge.gov.br` | 403 no CONNECT | **política de rede** |
+| `dados.gov.br` | 403 no CONNECT | **política de rede** |
+| `gov.br/receitafederal` | 403 no CONNECT | **política de rede** |
+| `sinapi.caixa.gov.br` | HTTP 504 | indisponibilidade do servidor |
+| `www.palhoca.sc.gov.br` | falha de validação TLS | certificado não confere com o nome do host |
+
+Os quatro primeiros são **negativas de política** — não se insiste nelas, e o
+remédio é o mesmo dos comparáveis: acrescentar o domínio aos permitidos do
+ambiente, em sessão nova. O último é defeito de certificado, e **não se
+contorna desligando a verificação de TLS**, em nenhuma hipótese.
+
+**Ressalva de expectativa, para não criar ilusão:** mesmo liberado o acesso, é
+incerto que a Prefeitura de Palhoça publique microdados de ITBI. Muitos
+municípios divulgam apenas a planta genérica de valores, que é referência
+fiscal e **não** preço de transação. A via vale ser tentada, não vale ser
+contada como resolvida.
+
 ### A revisar
 
 - Locação: nenhuma fonte liberada na política de rede entrega anúncios de
