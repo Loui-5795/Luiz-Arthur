@@ -229,6 +229,38 @@ via de saída antes de qualquer leilão**, e ela tem consequência prática dire
 um lote pode desaparecer durante a due diligence, depois de gasto dinheiro em
 matrícula, vistoria e consulta a advogado.
 
+#### A regra do R$/m² validada em cinco lotes — 13/10/2026
+
+O edital **0053/0226 - CPA/RE** trouxe seis lotes novos em Palhoça, três deles em
+Bela Vista, e com isso a amostra chegou a cinco aprovados de metragens e preços
+distintos. O resultado é a validação limpa da regra de seleção enunciada em
+06/10, e vale registrá-lo com os números:
+
+| Lote | R$/m² de entrada | Equilíbrio no m² | Desconto anunciado | Margem |
+|---|---|---|---|---|
+| Barra do Aririú (`844442659658-8`) | **R$ 2.983** | R$ 3.233 | 40,00% | **+5,9%** |
+| Bela Vista — P. R. Vidal, 475 | R$ 3.155 | R$ 3.267 | 40,00% | +2,6% |
+| Bela Vista — S. Alzemiro, 387 | R$ 3.452 | R$ 3.191 | 40,00% | −5,5% |
+| Bela Vista — P. R. Vidal, 2050 | R$ 3.857 | R$ 3.191 | 34,52% | −12,9% |
+| Bela Vista — edital 0053 | R$ 4.041 | R$ 3.191 | 29,20% | −15,9% |
+
+**A ordenação por preço por metro quadrado reproduz exatamente a ordenação das
+margens — cinco de cinco, sem inversão.** A ordenação por desconto anunciado não
+reproduz: os três primeiros lotes têm o **mesmo** desconto de 40,00% e margens
+que vão de +5,9% a −5,5%, isto é, uma amplitude de 11,4 pontos dentro de um
+desconto idêntico.
+
+Fica assim demonstrado, e não apenas conjecturado, que **o desconto da Caixa não
+ordena oportunidades e o preço por metro quadrado ordena.** A triagem segue
+usando o desconto como corte de entrada, o que é adequado — ele filtra o lote
+cuja dívida consolidada encareceu o piso —, mas **a priorização entre os
+aprovados deve ser pelo R$/m²**.
+
+**Novo melhor da série:** o lote de **Barra do Aririú**, R$ 138.000 em 46,26 m²,
+com margem de **+5,9%** — o primeiro acima de 5% desde 16/09. Reprova no mandato,
+por estar muito abaixo dos 25%, e segue fora do alcance do caixa. Certames em
+01/12 e 07/12.
+
 #### A Caixa deixou de publicar a ocupação — 10/10/2026
 
 Na rodada das 07h, **os dezessete lotes perderam o campo `Situação` ao mesmo
