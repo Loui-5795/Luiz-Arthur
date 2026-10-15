@@ -163,7 +163,7 @@ arremate, suspensão, retirada e purgação da mora são indistinguíveis daqui.
 
 | Constatação | n | Situação |
 |---|---|---|
-| Nenhum lote saiu entre o 1º e o 2º leilão | 10 de 10 (dos que têm duas datas) | **mantida** |
+| Nenhum lote saiu entre o 1º e o 2º leilão | **11 de 11** (dos que têm duas datas) | **mantida — 4 previstas** |
 | Piso na saída, sobre a avaliação | mediana 60,0% (n=16) | mantida |
 | Saída exatamente no piso do 2º leilão | 10 de 16 | mantida |
 | Atraso do portal entre certame e baixa | **~1 dia, 7 vezes** — 3 delas previstas | **reforçada em 10/10** |
