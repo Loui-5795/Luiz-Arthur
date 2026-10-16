@@ -66,6 +66,27 @@ def gravar_quarentena(caminho, registros):
         w.writerows(registros.values())
 
 
+def sem_certame(r):
+    """Lote sem data de certame -- Venda Online, oferta continua por proposta.
+
+    Em 16/10/2026 ficou demonstrado que, para esses lotes, **ausencia da lista
+    nao e' prova de saida**. O lote 144440299841-6, apartamento no Centro de
+    Florianopolis, ficou ausente por TREZE rodadas consecutivas, teve a saida
+    confirmada pela regra das duas rodadas, e reapareceu intacto na decima
+    quarta. Nenhuma janela finita de confirmacao o teria poupado.
+
+    O placar e' inequivoco: dos dois registros de Venda Online que chegaram ao
+    historico, **os dois eram falsos**. Dos quatorze de Leilao SFI, nenhum.
+    A explicacao e' estrutural: o lote com certame sai da lista por um evento
+    datado, e o de oferta continua some e volta ao sabor do processamento de
+    propostas.
+
+    Dai a regra: lote sem data de certame nao entra no historico de saidas.
+    Vai para um registro proprio de ausencias, que descreve o que se observou
+    -- ausente -- e nao afirma o que nao se sabe."""
+    return not (r.get("Data certame") or "").strip()
+
+
 def do_portal(r, data):
     """Extrai de um registro do portal os campos do historico."""
     return {
@@ -104,6 +125,12 @@ def main():
     # O criterio e' a ausencia na coleta ATUAL -- nunca a diferenca entre duas
     # coletas, que deixava o lote preso na quarentena para sempre.
     ausentes = {k: v for k, v in antes.items() if k not in agora}
+
+    # Lote sem certame sai do fluxo de saidas e vai para registro proprio.
+    sem_data = {k: v for k, v in ausentes.items() if sem_certame(v)}
+    for k in sem_data:
+        del ausentes[k]
+        quarentena.pop(k, None)
 
     confirmadas, novas_em_quarentena = [], []
 
@@ -152,6 +179,27 @@ def main():
             w.writeheader()
         w.writerows(novas)
     gravar_quarentena(a.quarentena, quarentena)
+
+    if sem_data and a.quarentena:
+        reg = os.path.join(os.path.dirname(a.quarentena) or ".",
+                           "ausencias-venda-online.csv")
+        existe = os.path.exists(reg)
+        with open(reg, "a", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=["data", "rodada", "id", "cidade",
+                                              "bairro", "modalidade", "ultimo_preco",
+                                              "observacao"], delimiter=";")
+            if not existe:
+                w.writeheader()
+            for i, r in sem_data.items():
+                w.writerow({"data": a.data, "rodada": rodada, "id": i,
+                            "cidade": r.get("Cidade", ""), "bairro": r.get("Bairro", ""),
+                            "modalidade": r.get("Modalidade", ""),
+                            "ultimo_preco": r.get("Preco", ""),
+                            "observacao": "ausente da lista; lote sem data de "
+                            "certame, cuja ausencia NAO constitui saida"})
+        for i, r in sem_data.items():
+            print("  SEM CERTAME %-16s %-18s ausente; nao conta como saida"
+                  % (i, r.get("Bairro", "")[:18]))
 
     print("%d ausente(s) nesta rodada | %d saida(s) confirmada(s) | %d em quarentena"
           % (len(ausentes), len(novas), len(quarentena)))

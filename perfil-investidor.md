@@ -140,8 +140,9 @@ Duas leituras, com pesos diferentes:
 
 ### Como os lotes saem da lista — observado na Grande Florianópolis
 
-Acumulado em `dados/historico-saidas.csv`. **Dezesseis saídas** até
-10/10/2026, em quatorze Leilões SFI, uma Licitação Aberta e uma Venda Online.
+Acumulado em `dados/historico-saidas.csv`. **Quinze saídas** até 16/10/2026,
+em quatorze Leilões SFI e uma Licitação Aberta — **nenhuma em Venda Online**, e
+isso não é lacuna, é consequência de regra, pelo motivo exposto adiante.
 
 **Três delas foram verificadas prospectivamente**, e são as de maior valor
 probatório de toda a série, porque a data foi anunciada antes e conferida
@@ -228,6 +229,43 @@ O que **caiu**: a ideia de que a lista só se esvazia por certame. **Existe uma
 via de saída antes de qualquer leilão**, e ela tem consequência prática direta —
 um lote pode desaparecer durante a due diligence, depois de gasto dinheiro em
 matrícula, vistoria e consulta a advogado.
+
+#### Na Venda Online, ausência da lista não é saída — 16/10/2026
+
+A regra das duas rodadas reduziu os falsos positivos, mas não os eliminou, e o
+caso que a expôs é definitivo. O lote **144440299841-6**, apartamento no Centro
+de Florianópolis, Venda Online, R$ 809.389,16:
+
+- ausentou-se da lista em 10/10, às 07h;
+- a saída foi **confirmada** pela regra das duas rodadas em 10/10, às 19h;
+- permaneceu ausente por **treze rodadas consecutivas**;
+- **reapareceu intacto** em 16/10, às 07h.
+
+Nenhuma janela finita de confirmação o teria poupado. Duas rodadas não bastam,
+nem dez bastariam.
+
+**O placar por modalidade é inequívoco:** dos dois registros de Venda Online que
+chegaram ao histórico, **os dois eram falsos** — o do Estreito, retratado em
+03/10, e este. Dos quatorze de Leilão SFI, **nenhum**.
+
+A explicação é estrutural e estava à vista desde 02/10: **o lote com certame sai
+da lista por um evento datado; o de oferta contínua some e volta ao sabor do
+processamento de propostas.** Não há, na Venda Online, evento algum cuja
+ocorrência a ausência possa indicar.
+
+**Regra adotada:** lote **sem data de certame não entra no histórico de
+saídas**. Vai para `dados/ausencias-venda-online.csv`, registro próprio que
+descreve o que se observou — *ausente da lista* — e não afirma o que não se
+sabe. Ambos os registros falsos foram retratados; o histórico passa a quinze
+saídas, todas de modalidades com certame.
+
+**A lição de método, que é a mais dura desta série:** a regra das duas rodadas,
+criada em 03/10 justamente para evitar este erro, **não era errada — era
+insuficiente, e pelo motivo de sempre: aplicava a mesma prova a fatos de
+natureza diferente.** Exigir confirmação em duas rodadas supõe que a ausência
+signifique algo; onde não significa, nenhuma quantidade de confirmação produz
+significado. Em perícia, o equivalente é exigir o mesmo documento para fatos que
+se provam por meios distintos — rigor aparente que não decide nada.
 
 #### A regra do R$/m² validada em cinco lotes — 13/10/2026
 

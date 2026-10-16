@@ -12,6 +12,18 @@ saia igual e para que você possa conferir o que foi feito.
 | Entrega | Um `.xlsx` enviado **nesta conversa**, com aviso de que está pronto |
 | Branch | `claude/venda-imoveis-caixa-access-22lqqc` |
 
+## Antes de começar: o contêiner reinicia e perde bibliotecas
+
+Em 16/10/2026 a planilha falhou com `ModuleNotFoundError: openpyxl` depois de um
+reinício do contêiner. **E `pip install openpyxl` não resolve**: neste ambiente o
+`pip` serve o Python 3.13 e o `python3` é o 3.11, de modo que o pacote é
+instalado onde o interpretador não o vê. Use sempre o módulo do interpretador
+corrente:
+
+```bash
+python3 -m pip install --quiet openpyxl
+```
+
 ## Os dez passos
 
 1. **Ler `perfil-investidor.md`.** Praça-alvo, cortes, tolerâncias e capital saem
