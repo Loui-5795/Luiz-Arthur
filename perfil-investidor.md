@@ -140,9 +140,10 @@ Duas leituras, com pesos diferentes:
 
 ### Como os lotes saem da lista — observado na Grande Florianópolis
 
-Acumulado em `dados/historico-saidas.csv`. **Quinze saídas** até 16/10/2026,
-em quatorze Leilões SFI e uma Licitação Aberta — **nenhuma em Venda Online**, e
-isso não é lacuna, é consequência de regra, pelo motivo exposto adiante.
+Acumulado em `dados/historico-saidas.csv`. **Dezessete saídas** até
+21/10/2026, em dezesseis Leilões SFI e uma Licitação Aberta — **nenhuma em Venda
+Online**, e isso não é lacuna, é consequência de regra, pelo motivo exposto
+adiante.
 
 **Três delas foram verificadas prospectivamente**, e são as de maior valor
 probatório de toda a série, porque a data foi anunciada antes e conferida
@@ -153,6 +154,11 @@ depois:
 | `878771537674-1` | São Sebastião | R$ 186.000 | 02/10 | 08/10 | 09/10, manhã |
 | `144441088173-5` | Pagani | R$ 330.300 | 05/10 | 09/10 | 10/10, manhã |
 | `878770561220-5` | **Bela Vista** | R$ 151.200 | 05/10 | 09/10 | 10/10, manhã |
+| `878771588251-5` | **Bela Vista** | R$ 168.933 | 14/10 | 20/10 | 21/10, manhã |
+| `878771222509-2` | Areias, São José | R$ 154.257 | 14/10 | 20/10 | 21/10, manhã |
+
+As duas últimas foram anunciadas em 15/10 e repetidas em cinco rodadas, com a
+data da saída prevista antes de ocorrer. **Cinco previsões, cinco confirmações.**
 
 Os três permaneceram listados entre as duas datas e saíram na manhã seguinte ao
 2º leilão. O terceiro era **um dos lotes aprovados na triagem** — o melhor
