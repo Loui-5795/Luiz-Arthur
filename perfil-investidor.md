@@ -164,7 +164,7 @@ arremate, suspensão, retirada e purgação da mora são indistinguíveis daqui.
 
 | Constatação | n | Situação |
 |---|---|---|
-| Nenhum lote saiu entre o 1º e o 2º leilão | **11 de 11** (dos que têm duas datas) | **mantida — 4 previstas** |
+| Nenhum lote saiu entre o 1º e o 2º leilão | **12 de 12** (dos que têm duas datas) | **mantida — 5 previstas** |
 | Piso na saída, sobre a avaliação | mediana 60,0% (n=16) | mantida |
 | Saída exatamente no piso do 2º leilão | 10 de 16 | mantida |
 | Atraso do portal entre certame e baixa | **~1 dia, 7 vezes** — 3 delas previstas | **reforçada em 10/10** |
@@ -229,6 +229,35 @@ O que **caiu**: a ideia de que a lista só se esvazia por certame. **Existe uma
 via de saída antes de qualquer leilão**, e ela tem consequência prática direta —
 um lote pode desaparecer durante a due diligence, depois de gasto dinheiro em
 matrícula, vistoria e consulta a advogado.
+
+#### Erro meu de classificação, corrigido em 21/10/2026
+
+Em 15/10 anunciei "três 2º leilões em 20/10" e repeti o anúncio em cinco
+rodadas, até 19/10, com previsão de que os três sairiam da lista em 21/10.
+**Dois saíram; o terceiro não — e o terceiro não deveria sair.**
+
+| Lote | Certames | O que 20/10 era | Resultado em 21/10 |
+|---|---|---|---|
+| Bela Vista, P. R. Vidal, 2050 | 14/10 e 20/10 | **2º leilão** | ausente ✔ |
+| Areias, São José | 14/10 e 20/10 | **2º leilão** | ausente ✔ |
+| Forquilhinha, São José | **20/10** e 26/10 | **1º leilão** | segue listado ✔ |
+
+O lote de Forquilhinha tem certames em **20/10 e 26/10**: a data de 20/10 era o
+seu **primeiro** leilão, não o segundo. Eu o agrupei com os outros dois por
+coincidência de data, sem conferir a que etapa a data correspondia em cada um.
+
+**A previsão não falhou — a minha classificação falhou.** E o resultado, bem
+lido, confirma as duas constatações ao mesmo tempo: os dois lotes de 2º leilão
+saíram na manhã seguinte, e o de 1º leilão permaneceu, elevando a constatação do
+1º leilão a **doze de doze**. O 2º leilão de Forquilhinha é em 26/10, e a
+previsão correta para ele é a saída na manhã de 27/10.
+
+**A lição, que é de disciplina e não de método:** agrupar por data é cômodo e
+engana. A data de um certame só significa algo acompanhada da etapa a que
+corresponde — primeiro ou segundo leilão —, e etapa se lê no campo, lote a lote,
+nunca por semelhança com o vizinho. Em perícia, é o mesmo vício de somar
+documentos pela data de emissão sem verificar a que competência cada um se
+refere.
 
 #### Na Venda Online, ausência da lista não é saída — 16/10/2026
 
