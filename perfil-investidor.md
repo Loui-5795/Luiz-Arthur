@@ -302,6 +302,15 @@ signifique algo; onde não significa, nenhuma quantidade de confirmação produz
 significado. Em perícia, o equivalente é exigir o mesmo documento para fatos que
 se provam por meios distintos — rigor aparente que não decide nada.
 
+**Terceira confirmação da regra, em 22/10/2026.** O lote **160000016077-0**,
+apartamento em Areias, São José, Venda Online, R$ 555.738,07, ausentou-se da
+lista em 16/10 às 19h, reapareceu, e ausentou-se outra vez em 22/10 às 19h. Pela
+regra anterior, a segunda ausência teria produzido o terceiro registro falso do
+histórico; pela regra vigente, produziu uma linha em
+`dados/ausencias-venda-online.csv` e nada mais. **O mesmo lote ausentando-se
+duas vezes em seis dias é a demonstração direta do que se afirmou acima:** na
+oferta contínua, a ausência é intermitência de processamento, não evento.
+
 #### A regra do R$/m² validada em cinco lotes — 13/10/2026
 
 O edital **0053/0226 - CPA/RE** trouxe seis lotes novos em Palhoça, três deles em
