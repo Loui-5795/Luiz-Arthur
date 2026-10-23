@@ -88,7 +88,8 @@ PREMISSAS = [
     ("Fator de deságio do VVR", 0.88, '0.00', "Venda em 90 dias. Definido no perfil-investidor.md."),
     ("Margem líquida mínima", 0.25, PCT, "Abaixo disso o perfil manda descartar."),
     ("Mercado e caixa", None, None, None),
-    ("R$/m² de mercado", 5913.0, MOEDA, "Mediana de 13 anúncios de 2 dorm. entre 42 e 49 m² em Bela Vista, 23/09/2026."),
+    ("R$/m² de mercado — até 49 m²", 5913.0, MOEDA, "Mediana de 13 anúncios de 2 dorm. entre 42 e 49 m² em Bela Vista, 23/09/2026."),
+    ("R$/m² de mercado — 50 m² ou mais", 5333.0, MOEDA, "Mediana de 12 anúncios entre 50 e 62 m² no mesmo levantamento. É 9,8% MENOR que a da banda pequena: unidade maior vende por menos por metro. Aplicar o R$/m² da banda errada superestimaria o VVR — no lote de 55,98 m² de 23/10/2026, a diferença era de 12 pontos de margem."),
     ("Capital disponível", 100000.0, MOEDA, "Perfil: R$ 50.000 a R$ 100.000. Aqui no topo da faixa."),
     ("% do lance pago à vista", 1.0, PCT, "100% = sem financiamento. Nenhum lote de Palhoça aceita financiamento."),
 ]
@@ -151,7 +152,8 @@ def aba_viabilidade(wb, nome, lotes, nota):
     p_iptu, p_cond, p_cons = REF["IPTU atrasado"], REF["Condomínio atrasado"], REF["Contas de consumo"]
     p_des, p_ref, p_car = REF["Desocupação"], REF["Reforma por m²"], REF["Carrego mensal"]
     p_mes, p_venda, p_desag = REF["Meses do ciclo"], REF["Custo de venda (corretagem)"], REF["Fator de deságio do VVR"]
-    p_marg, p_m2, p_cap = REF["Margem líquida mínima"], REF["R$/m² de mercado"], REF["Capital disponível"]
+    p_marg, p_cap = REF["Margem líquida mínima"], REF["Capital disponível"]
+    p_m2p, p_m2g = REF["R$/m² de mercado — até 49 m²"], REF["R$/m² de mercado — 50 m² ou mais"]
     p_ent = REF["% do lance pago à vista"]
 
     r = 5
@@ -172,7 +174,12 @@ def aba_viabilidade(wb, nome, lotes, nota):
         k = "(%s+%s+%s)" % (p_com, p_itbi, p_reg)
         fixos = "(K{r}+L{r}+M{r}+N{r})".format(r=r)
         f = {
-            7:  "=D{r}*{m2}*{des}".format(r=r, m2=p_m2, des=p_desag),
+            # O R$/m² sai da banda de área do próprio lote, nunca de uma banda só. A banda
+            # se escolhe aqui, na montagem, e nao por IF na celula: a formula fica legivel e
+            # continua recalculando sozinha quando se edita a premissa da banda.
+            7:  "=D{r}*{m2}*{des}".format(
+                r=r, des=p_desag,
+                m2=(p_m2g if (area or 0) >= 50 else p_m2p)),
             8:  "=F{r}*{p}".format(r=r, p=p_com),
             9:  "=F{r}*{p}".format(r=r, p=p_itbi),
             10: "=F{r}*{p}".format(r=r, p=p_reg),

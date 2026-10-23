@@ -497,6 +497,55 @@ Três consequências práticas:
 3. Para a perícia, é o indicador de que **a avaliação da Caixa e o saldo devedor
    são grandezas independentes**, e que uma não valida a outra.
 
+### O R$/m² depende da banda de área, e a banda grande vale menos — 23/10/2026
+
+O edital **0056/0226 - CPA/RE** trouxe, na rodada das 19h, o primeiro lote de
+Bela Vista com área acima de 50 m²: **844440215690-1**, apartamento de
+**55,98 m²**, avaliação de R$ 240.000, pedido de **R$ 144.000** — 40% de desconto
+anunciado, certames em 14/12 e 17/12.
+
+Ao precificá-lo, deparei-me com uma questão de método que até aqui não se havia
+apresentado: **o levantamento de comparáveis foi pesquisado na banda de 42 a
+49 m²**, porque toda a amostra anterior cabia nela. Aplicar aquele R$/m² a uma
+unidade de 55,98 m² seria extrapolar a banda pesquisada. Fui ao arquivo de 23/09
+conferir o que ele próprio contém, e a resposta estava lá:
+
+| Banda de área | Anúncios | R$/m² mediano | Preço mediano |
+|---|---|---|---|
+| 42 a 49 m² | 13 | **R$ 5.913** | R$ 270.000 |
+| 50 a 62 m² | 12 | **R$ 5.333** | R$ 280.000 |
+
+**A unidade maior vende por 9,8% menos por metro quadrado.** O preço total sobe —
+de R$ 270 mil para R$ 280 mil —, mas não na proporção da área: é o padrão
+conhecido de que o metro marginal vale menos que o primeiro. O levantamento de
+23/09 já sustentava as duas bandas; o que faltava era a pergunta.
+
+**O efeito sobre este lote é decisivo, e não cosmético:**
+
+| R$/m² aplicado | VVR | Margem | Teto do mandato | Distância até o pedido |
+|---|---|---|---|---|
+| R$ 5.913 (banda errada) | R$ 291.288 | 23,0% | R$ 140.799 | R$ 3.201 — **2,2%** |
+| R$ 5.333 (banda correta) | R$ 262.716 | **9,0%** | R$ 118.375 | R$ 25.625 — **17,8%** |
+
+Pela banda errada, o lote **aparentaria faltar 2,2% para passar** — o mais perto
+que qualquer lote desta praça jamais chegou, e provavelmente bastaria para
+justificar diligência, visita e proposta. Pela banda correta, falta 17,8%, e o
+lote reprova com folga. **Quatorze pontos de margem dependiam de qual coluna da
+mesma planilha se consultava.**
+
+**Correção aplicada ao instrumento, não apenas ao laudo.** O `planilha.py` passou
+a ter duas premissas de R$/m², uma por banda, e escolhe a do lote pela área na
+montagem da aba — de modo que a conta não dependa de quem a faz lembrar da
+banda. A escolha fica explícita na célula e continua recalculando quando a
+senhora editar a premissa.
+
+**A lição de método.** O erro que quase cometi não é de cálculo nem de fonte: é
+de **aderência da amostra ao objeto**. A mediana de R$ 5.913 era correta, apurada
+e recente o bastante; apenas não se referia a este imóvel. Em perícia é o mesmo
+vício de tomar laudo de imóvel semelhante por laudo do imóvel periciado — o
+número está certo e responde a outra pergunta. **Antes de aplicar uma mediana,
+verifique-se de que o objeto pertence à população de onde ela saiu.**
+
 ### O teto de lance do mandato, por metro quadrado — e a distância até o piso da Caixa
 
 Apurado em 06/10/2026, quando três editais novos (0050, 0051 e 0052 — CPA/RE)
