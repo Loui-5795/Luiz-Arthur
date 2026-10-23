@@ -311,6 +311,16 @@ histórico; pela regra vigente, produziu uma linha em
 duas vezes em seis dias é a demonstração direta do que se afirmou acima:** na
 oferta contínua, a ausência é intermitência de processamento, não evento.
 
+**Verificação prospectiva da regra, em 23/10/2026.** Na rodada das 19h de 22/10
+declarou-se que aquela ausência não constituía saída. Na rodada seguinte, às 07h
+de 23/10, **o lote reapareceu intacto** — mesmo preço, mesma avaliação, mesma
+modalidade —, depois de uma única rodada de ausência. Registre-se o que esta
+confirmação é e o que não é: trata-se de **previsão negativa** — afirmou-se que
+nada havia ocorrido —, e por isso ela não integra a tabela de previsões de
+saída, que só admite data anunciada antes do fato. Classificá-la ali inflaria a
+série com um acerto de outra natureza, que é precisamente o erro cometido em
+21/10 ao agrupar certames por data.
+
 #### A regra do R$/m² validada em cinco lotes — 13/10/2026
 
 O edital **0053/0226 - CPA/RE** trouxe seis lotes novos em Palhoça, três deles em
