@@ -140,8 +140,8 @@ Duas leituras, com pesos diferentes:
 
 ### Como os lotes saem da lista — observado na Grande Florianópolis
 
-Acumulado em `dados/historico-saidas.csv`. **Dezessete saídas** até
-21/10/2026, em dezesseis Leilões SFI e uma Licitação Aberta — **nenhuma em Venda
+Acumulado em `dados/historico-saidas.csv`. **Dezoito saídas** até
+27/10/2026, em dezessete Leilões SFI e uma Licitação Aberta — **nenhuma em Venda
 Online**, e isso não é lacuna, é consequência de regra, pelo motivo exposto
 adiante.
 
@@ -156,9 +156,19 @@ depois:
 | `878770561220-5` | **Bela Vista** | R$ 151.200 | 05/10 | 09/10 | 10/10, manhã |
 | `878771588251-5` | **Bela Vista** | R$ 168.933 | 14/10 | 20/10 | 21/10, manhã |
 | `878771222509-2` | Areias, São José | R$ 154.257 | 14/10 | 20/10 | 21/10, manhã |
+| `144441762824-5` | Forquilhinha, São José | R$ 185.855 | 20/10 | 26/10 | 27/10, manhã |
 
-As duas últimas foram anunciadas em 15/10 e repetidas em cinco rodadas, com a
-data da saída prevista antes de ocorrer. **Cinco previsões, cinco confirmações.**
+As duas de 21/10 foram anunciadas em 15/10 e repetidas em cinco rodadas, com a
+data da saída prevista antes de ocorrer. **Seis previsões, seis confirmações.**
+
+A sexta merece registro próprio, por nascer de um erro meu. Em 21/10 anunciei
+"três 2º leilões em 20/10" e incluí Forquilhinha entre eles; os certames do lote
+são **20/10 e 26/10**, de modo que 20/10 era o seu **1º** leilão. Corrigida a
+classificação, a previsão passou a ser a saída na manhã de 27/10 — e foi o que
+se observou, com a primeira ausência às 07h e a confirmação às 19h do mesmo dia.
+**A previsão original não falhou por acaso: ela não existia, porque o estágio
+estava mal classificado.** O acerto desta sexta linha é o da regra, não o da
+pressa.
 
 Os três permaneceram listados entre as duas datas e saíram na manhã seguinte ao
 2º leilão. O terceiro era **um dos lotes aprovados na triagem** — o melhor
@@ -170,7 +180,7 @@ arremate, suspensão, retirada e purgação da mora são indistinguíveis daqui.
 
 | Constatação | n | Situação |
 |---|---|---|
-| Nenhum lote saiu entre o 1º e o 2º leilão | **12 de 12** (dos que têm duas datas) | **mantida — 5 previstas** |
+| Nenhum lote saiu entre o 1º e o 2º leilão | **13 de 13** (dos que têm duas datas) | **mantida — 6 previstas** |
 | Piso na saída, sobre a avaliação | mediana 60,0% (n=16) | mantida |
 | Saída exatamente no piso do 2º leilão | 10 de 16 | mantida |
 | Atraso do portal entre certame e baixa | **~1 dia, 7 vezes** — 3 delas previstas | **reforçada em 10/10** |
