@@ -321,6 +321,13 @@ histórico; pela regra vigente, produziu uma linha em
 duas vezes em seis dias é a demonstração direta do que se afirmou acima:** na
 oferta contínua, a ausência é intermitência de processamento, não evento.
 
+**Quarta confirmação, em 29/10/2026.** O lote `000001028634-4`, imóvel
+comercial de 577,10 m² no Estreito, Florianópolis, Venda Online, R$
+1.934.248,90, ausentou-se outra vez. É precisamente o lote da **primeira
+retratação**, de 02/10, e sua nova ausência vai para o registro de ausências
+sem tocar o histórico. Quatro casos, três lotes distintos, nenhum registro
+falso desde a adoção da regra.
+
 **Verificação prospectiva da regra, em 23/10/2026.** Na rodada das 19h de 22/10
 declarou-se que aquela ausência não constituía saída. Na rodada seguinte, às 07h
 de 23/10, **o lote reapareceu intacto** — mesmo preço, mesma avaliação, mesma
