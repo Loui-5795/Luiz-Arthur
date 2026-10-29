@@ -10,7 +10,7 @@ O download estatico (/listaweb/Lista_imoveis_UF.csv) e barrado pelo bot manager
 do portal neste ambiente; os endpoints POST que o proprio formulario usa passam.
 Gera CSV no formato que scripts/triagem.py consome.
 """
-import csv, html, os, re, subprocess, sys, tempfile, time
+import csv, html, os, re, subprocess, sys, tempfile, time, unicodedata
 
 BASE = "https://venda-imoveis.caixa.gov.br/sistema"
 RAIZ = "https://venda-imoveis.caixa.gov.br"
@@ -40,6 +40,11 @@ def curl(url, data=None, tentativas=4):
             return txt
         time.sleep(2 * (n + 1))          # bot manager: recua e tenta de novo
     return ""
+
+
+def sem_acento(t):
+    return unicodedata.normalize("NFKD", t or "").encode(
+        "ascii", "ignore").decode().lower()
 
 
 def limpar(t):
@@ -119,6 +124,12 @@ def extrai(d, cod, uf, nome_cidade):
         "Garagem": campo(d, r"Garagem"),
         "Area total": campo(d, r"\w+rea total"),
         "Area privativa": campo(d, r"\w+rea privativa"),
+        # Terreno nao tem area privativa nem area total: a pagina traz
+        # "Area do terreno = <strong>6.525,84m2</strong>". Sem este campo o
+        # lote de terreno saia sem area alguma e reprovava o completa(),
+        # derrubando a coleta da cidade inteira -- foi o que aconteceu em
+        # 29/10/2026 com o lote 000001015918-6, em Sao Jose.
+        "Area do terreno": campo(d, r"\w+rea do terreno"),
         "Matricula": campo(d, r"Matr\w+cula\(s\)"),
         # Apareceram em 10/10/2026, na mesma reformulacao que retirou a
         # situacao de ocupacao. "Averbacao dos leiloes negativos" diz se os
@@ -159,7 +170,22 @@ class ColetaIncompleta(RuntimeError):
     lote que saiu da lista."""
 
 
-ESSENCIAIS = ("Bairro", "Preco", "Valor de avaliacao", "Area privativa")
+ESSENCIAIS = ("Bairro", "Preco", "Valor de avaliacao")
+# A area e' essencial, mas o campo que a carrega depende do tipo do imovel.
+# Exigir "Area privativa" de todo lote foi um erro de aderencia do teste ao
+# objeto: terreno nao tem area privativa por natureza, e em 29/10/2026 um
+# terreno listado em Sao Jose fez a coleta da cidade inteira falhar oito vezes
+# seguidas. A pagina estava completa; o teste e' que pedia o campo errado.
+AREA_POR_TIPO = {"terreno": ("Area do terreno", "Area total"),
+                 "_": ("Area privativa", "Area total", "Area do terreno")}
+
+
+def campos_de_area(tipo):
+    t = sem_acento(tipo or "")
+    for chave, campos in AREA_POR_TIPO.items():
+        if chave != "_" and chave in t:
+            return campos
+    return AREA_POR_TIPO["_"]
 
 
 def completa(linha):
@@ -167,8 +193,15 @@ def completa(linha):
     aceita (nao e' 302 e tem corpo), o extrai() devolve a linha toda em branco
     e o lote entra na planilha sem bairro e sem preco -- que a triagem descarta
     como fora_do_bairro e o diff le como alteracao. Linha incompleta nao e'
-    dado: ou se recoleta, ou a rodada falha em voz alta."""
-    return all(linha.get(c) for c in ESSENCIAIS)
+    dado: ou se recoleta, ou a rodada falha em voz alta.
+
+    A area entra por qualquer um dos campos que o tipo do imovel admite: basta
+    UM preenchido. Apartamento declara area privativa; terreno, area do
+    terreno. Ausencia de TODOS continua reprovando, que e' o caso real de
+    pagina vazia."""
+    if not all(linha.get(c) for c in ESSENCIAIS):
+        return False
+    return any(linha.get(c) for c in campos_de_area(linha.get("Tipo")))
 
 
 def coletar_detalhe(cod, uf, nome_cidade, tentativas=4):
