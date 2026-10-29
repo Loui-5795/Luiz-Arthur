@@ -55,6 +55,14 @@ python3 -m pip install --quiet openpyxl
    descartava como `fora_do_bairro` e o diff lia a lista encurtada como saída.
    Código de saída 2 significa **refazer**, nunca seguir com o que veio.
 
+   **Se o esquema do coletor mudar no meio da rodada, juntar por NOME.** Em
+   29/10/2026 a correção do coletor acrescentou a coluna `Area do terreno`
+   depois de Palhoça e Florianópolis já estarem coletadas. Concatenar com
+   `tail -n +2` desalinharia os campos de quem tem uma coluna a menos, sem
+   erro algum à vista — o CSV ficaria bem formado e com os dados trocados de
+   lugar. Nesse caso a junção se faz em Python, pelo nome das colunas, com a
+   ordem do esquema completo.
+
 3. **Conferir a coleta contra a anterior**, antes de triar.
    ```bash
    python3 .claude/skills/leilao-imoveis/scripts/conferir_coleta.py \
