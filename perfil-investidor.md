@@ -140,10 +140,18 @@ Duas leituras, com pesos diferentes:
 
 ### Como os lotes saem da lista — observado na Grande Florianópolis
 
-Acumulado em `dados/historico-saidas.csv`. **Dezoito saídas** até
-27/10/2026, em dezessete Leilões SFI e uma Licitação Aberta — **nenhuma em Venda
-Online**, e isso não é lacuna, é consequência de regra, pelo motivo exposto
+Acumulado em `dados/historico-saidas.csv`. **Dezenove saídas** até
+30/10/2026, em dezessete Leilões SFI e **duas** Licitações Abertas — **nenhuma em
+Venda Online**, e isso não é lacuna, é consequência de regra, pelo motivo exposto
 adiante.
+
+A segunda Licitação Aberta, confirmada em 30/10, é a primeira observação útil
+sobre a modalidade de **data única**: o apartamento `144442282177-5`, no
+Estreito, Florianópolis, R$ 499.017,10, teve certame em 29/10 e ausentou-se na
+manhã de 30/10, confirmando-se à noite. **O atraso de cerca de um dia entre o
+certame e a baixa no portal, até aqui medido só em Leilão SFI, repete-se na
+Licitação Aberta** — o que era de esperar, por ser atraso de processamento do
+portal e não característica do certame, mas que só agora se observou.
 
 **Três delas foram verificadas prospectivamente**, e são as de maior valor
 probatório de toda a série, porque a data foi anunciada antes e conferida
