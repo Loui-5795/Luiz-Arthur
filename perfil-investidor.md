@@ -328,6 +328,11 @@ retratação**, de 02/10, e sua nova ausência vai para o registro de ausências
 sem tocar o histórico. Quatro casos, três lotes distintos, nenhum registro
 falso desde a adoção da regra.
 
+**Quinta confirmação, em 30/10/2026.** O mesmo lote do Estreito reapareceu
+intacto na rodada seguinte à ausência de 29/10 — uma única rodada fora da
+lista. É a segunda reaparição deste lote e a quinta observação sob a regra:
+**cinco ausências de Venda Online, três lotes, nenhum registro falso.**
+
 **Verificação prospectiva da regra, em 23/10/2026.** Na rodada das 19h de 22/10
 declarou-se que aquela ausência não constituía saída. Na rodada seguinte, às 07h
 de 23/10, **o lote reapareceu intacto** — mesmo preço, mesma avaliação, mesma
