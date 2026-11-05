@@ -140,8 +140,8 @@ Duas leituras, com pesos diferentes:
 
 ### Como os lotes saem da lista — observado na Grande Florianópolis
 
-Acumulado em `dados/historico-saidas.csv`. **Dezenove saídas** até
-30/10/2026, em dezessete Leilões SFI e **duas** Licitações Abertas — **nenhuma em
+Acumulado em `dados/historico-saidas.csv`. **Vinte saídas** até
+05/11/2026, em dezessete Leilões SFI e **três** Licitações Abertas — **nenhuma em
 Venda Online**, e isso não é lacuna, é consequência de regra, pelo motivo exposto
 adiante.
 
@@ -165,9 +165,18 @@ depois:
 | `878771588251-5` | **Bela Vista** | R$ 168.933 | 14/10 | 20/10 | 21/10, manhã |
 | `878771222509-2` | Areias, São José | R$ 154.257 | 14/10 | 20/10 | 21/10, manhã |
 | `144441762824-5` | Forquilhinha, São José | R$ 185.855 | 20/10 | 26/10 | 27/10, manhã |
+| `844441802944-0` | Barreiros, São José | R$ 315.337 | — | 04/11 (data única) | 05/11, manhã |
 
 As duas de 21/10 foram anunciadas em 15/10 e repetidas em cinco rodadas, com a
-data da saída prevista antes de ocorrer. **Seis previsões, seis confirmações.**
+data da saída prevista antes de ocorrer. **Sete previsões, sete confirmações.**
+
+A sétima é a de maior valor probatório da série, por três razões. Foi a única
+**anunciada dois dias antes** do fato, em 03/11, e repetida em três rodadas. Foi
+a primeira feita em **Licitação Aberta**, modalidade de data única, cujo prazo de
+baixa se havia medido uma única vez, em 30/10 — de sorte que a previsão extrapolou
+de n=1 e se confirmou. E o lote **permaneceu listado na rodada da noite do próprio
+certame**, confirmando que a baixa no portal se dá na manhã seguinte, e não no
+dia.
 
 A sexta merece registro próprio, por nascer de um erro meu. Em 21/10 anunciei
 "três 2º leilões em 20/10" e incluí Forquilhinha entre eles; os certames do lote
