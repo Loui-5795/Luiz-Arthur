@@ -536,6 +536,48 @@ Três consequências práticas:
 3. Para a perícia, é o indicador de que **a avaliação da Caixa e o saldo devedor
    são grandezas independentes**, e que uma não valida a outra.
 
+### Sair da lista não é estado permanente — 11/11/2026
+
+O lote **878771588251-5**, apartamento de 43,80 m² na Avenida Paulo Roberto
+Vidal, 2050, em Bela Vista, **voltou à lista**. É o mesmo lote cuja saída se
+confirmou em 21/10 e que figura entre as previsões prospectivas desta série.
+
+| | Saída, 21/10 | Retorno, 11/11 |
+|---|---|---|
+| Edital | 0048/0226 - CPA/RE | **0061/0226 - CPA/RE** |
+| Certames | 14/10 e 20/10/2026 | **19/01 e 25/01/2027** |
+| Avaliação | R$ 258.000,00 | R$ 258.000,00 |
+| Preço | R$ 168.932,94 | **R$ 169.635,01** |
+
+**O registro de 21/10 não se retrata, e nada nele estava errado.** O lote
+esteve de fato ausente por vinte e uma rodadas, e o histórico sempre registrou
+o fato observado — *saiu da lista* — sem supor a causa. O que esta rodada
+acrescenta é a causa, por eliminação: **o lote não foi arrematado.** Os dois
+leilões de outubro foram negativos, a Caixa recolheu o imóvel e o reofertou
+três semanas depois, em edital novo, com datas novas.
+
+**Três consequências práticas, e a terceira é a que interessa ao lance:**
+
+1. **Saída não é venda.** Das vinte saídas registradas, ao menos esta não o
+   foi. Quantas mais, não se sabe — e é por isso que a observação nunca foi
+   anotada como arremate.
+2. **A janela que se fecha pode reabrir.** Perder um lote no certame não o
+   perde definitivamente; convém reencontrá-lo, e o acompanhamento o faz
+   sozinho.
+3. **O preço de reoferta quase não cedeu: +0,42% em vinte e dois dias.** Não é
+   reajuste de mercado, é acréscimo de dívida — coerente com o art. 27, §2º,
+   II, da Lei 9.514/1997, em que o piso do 2º leilão é a dívida consolidada.
+   **Esperar o lote rodar outra vez não o barateia; encarece-o devagar.** Quem
+   contava com desconto adicional a cada praça frustrada contava com o que esta
+   praça não dá.
+
+**Defeito próprio, corrigido na mesma rodada.** O `historico.py` deduplicava as
+saídas **pelo lote**, de modo que uma segunda saída do mesmo imóvel seria
+descartada em silêncio — justamente o dado que mede quantas vezes um lote roda
+sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
+nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
+a repetição exata continua sendo descartada.
+
 ### O R$/m² depende da banda de área, e a banda grande vale menos — 23/10/2026
 
 O edital **0056/0226 - CPA/RE** trouxe, na rodada das 19h, o primeiro lote de

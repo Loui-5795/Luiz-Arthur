@@ -169,8 +169,13 @@ def main():
         with open(a.historico, encoding="utf-8-sig") as f:
             ja = {(r["data_saida"], r["id"]) for r in csv.DictReader(f, delimiter=";")
                   if "RETRATADO" not in r.get("observacao", "")}
-    ja_ids = {r[1] for r in ja}
-    novas = [r for r in confirmadas if r["id"] not in ja_ids]
+    # Deduplica por (data, lote), nao por lote. Em 11/11/2026 o lote
+    # 878771588251-5, de Bela Vista, cuja saida se confirmara em 21/10, voltou
+    # a' lista num edital novo, com certames novos. Logo a saida NAO e' estado
+    # permanente: o mesmo lote pode sair outra vez, e a chave por lote apagaria
+    # silenciosamente a segunda saida -- justamente o dado que mede quantas
+    # vezes um lote roda sem ser arrematado.
+    novas = [r for r in confirmadas if (r["data_saida"], r["id"]) not in ja]
 
     existe = os.path.exists(a.historico)
     with open(a.historico, "a", newline="", encoding="utf-8") as f:
