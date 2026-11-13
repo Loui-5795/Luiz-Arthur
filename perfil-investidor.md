@@ -140,8 +140,8 @@ Duas leituras, com pesos diferentes:
 
 ### Como os lotes saem da lista — observado na Grande Florianópolis
 
-Acumulado em `dados/historico-saidas.csv`. **Vinte saídas** até
-05/11/2026, em dezessete Leilões SFI e **três** Licitações Abertas — **nenhuma em
+Acumulado em `dados/historico-saidas.csv`. **Vinte e uma saídas** até
+13/11/2026, em dezessete Leilões SFI e **quatro** Licitações Abertas — **nenhuma em
 Venda Online**, e isso não é lacuna, é consequência de regra, pelo motivo exposto
 adiante.
 
