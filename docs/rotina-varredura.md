@@ -24,6 +24,26 @@ corrente:
 python3 -m pip install --quiet openpyxl
 ```
 
+## O contêiner também pode voltar a um commit antigo
+
+Em 15/11/2026, à noite, o contêiner foi reconstruído e o repositório local
+reapareceu em **09f41ad**, commit de setembro, com `dados/` e `planilhas/`
+praticamente vazios. Nada se perdeu, porque o remoto estava íntegro — mas quem
+rodasse a varredura sem olhar o commit compararia a coleta de hoje com a de
+setembro e leria a praça inteira como novidade.
+
+**Antes de coletar, conferir que o local está na altura do remoto:**
+
+```bash
+git fetch origin claude/venda-imoveis-caixa-access-22lqqc
+git merge --ff-only origin/claude/venda-imoveis-caixa-access-22lqqc
+```
+
+O `--ff-only` é a garantia: se houvesse trabalho local ainda não enviado, o
+comando falharia em vez de descartá-lo. Confirme-se antes, com
+`git merge-base --is-ancestor HEAD origin/<branch>`, que o local é apenas
+antigo, e não divergente.
+
 ## Os dez passos
 
 1. **Ler `perfil-investidor.md`.** Praça-alvo, cortes, tolerâncias e capital saem
