@@ -14,6 +14,14 @@ e depois de qual data de certame. Este script preserva isso, sem apagar nada.
 O portal nao diz se o lote saiu por arremate, suspensao ou retirada. O registro
 guarda o fato observado -- saiu da lista -- e nunca supoe a causa.
 
+LOTE QUE VOLTA. Sair da lista nao e' estado permanente: um lote pode ser
+reofertado semanas depois, em edital novo e as vezes em OUTRA modalidade. Em
+13/11/2026 anunciei como "lote novo" o 855551517677-2, do Rocado, que de fato
+era um retorno -- havia saido em 19/09, como Leilao SFI, e voltou como
+Licitacao Aberta. A conferencia existia (o historico) e eu nao a fiz. Agora o
+script a faz: todo lote que aparece e' cruzado com o historico de saidas, e o
+retorno e' anunciado como retorno, com a comparacao de preco e modalidade.
+
 REGRA DAS DUAS RODADAS. Em 02/10/2026 um lote de Venda Online foi registrado
 como saida e reapareceu intacto na rodada seguinte: a ausencia era
 indisponibilidade da fonte, nao saida. Uma retratacao depois, a regra passou a
@@ -43,6 +51,13 @@ def rodada_de(caminho):
     data corrente nao distinguia manha de noite. O nome do arquivo distingue."""
     m = re.search(r"(\d{4}-\d{2}-\d{2}(?:-\d{2}h)?)", os.path.basename(caminho))
     return m.group(1) if m else os.path.basename(caminho)
+
+
+def valor(t):
+    try:
+        return float(str(t).replace(".", "").replace(",", "."))
+    except (ValueError, AttributeError):
+        return 0.0
 
 
 def ler(caminho):
@@ -115,6 +130,16 @@ def main():
     antes, agora = ler(a.anterior), ler(a.atual)
     rodada = rodada_de(a.atual)
     quarentena = ler_quarentena(a.quarentena)
+
+    # Lote que aparece e ja consta do historico nao e' novo: e' reoferta.
+    saiu_antes = {}
+    if os.path.exists(a.historico):
+        with open(a.historico, encoding="utf-8-sig") as f:
+            for r in csv.DictReader(f, delimiter=";"):
+                if "RETRATADO" not in r.get("observacao", ""):
+                    saiu_antes[r["id"]] = r          # fica a saida mais recente
+    retornos = [(i, saiu_antes[i]) for i in agora
+                if i not in antes and i in saiu_antes]
 
     # Quem estava em quarentena e voltou a aparecer nunca saiu. Limpa sem registrar.
     voltaram = [i for i in quarentena if i in agora]
@@ -205,6 +230,36 @@ def main():
         for i, r in sem_data.items():
             print("  SEM CERTAME %-16s %-18s ausente; nao conta como saida"
                   % (i, r.get("Bairro", "")[:18]))
+
+    if retornos:
+        reg = os.path.join(os.path.dirname(a.historico) or ".", "retornos.csv")
+        existe_r = os.path.exists(reg)
+        campos_r = ["data_retorno", "id", "cidade", "bairro", "data_saida_anterior",
+                    "modalidade_antes", "modalidade_agora", "preco_antes",
+                    "preco_agora", "variacao_pct", "edital_antes", "edital_agora"]
+        with open(reg, "a", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=campos_r, delimiter=";")
+            if not existe_r:
+                w.writeheader()
+            for i, ant in retornos:
+                at = agora[i]
+                pa, pb = valor(ant.get("ultimo_preco")), valor(at.get("Preco"))
+                var = ("%.2f" % ((pb / pa - 1) * 100)).replace(".", ",") if pa else ""
+                w.writerow({
+                    "data_retorno": a.data, "id": i,
+                    "cidade": at.get("Cidade", ""), "bairro": at.get("Bairro", ""),
+                    "data_saida_anterior": ant.get("data_saida", ""),
+                    "modalidade_antes": ant.get("modalidade", ""),
+                    "modalidade_agora": at.get("Modalidade", ""),
+                    "preco_antes": ant.get("ultimo_preco", ""),
+                    "preco_agora": at.get("Preco", ""), "variacao_pct": var,
+                    "edital_antes": ant.get("edital", ""),
+                    "edital_agora": at.get("Edital", "")})
+                print("  RETORNOU   %-16s %-18s saiu em %s como %s a R$ %s; volta "
+                      "como %s a R$ %s (%s%%)"
+                      % (i, at.get("Bairro", "")[:18], ant.get("data_saida", ""),
+                         ant.get("modalidade", ""), ant.get("ultimo_preco", ""),
+                         at.get("Modalidade", ""), at.get("Preco", ""), var))
 
     print("%d ausente(s) nesta rodada | %d saida(s) confirmada(s) | %d em quarentena"
           % (len(ausentes), len(novas), len(quarentena)))

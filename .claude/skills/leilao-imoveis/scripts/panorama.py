@@ -10,24 +10,36 @@ numero estava certo para a amostra de quando foi escrito e errado para a de
 hoje -- que e' o modo mais traicoeiro de um dado estar errado, porque nao parece
 desatualizado, parece apurado.
 
-Cada lote entra UMA vez, pela primeira coleta em que apareceu. Contar por
-coleta inflaria a amostra: um lote visto em vinte rodadas nao sao vinte lotes.
+Cada lote entra UMA vez. Contar por coleta inflaria a amostra: um lote visto em
+vinte rodadas nao sao vinte lotes.
+
+A versao que vale e' a MAIS RECENTE, nao a primeira. Ate 18/11/2026 valia a
+primeira, e o caso que mostrou o erro foi o lote 000001015918-6, terreno da
+Fazenda Santo Antonio: saiu da lista em 13/11, depois de uma Licitacao Aberta
+negativa, e voltou em 18/11 como VENDA ONLINE, pelo mesmo preco. Contado pela
+primeira aparicao, ele seguiria somando na coluna da Licitacao Aberta -- numa
+tabela que existe para dizer o que a modalidade determina HOJE em cada lote,
+isto e' responder pela modalidade que o lote ja nao tem.
 """
 import argparse, collections, csv, glob, os, sys
 
 
 def ler_todas(pasta):
-    """Lotes distintos, na primeira versao em que foram vistos."""
+    """Lotes distintos, na versao mais recente em que foram vistos."""
     vistos, arquivos = {}, sorted(glob.glob(os.path.join(pasta, "caixa-lotes-*.csv")))
     if not arquivos:
         print("Nenhuma coleta encontrada em %s" % pasta, file=sys.stderr)
         sys.exit(2)
-    for p in arquivos:
+    for p in arquivos:                      # em ordem; a ultima leitura prevalece
         with open(p, encoding="utf-8-sig") as f:
             for r in csv.DictReader(f, delimiter=";"):
                 i = r.get("Numero do imovel")
-                if i and i not in vistos:
-                    r["_primeira_coleta"] = os.path.basename(p)
+                if i:
+                    if i not in vistos:
+                        r["_primeira_coleta"] = os.path.basename(p)
+                    else:
+                        r["_primeira_coleta"] = vistos[i]["_primeira_coleta"]
+                    r["_ultima_coleta"] = os.path.basename(p)
                     vistos[i] = r
     return vistos, arquivos
 

@@ -578,6 +578,53 @@ sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
 
+### A escada da reoferta, e um erro meu que ela revelou — 18/11/2026
+
+O lote **000001015918-6**, terreno da Fazenda Santo Antônio, cuja saída se
+confirmou em 13/11 após Licitação Aberta negativa, voltou à lista em 18/11 —
+**como Venda Online, pelo preço idêntico**. Comparadas as trinta e seis colunas
+da coleta, mudaram seis, e todas pela mesma causa: caíram edital, leiloeiro,
+plataforma e data de certame, e a modalidade passou de Licitação Aberta a Venda
+Online. Preço, avaliação, área e regras de condomínio, financiamento e FGTS:
+**idênticos**.
+
+Fui então cruzar todo o estoque já coletado com o histórico, e o levantamento
+produziu duas coisas: uma constatação e uma retificação.
+
+**A constatação — a Caixa desce uma escada de modalidades.** Dos sessenta e três
+lotes distintos vistos até aqui, dois mudaram de modalidade, e os três retornos
+registrados formam uma sequência coerente:
+
+| Retorno | Lote | Antes | Depois | Preço | Variação |
+|---|---|---|---|---|---|
+| 11/11 | `878771588251-5`, Bela Vista | Leilão SFI | Leilão SFI (edital novo) | R$ 168.933 → R$ 169.635 | **+0,42%** |
+| 13/11 | `855551517677-2`, Roçado | Leilão SFI | **Licitação Aberta** | R$ 279.000 → R$ 271.506 | **−2,69%** |
+| 18/11 | `000001015918-6`, Fazenda Santo Antônio | Licitação Aberta | **Venda Online** | R$ 1.470.221 → R$ 1.470.221 | **0,00%** |
+
+A escada é **Leilão SFI → Licitação Aberta → Venda Online**, e o que ela oferece
+não é desconto: a maior queda observada foi de 2,69%, e houve alta e
+estabilidade. **O que a reoferta muda é o regime de acesso, não o preço.** E
+nisso ela é favorável a quem tem pouco caixa e precisa de tempo: a Venda Online
+aceita proposta a qualquer momento, sem certame, sem habilitação prévia em
+plataforma de leiloeiro e sem a corrida de um dia marcado.
+
+**A retificação.** Em 13/11 anunciei o lote do Roçado como **lote novo**. Não
+era: havia saído em 19/09, como Leilão SFI, e voltava cinquenta e cinco dias
+depois sob outra modalidade. O dado para desfazer o engano estava no próprio
+repositório — o histórico de saídas — e eu não o consultei, dois dias depois de
+ter escrito, a propósito do lote de Bela Vista, que *sair da lista não é estado
+permanente*. **Enunciar a regra não é aplicá-la**, e a diferença entre as duas
+coisas é um controle automático.
+
+**Controle criado, para que não dependa de mim.** O `historico.py` passou a
+cruzar todo lote que aparece com o histórico de saídas e a anunciar o retorno
+como retorno, com a comparação de modalidade e de preço, registrando-o em
+`dados/retornos.csv`. Rodado retroativamente, recuperou os três casos. O
+`panorama.py`, pelo mesmo motivo, passou a contar cada lote pela versão **mais
+recente** e não pela primeira: contado pela primeira, o terreno seguiria somando
+na coluna da Licitação Aberta, numa tabela que existe para dizer o que a
+modalidade determina **hoje**.
+
 ### O R$/m² depende da banda de área, e a banda grande vale menos — 23/10/2026
 
 O edital **0056/0226 - CPA/RE** trouxe, na rodada das 19h, o primeiro lote de
