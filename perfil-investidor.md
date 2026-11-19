@@ -578,6 +578,69 @@ sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
 
+### O preço de reoferta é tabelado, e é isto que mede a distância até o mandato — 19/11/2026
+
+Dois lotes voltaram à lista na mesma rodada, ambos saídos em 03/10 após Leilão
+SFI, ambos reofertados em Licitação Aberta — e o controle criado na véspera os
+apanhou sozinho, com a comparação pronta:
+
+| Lote | Bairro | Preço antes | Preço agora | Queda |
+|---|---|---|---|---|
+| `144441764402-0` | Centro, Palhoça | R$ 477.998,55 | R$ 369.642,29 | **−22,67%** |
+| `000001018127-9` | Kobrasol, São José | R$ 395.960,11 | R$ 145.971,08 | **−63,13%** |
+
+A queda de 63% do lote de Kobrasol é a chave de tudo. **É o lote do desconto
+negativo**, registrado em 03/10: a Caixa pedia R$ 395.960,11 por uma sala
+avaliada em R$ 250.000,00 — 58,4% ACIMA da avaliação —, porque no 2º leilão do
+SFI o piso é a dívida consolidada (art. 27, §2º, II, da Lei 9.514/1997), e não
+um percentual da avaliação. Fracassado o SFI, o imóvel passa ao ativo da Caixa e
+é reofertado **com referência na avaliação**. Daí a queda: não houve desconto
+concedido, houve troca de referência.
+
+**E a referência é tabelada.** Medindo preço ÷ avaliação em todo o estoque de
+49 lotes, os números não se distribuem: eles se repetem, idênticos até a sexta
+decimal, entre lotes de editais, cidades e tipos diferentes.
+
+| Modalidade | Fator preço/avaliação | Desconto | Lotes |
+|---|---|---|---|
+| Leilão SFI | **0,600000** | 40,00% | 22 de 40 |
+| Leilão SFI | acima de 0,60, até 1,0609 | 39% a **−6%** | 18 de 40 — piso pela dívida |
+| Licitação Aberta / Venda Online | **0,637314** | 36,27% | 5 |
+| Licitação Aberta / Venda Online | **0,583884** | **41,61%** | 3 |
+| Licitação Aberta | 0,604413 | 39,56% | 1 |
+
+Os 0,600000 exatos em vinte e dois lotes são o piso legal do 2º leilão, a 60% da
+avaliação. Os 0,583884 e 0,637314, repetidos a seis decimais em lotes sem
+nenhuma relação entre si, **não são preço de mercado: são parâmetro
+administrativo do vendedor.** Não arrisco a fórmula que os produz; registro o
+fato, que é verificável e já se repetiu oito vezes.
+
+#### A consequência, que é a mais importante de toda a série
+
+O mandato, para uma unidade de 43,80 m² em Bela Vista avaliada em R$ 258.000,
+admite lance de até R$ 100.541 — isto é, **exige 61,0% de desconto**. O melhor
+que a reoferta já ofereceu é **41,61%**.
+
+**A distância é de 19,4 pontos percentuais, e não se fecha esperando.** Esperar
+o lote descer a escada das modalidades leva o desconto de 40% a 41,6%, não a
+61%. Quem contava com a paciência como alavanca contava com o que esta praça não
+dá — e isto agora está medido, não suposto.
+
+Restam as três alavancas de 06/10, e só elas: **a margem exigida, os custos
+fixos e o capital.** A quarta, que eu não havia descartado com números até hoje
+— *aguardar a reoferta* —, está descartada.
+
+#### Uma pergunta que é da senhora, não minha
+
+O lote `144441764402-0` é um apartamento de **72,45 m² no Centro de Palhoça**, a
+R$ 369.642,29 contra avaliação de R$ 580.000,00 — **36,3% de desconto**, em
+Licitação Aberta com certame em 04/12. Está na cidade-alvo e **fora da lista de
+bairros** do mandato, que nomeia Bela Vista, Pedra Branca, Passa Vinte, Aririú,
+Jardim Eldorado, Ponte do Imaruim e Caminho Novo. A triagem o descarta por isso,
+e corretamente — mas o descarte é de regra, não de mérito. **Incluir o Centro na
+praça-alvo é decisão sua**, e enquanto não houver, não levanto comparáveis do
+bairro nem o precifico: seria responder a uma pergunta que a senhora não fez.
+
 ### A escada da reoferta, e um erro meu que ela revelou — 18/11/2026
 
 O lote **000001015918-6**, terreno da Fazenda Santo Antônio, cuja saída se
@@ -601,12 +664,15 @@ registrados formam uma sequência coerente:
 | 13/11 | `855551517677-2`, Roçado | Leilão SFI | **Licitação Aberta** | R$ 279.000 → R$ 271.506 | **−2,69%** |
 | 18/11 | `000001015918-6`, Fazenda Santo Antônio | Licitação Aberta | **Venda Online** | R$ 1.470.221 → R$ 1.470.221 | **0,00%** |
 
-A escada é **Leilão SFI → Licitação Aberta → Venda Online**, e o que ela oferece
-não é desconto: a maior queda observada foi de 2,69%, e houve alta e
-estabilidade. **O que a reoferta muda é o regime de acesso, não o preço.** E
-nisso ela é favorável a quem tem pouco caixa e precisa de tempo: a Venda Online
-aceita proposta a qualquer momento, sem certame, sem habilitação prévia em
-plataforma de leiloeiro e sem a corrida de um dia marcado.
+A escada é **Leilão SFI → Licitação Aberta → Venda Online**, e ela muda o regime
+de acesso: a Venda Online aceita proposta a qualquer momento, sem certame, sem
+habilitação prévia em plataforma de leiloeiro e sem a corrida de um dia marcado.
+
+> **Retificado em 19/11/2026.** Escrevi aqui que a reoferta "não oferece
+> desconto", porque nos três primeiros casos a maior queda havia sido de 2,69%.
+> **Estava errado, e o erro era de amostra pequena.** Dois retornos de 19/11
+> caíram 22,67% e 63,13%. A reoferta oferece desconto, e grande; a seção de
+> 19/11 explica por quê e quanto.
 
 **A retificação.** Em 13/11 anunciei o lote do Roçado como **lote novo**. Não
 era: havia saído em 19/09, como Leilão SFI, e voltava cinquenta e cinco dias
