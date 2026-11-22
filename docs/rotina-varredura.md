@@ -185,6 +185,18 @@ Três linhas, no máximo. O que interessa é a **diferença**:
 qualquer forma. Movimento inventado para justificar a rodada é pior que rodada
 silenciosa.
 
+## Nunca canalizar a coleta por `grep` em segundo plano
+
+Em 22/11/2026, à noite, a coleta rodou em segundo plano com a saída canalizada
+por `grep -E "gravado|FALHA|exit="`. O processo foi interrompido ao atingir o
+limite de tempo, e **o arquivo de saída veio vazio** — não porque o coletor
+nada dissesse, mas porque o `grep` retém a saída em buffer quando não escreve
+num terminal, e nada foi descarregado antes da interrupção. Perdeu-se a única
+prova de onde a coleta havia parado.
+
+Em segundo plano, **a coleta escreve direto no arquivo de saída, sem pipe**. A
+filtragem se faz depois, lendo o arquivo.
+
 ## Quando a rodada falha
 
 A varredura depende de dois domínios liberados na política de rede do ambiente:

@@ -578,6 +578,36 @@ sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
 
+### A rodada que não houve, e o que a medição mostrou — 22/11/2026
+
+A varredura das 19h de 22/11 **não foi entregue**. Não há planilha dessa rodada,
+e o registro disto é parte do método: rodada sem coleta não se preenche com a
+coleta anterior.
+
+O portal não estava fora do ar — estava inutilizável, e a diferença se mediu:
+
+| Operação | Tempo normal | Tempo em 22/11 à noite | Resultado |
+|---|---|---|---|
+| Busca da cidade (Palhoça) | poucos segundos | **370 s**, em duas voltas | 21 lotes listados |
+| Uma página de detalhe | ~1 s | **1.055 s** (quatro tentativas) | **falhou** |
+
+A busca devolveu a lista; **as páginas de detalhe não vieram**. A dezessete
+minutos por lote e com quarenta e oito lotes, a coleta completa levaria cerca de
+catorze horas — isto é, a rodada é impossível, não apenas lenta. O coletor agiu
+como deve: não gravou nada, porque lista sem detalhe produziria linhas em branco
+e o diff as leria como alteração do mercado.
+
+**Nada se conclui sobre a praça a partir desta rodada.** O estoque pode ter
+mudado entre a rodada das 07h e agora, e não se sabe; a próxima rodada comparará
+com a das 07h de 22/11, e o intervalo de doze horas passa a vinte e quatro.
+
+Registre-se, por fim, um erro meu de instrumentação que agravou o diagnóstico: a
+coleta rodava com a saída canalizada por `grep`, que retém o texto em buffer
+quando não escreve num terminal. Interrompido o processo, **o arquivo de saída
+veio vazio** — e eu perdi a única prova de onde a coleta havia parado, tendo de
+remedi-la com uma medição nova. A rotina passou a proibir o pipe na coleta em
+segundo plano.
+
 ### O preço de reoferta é tabelado, e é isto que mede a distância até o mandato — 19/11/2026
 
 Dois lotes voltaram à lista na mesma rodada, ambos saídos em 03/10 após Leilão
