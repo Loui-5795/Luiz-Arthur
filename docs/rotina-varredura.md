@@ -44,7 +44,7 @@ comando falharia em vez de descartá-lo. Confirme-se antes, com
 `git merge-base --is-ancestor HEAD origin/<branch>`, que o local é apenas
 antigo, e não divergente.
 
-## Os dez passos
+## Os onze passos
 
 1. **Ler `perfil-investidor.md`.** Praça-alvo, cortes, tolerâncias e capital saem
    de lá — nunca de memória. Parâmetro em `A DEFINIR` roda com o padrão da skill
@@ -125,7 +125,20 @@ antigo, e não divergente.
    seguinte. **Nunca rodar o `historico.py` sem o `--quarentena`**, e passar o
    mesmo arquivo ao `planilha.py`, que declara as pendências na aba de saídas.
 
-6. **Recalcular o panorama de modalidade**, nunca atualizá-lo de memória.
+6. **Medir os degraus de preço** de quem permaneceu na lista.
+   ```bash
+   python3 .claude/skills/leilao-imoveis/scripts/degraus.py \
+     --dados dados --saida dados/degraus-preco.csv
+   ```
+   Registra variação de preço de lote que **ficou** na lista sob a **mesma
+   modalidade** — o que é coisa distinta da reoferta, que pertence ao
+   `retornos.csv`. Criado em 23/11/2026, quando um lote em Venda Online baixou
+   exatamente 2,5% após sessenta e um dias de preço inalterado. Esse degrau é o
+   único mecanismo conhecido pelo qual a espera produz desconto, e medir sua
+   cadência é o que diz se ela serve de alavanca. Achado por comparação manual
+   naquela rodada; o script existe para que não dependa disso.
+
+7. **Recalcular o panorama de modalidade**, nunca atualizá-lo de memória.
    ```bash
    python3 .claude/skills/leilao-imoveis/scripts/panorama.py \
      --dados dados --saida dados/panorama-modalidade.csv
@@ -137,10 +150,10 @@ antigo, e não divergente.
    já trazia um. **Se a tabela do perfil divergir da saída do script, o script
    está certo.**
 
-7. **Precificar os aprovados** com `scripts/viabilidade.py`, usando o VVR do
+8. **Precificar os aprovados** com `scripts/viabilidade.py`, usando o VVR do
    perfil (`área privativa × R$/m² da banda × 0,88`).
 
-8. **Atualizar os comparáveis de mercado** se o levantamento tiver **7 dias ou
+9. **Atualizar os comparáveis de mercado** se o levantamento tiver **7 dias ou
    mais**. Menos que isso, reaproveita — anúncio não muda de manhã para a noite,
    e refazer a cada 12 horas só gasta requisição.
    ```bash
@@ -153,7 +166,7 @@ antigo, e não divergente.
    e **avisar no resumo** que o VVR mudou por causa do mercado, e não por
    movimento no portal — senão a usuária confunde as duas coisas.
 
-9. **Gerar e conferir a planilha.**
+10. **Gerar e conferir a planilha.**
    ```bash
    python3 .claude/skills/leilao-imoveis/scripts/planilha.py \
      --lotes dados/caixa-lotes-AAAA-MM-DD.csv \
@@ -168,7 +181,7 @@ antigo, e não divergente.
    O recálculo canônico seria o LibreOffice, que neste ambiente não carrega nem
    um arquivo trivial. **Nenhuma planilha se entrega com célula em erro.**
 
-10. **Entregar:** enviar o `.xlsx` na conversa, escrever um resumo curto do que
+11. **Entregar:** enviar o `.xlsx` na conversa, escrever um resumo curto do que
    **mudou** desde a rodada anterior, e comitar tudo na branch designada.
 
 ## O resumo que acompanha a planilha

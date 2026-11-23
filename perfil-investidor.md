@@ -578,6 +578,86 @@ sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
 
+### O vendedor baixa o preço de quem fica, e agora se sabe o passo — 23/11/2026
+
+O portal voltou a responder nesta noite e a varredura das 19h foi coletada
+integralmente: 21 lotes em Palhoça, 26 no 2º anel, 47 no total. O movimento da
+rodada é pequeno em quantidade e grande em consequência.
+
+**Um só lote mudou de preço, e é o primeiro caso de uma espécie nova.** O lote
+`000001028634-4` — imóvel comercial de 577,10 m² na Av. Gov. Ivo Silveira, 2487,
+Estreito, Florianópolis, em Venda Online — baixou de R$ 1.934.248,90 para
+R$ 1.885.892,67.
+
+| | Preço | Fator preço/avaliação | Desconto |
+|---|---|---|---|
+| Até 22/11 | R$ 1.934.248,90 | **0,637314** | 36,27% |
+| Desde 23/11 | R$ 1.885.892,67 | **0,621381** | 37,86% |
+
+A queda é de **exatamente −2,50%**: 1.934.248,90 × 0,975 = 1.885.892,6775, que
+truncado ao centavo dá o valor publicado. E o fator novo é o antigo multiplicado
+pelo mesmo 0,975 — isto é, **a Caixa não reprecificou o imóvel: aplicou um
+desconto redondo sobre o preço tabelado anterior.** É mais uma confirmação de
+que o fator 0,637314 é parâmetro administrativo, e não avaliação de mercado.
+
+#### Por que este caso é de espécie diferente dos anteriores
+
+Todas as quedas registradas até hoje — as de 22,67% e 63,13% em 19/11, a de
+2,69% em 13/11 — eram de **reoferta**: o lote sai da lista, fracassa o certame e
+volta sob outra modalidade, com outra referência de preço. Esta não. **O lote
+não saiu, não trocou de modalidade e não mudou de edital. O vendedor
+simplesmente baixou o preço de quem continua anunciado.**
+
+A distinção não é acadêmica: confundir as duas coisas superestimaria
+grosseiramente o desconto que a espera produz.
+
+#### O passo e a cadência, que é o número que importa
+
+O lote está na lista desde **23/09/2026** e foi observado **120 vezes**. Em cento
+e dezenove dessas observações o preço foi o mesmo. **Ficou sessenta e um dias
+parado e então desceu um degrau de 2,5%.**
+
+É uma única observação, e eu não afirmo periodicidade a partir dela — não sei se
+o próximo degrau vem em sessenta dias, em cento e vinte ou nunca. O que sei é o
+limite: **nesta praça, em sessenta dias de observação contínua, um lote desceu um
+degrau de 2,5% e nenhum outro desceu nenhum.**
+
+E esse limite basta para responder à pergunta que a senhora tem em mãos. Para
+levar o desconto dos 41,61% hoje disponíveis aos **61,0% que o mandato exige**,
+seriam necessários **dezesseis degraus** de 2,5% (0,583884 × 0,975¹⁶ = 0,390 —
+60,98% de desconto). A dezesseis degraus de sessenta e um dias, isso são
+**novecentos e setenta e seis dias: dois anos e oito meses.**
+
+**A conclusão de 19/11 não se retifica: reforça-se, e agora com a taxa medida.**
+Escrevi então que a distância de 19,4 pontos "não se fecha esperando". O degrau
+descoberto hoje é justamente o mecanismo pelo qual a espera produziria desconto —
+e ele é lento demais para servir de alavanca. Restam as três de 06/10: **a margem
+exigida, os custos fixos e o capital.**
+
+#### Controle criado, para que não dependa de eu reparar
+
+Achei este degrau por comparação manual das duas coletas, e isso é frágil: se o
+movimento tivesse ocorrido numa rodada mais cheia, teria passado em branco. O
+`scripts/degraus.py` passou a varrer todas as coletas gravadas e a registrar em
+`dados/degraus-preco.csv` toda variação de preço de lote que **permaneceu** na
+lista sob a **mesma modalidade**, com os dias que o preço anterior durou.
+Rodado retroativamente sobre as 133 coletas, encontrou **um único** caso: este.
+Os de reoferta ele exclui por construção, e continuam no `retornos.csv`, onde
+pertencem.
+
+#### O estoque, e a saída da rodada
+
+Saiu da lista o terreno `000001015918-6` da Fazenda Santo Antônio, em São José —
+o mesmo que em 18/11 havia descido a escada até Venda Online. **Não conta como
+saída confirmada**, pela regra: Venda Online não tem certame, e ausência de lote
+sem data marcada vai para `ausencias-venda-online.csv`, não para o histórico.
+Pode ter sido proposta aceita, pode ser oscilação do portal. Não se supõe.
+
+Nenhum lote novo. Os onze aprovados na triagem são os mesmos, todos reprovam na
+margem, e a referência de mercado completa **sessenta e um dias** congelada —
+a renovação dos comparáveis falhou outra vez, com o mesmo HTTP 403 e a mesma
+página de desafio.
+
 ### Segunda rodada perdida, agora com a causa identificada — 23/11/2026
 
 A varredura das 07h de 23/11 **também não foi entregue**. É a segunda rodada
