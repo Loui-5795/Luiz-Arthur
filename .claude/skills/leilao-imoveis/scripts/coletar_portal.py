@@ -21,9 +21,22 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 CJ = os.path.join(tempfile.gettempdir(), "caixa-cookies-%d.txt" % os.getpid())
 
 
+# Pagina de erro da borda (Azion) que serve o portal. Ela chega com status 504
+# e ~10 KB de HTML -- passaria no teste de tamanho abaixo e seria lida como se
+# fosse a ficha do lote, gerando campos vazios em vez de falha declarada.
+ERRO_BORDA = ("Azion - Default error page", "error-header__title")
+
+
+def pagina_de_erro(txt):
+    return any(m in txt for m in ERRO_BORDA)
+
+
 def curl(url, data=None, tentativas=4):
     for n in range(tentativas):
-        cmd = ["curl", "-sS", "--max-time", "60", "-b", CJ, "-c", CJ,
+        # 120s: em 23/11/2026 a propria borda do portal so desiste aos 120s, e
+        # uma pagina simples levou 42s. O limite de 60s rejeitava como falha o
+        # que era apenas lentidao do servidor.
+        cmd = ["curl", "-sS", "--max-time", "120", "-b", CJ, "-c", CJ,
                "-H", "User-Agent: " + UA,
                "-H", "Referer: %s/busca-imovel.asp" % BASE]
         if data is not None:
@@ -36,7 +49,7 @@ def curl(url, data=None, tentativas=4):
             txt = r.stdout.decode("utf-8")
         except UnicodeDecodeError:
             txt = r.stdout.decode("latin-1", "replace")
-        if "302 Found" not in txt and len(txt) > 50:
+        if "302 Found" not in txt and len(txt) > 50 and not pagina_de_erro(txt):
             return txt
         time.sleep(2 * (n + 1))          # bot manager: recua e tenta de novo
     return ""

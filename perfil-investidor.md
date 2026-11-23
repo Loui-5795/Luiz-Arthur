@@ -578,6 +578,55 @@ sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
 
+### Segunda rodada perdida, agora com a causa identificada — 23/11/2026
+
+A varredura das 07h de 23/11 **também não foi entregue**. É a segunda rodada
+consecutiva sem coleta, e desta vez a causa tem nome e código de estado.
+
+Medido nesta manhã, com o tempo-limite da requisição elevado a 180 segundos para
+que a falha pudesse ser vista por inteiro:
+
+| Endereço | Resultado |
+|---|---|
+| `busca-imovel.asp` (página estática) | **HTTP 200**, 64.981 bytes em 42 s |
+| `carregaPesquisaImoveis.asp` (busca por cidade) | **HTTP 504** aos 120 s |
+| `detalhe-imovel.asp` (ficha do lote) | **HTTP 504** aos 120 s |
+
+O corpo das duas respostas de erro é a página padrão da **Azion**, a borda que
+serve o portal da Caixa, com o título *Server Error*. A leitura é direta: **a
+borda responde, o servidor de origem da Caixa não.** As páginas estáticas saem
+do cache da borda e por isso ainda chegam; tudo que depende de consulta ao
+sistema da Caixa expira. Não é bloqueio antirrobô, não é lentidão do ambiente e
+não é defeito do coletor — é indisponibilidade do originador, e nada que se faça
+daqui a contorna.
+
+**Dois defeitos meus que esta medição revelou, ambos corrigidos.**
+
+O primeiro é de tempo-limite. O coletor desistia aos **60 segundos**, enquanto a
+própria borda do portal só desiste aos 120 — e uma página simples levou 42 s
+nesta manhã. O limite de 60 s classificava como falha o que por vezes era apenas
+lentidão. Passou para 120 s.
+
+O segundo é mais grave, e é de aderência outra vez. O coletor aceitava como boa
+qualquer resposta com mais de 50 caracteres que não fosse redirecionamento. **A
+página de erro da Azion tem 10.430 bytes** — passaria nesse teste e seria lida
+como se fosse a ficha do imóvel, produzindo um lote de campos vazios em vez de
+uma falha declarada. O defeito nunca se manifestou porque até ontem o portal
+devolvia *nada* em vez de *outra coisa*; bastava o modo de falha mudar para que
+o coletor mentisse em silêncio. Agora ele reconhece a página de erro pelo que
+ela é e recusa-a.
+
+**A lição, que é a mesma da banda de área e a mesma do lote do Roçado.** Um teste
+de validade que pergunta *"veio alguma coisa?"* não responde *"veio a coisa
+certa?"*. Em perícia é o vício de aceitar um documento porque ele existe, sem
+conferir se é o documento pedido. **Todo controle de entrada deve verificar
+identidade, não apenas presença.**
+
+**Nada se conclui sobre a praça.** O último retrato é o das 07h de 22/11; a
+próxima coleta que vingar comparará com ele, e o intervalo, já de vinte e quatro
+horas, segue crescendo. Há um certame em **04/12** no horizonte, e a janela de
+observação até lá está sendo consumida por indisponibilidade da fonte.
+
 ### A rodada que não houve, e o que a medição mostrou — 22/11/2026
 
 A varredura das 19h de 22/11 **não foi entregue**. Não há planilha dessa rodada,

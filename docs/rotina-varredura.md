@@ -205,3 +205,22 @@ da lista, ou se o antirrobô do portal apertar, a rodada avisa o que falhou e
 entrega a planilha com o que conseguiu — nunca finge que coletou.
 
 Lista de domínios e como editá-la: `docs/liberar-rede.md`.
+
+## Falha da fonte: distinguir ausência de resposta de resposta errada
+
+Desde 23/11/2026 o coletor reconhece a página de erro da borda (Azion, *Server
+Error*) e a recusa. Antes disso, qualquer resposta com mais de 50 caracteres
+passava como válida — e uma página de erro de 10 KB teria sido lida como ficha
+de imóvel, gerando linhas de campos vazios que o diff leria como alteração do
+mercado.
+
+Regra geral, aplicável a qualquer fonte nova: **o teste de validade da resposta
+verifica identidade, não tamanho.** Procure no corpo uma marca do conteúdo
+esperado, não a mera existência de texto.
+
+O tempo-limite de cada requisição é de **120 segundos**, igual ao da borda do
+portal. Abaixo disso, lentidão do servidor é classificada como falha.
+
+Ao reportar uma rodada perdida, cite o **código de estado HTTP** e a origem da
+página de erro. "Não voltou nada" é diagnóstico pobre; "HTTP 504 da borda, com
+página de erro da Azion" diz de quem é o problema.
