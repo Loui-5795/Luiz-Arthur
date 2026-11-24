@@ -584,6 +584,83 @@ sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
 
+### A reoferta mediu-se pela quinta vez, e o degrau de ontem ficou sem lote — 24/11/2026, 19h
+
+Coleta íntegra: 20 lotes em Palhoça, 25 no 2º anel, 45 no total. A rodada traz
+uma confirmação forte, um fato que enfraquece uma leitura minha de ontem e uma
+anomalia que exige a próxima rodada para se resolver.
+
+**A saída do lote de Aririú da Formiga confirmou-se**, por segunda ausência
+consecutiva, e o controle novo anunciou-a com a relação medida: `+1 dia do 1º
+certame (23/11/2026) — curso esperado`. É a vigésima segunda saída da série.
+
+#### A confirmação: a escada da reoferta, pela quinta vez e com o mesmo fator
+
+Voltou à lista o lote `144442332474-0` — **casa de 71,43 m² em Potecas, São
+José**, que havia saído em **25/09/2026** após Leilão SFI negativo. Sessenta dias
+depois, reaparece em **Licitação Aberta**, com certame em **09/12/2026**:
+
+| | Preço | Avaliação | Fator | Desconto |
+|---|---|---|---|---|
+| Leilão SFI, até 25/09 | R$ 337.393,03 | R$ 360.000,00 | **0,937203** | 6,28% |
+| Licitação Aberta, 24/11 | R$ 229.433,15 | R$ 360.000,00 | **0,637314** | **36,27%** |
+
+A queda é de **−32,00%** — e **o fator novo é 0,637314, idêntico à sexta decimal
+ao de outros seis lotes** de editais, cidades e tipos distintos. Contadas todas
+as coletas da série, o fator aparece agora em **sete lotes distintos**; o
+0,583884 em três; e o piso de **0,600000 em trinta e um**. A tabela de 19/11
+media o estoque de então; esta contagem é de toda a série, e por isso os números
+são maiores.
+
+E o caso explica o mecanismo melhor do que qualquer um até aqui, porque mostra os
+dois termos ao mesmo tempo. No Leilão SFI o preço estava a **93,72% da
+avaliação**, pois o piso do 2º leilão é a dívida consolidada (art. 27, §2º, II,
+da Lei 9.514/1997). Fracassado o certame, o imóvel passa ao ativo da Caixa e é
+reofertado **com referência na avaliação**, no fator tabelado. **Os 32% de queda
+não são desconto concedido: são a diferença entre a dívida de um devedor e a
+tabela do vendedor.** Daí não haver relação entre o tamanho da queda e a
+atratividade do lote — a queda mede o endividamento anterior, não o valor.
+
+#### O fato que enfraquece a leitura de ontem, e é meu dever registrá-lo
+
+Ontem apresentei o degrau de −2,50% do lote `000001028634-4` (comercial no
+Estreito) como "o mecanismo pelo qual a espera produziria desconto", e calculei
+que dezesseis degraus levariam dois anos e oito meses. **Hoje, doze horas
+depois, esse lote saiu da lista.**
+
+A aritmética continua correta; **a premissa dela, não.** Eu supus que o degrau
+fosse a primeira parcela de uma série aplicada a um lote que permanece anunciado.
+O que se observou foi outra coisa: o degrau veio, e em seguida o lote saiu. Pode
+ter sido redução para fechar a venda — e então o degrau é ato final, não
+periodicidade. Pode ser coincidência de um caso. **Com uma observação, não se
+distingue.** Fica dito com clareza: **o cálculo dos dois anos e oito meses
+pressupõe degraus que se repetem, e essa hipótese perdeu apoio em vez de
+ganhar.** A conclusão prática não muda — a espera não é alavanca —, mas por razão
+mais forte, não mais fraca.
+
+#### A anomalia: a Venda Online esvaziou-se em doze horas
+
+| Modalidade | Rodada das 07h | Rodada das 19h |
+|---|---|---|
+| Leilão SFI | 40 | 40 |
+| Licitação Aberta | 3 | **4** |
+| Venda Online | **4** | **1** |
+
+Saíram, na mesma rodada, **três dos quatro lotes em Venda Online**: o comercial
+do Estreito, o terreno `144440331727-7` da Fazenda Santo Antônio e o apartamento
+`160000016077-0` de Areias. Nenhum conta como saída confirmada — Venda Online não
+tem certame, e a regra os manda para `ausencias-venda-online.csv`.
+
+**Três vendas em doze horas, numa modalidade que levou dois meses para mover um
+preço, é a explicação menos provável.** Mais provável é comportamento do portal
+ou migração de lote entre editais. Mas não se afirma o que não se mediu, e aqui
+a medição é a próxima rodada: **se os três reaparecerem, foi oscilação; se os
+três permanecerem fora, houve ato do vendedor — e aí a pergunta passa a ser qual.**
+
+**O estoque:** dez aprovados na triagem, todos em Leilão SFI, todos reprovando
+na margem. Comparáveis de mercado com **sessenta e dois dias** e nova recusa da
+fonte com HTTP 403.
+
 ### A saída tem hora marcada, e ela é o dia seguinte ao certame — 24/11/2026
 
 Coleta íntegra: 20 lotes em Palhoça, 27 no 2º anel, 47 no total. Dois movimentos,
@@ -859,7 +936,7 @@ decimal, entre lotes de editais, cidades e tipos diferentes.
 |---|---|---|---|
 | Leilão SFI | **0,600000** | 40,00% | 22 de 40 |
 | Leilão SFI | acima de 0,60, até 1,0609 | 39% a **−6%** | 18 de 40 — piso pela dívida |
-| Licitação Aberta / Venda Online | **0,637314** | 36,27% | 5 |
+| Licitação Aberta / Venda Online | **0,637314** | 36,27% | 5 no estoque de 19/11 — **7 lotes em toda a série, contados em 24/11** |
 | Licitação Aberta / Venda Online | **0,583884** | **41,61%** | 3 |
 | Licitação Aberta | 0,604413 | 39,56% | 1 |
 
