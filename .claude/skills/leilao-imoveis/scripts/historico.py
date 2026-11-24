@@ -116,6 +116,41 @@ def do_portal(r, data):
     }
 
 
+def dias_do_certame(registro, data_saida):
+    """Dias entre o 1o certame do lote e a sua ausencia.
+
+    Medido em 24/11/2026 sobre as vinte e uma saidas confirmadas: dezenove
+    ocorreram DEPOIS do certame, e o intervalo se agrupa por modalidade --
+    Leilao SFI sai de +5 a +7 dias do 1o leilao (isto e', depois do 2o);
+    Licitacao Aberta sai em +1 dia, em cinco casos de cinco.
+
+    Serve de alarme nos dois sentidos: ausencia muito antes do certame pede
+    conferencia na fonte, e lote de Licitacao Aberta que PERMANECE dois dias
+    apos o certame tambem e' anomalia. Por isso a relacao se imprime no
+    momento do evento, e nao apenas no relatorio de depois.
+    """
+    import datetime, re
+    def ds(t):
+        return sorted(datetime.date(int(y), int(m), int(d)) for d, m, y in
+                      (x.groups() for x in re.finditer(r"(\d{2})/(\d{2})/(\d{4})", t or "")))
+    certames = ds(registro.get("datas_certame", ""))
+    saida = ds(data_saida)
+    if not certames or not saida:
+        return None
+    return (saida[0] - certames[0]).days
+
+
+def relacao_certame(registro, data_saida):
+    d = dias_do_certame(registro, data_saida)
+    if d is None:
+        return "sem data de certame registrada"
+    if d > 0:
+        return "%+d dia(s) do 1o certame (%s) -- curso esperado" % (
+            d, registro.get("datas_certame", "")[:10])
+    return "%+d dia(s) do 1o certame (%s) -- ANTES do certame, conferir na fonte" % (
+        d, registro.get("datas_certame", "")[:10])
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -266,10 +301,13 @@ def main():
     for r in novas:
         print("  SAIU       %s  %-16s %-18s %-13s R$ %s" % (
             r["data_saida"], r["id"], r["bairro"][:18], r["cidade"], r["ultimo_preco"]))
+    for r in novas:
+        print("             %s" % relacao_certame(r, r["data_saida"]))
     for r in novas_em_quarentena:
         print("  1a falta   %s  %-16s %-18s %-13s R$ %s  (aguarda 2a rodada)" % (
             r["primeira_ausencia"], r["id"], r["bairro"][:18], r["cidade"],
             r["ultimo_preco"]))
+        print("             %s" % relacao_certame(r, r["primeira_ausencia"]))
     for i in voltaram:
         print("  REAPARECEU %-16s  nunca saiu; retirado da quarentena" % i)
 

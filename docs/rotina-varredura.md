@@ -117,6 +117,15 @@ antigo, e não divergente.
    que calibra lance futuro. O portal **não declara a causa da saída** — o
    registro guarda o fato observado e nunca supõe arremate.
 
+   Desde 24/11/2026 o script imprime, para cada ausência, **quantos dias a
+   separam do 1º certame do lote**. Medido sobre as vinte e uma saídas: dezenove
+   ocorreram depois do certame; em Leilão SFI a baixa vem de `+5` a `+7` dias do
+   1º leilão (isto é, depois do 2º) e em Licitação Aberta vem em `+1` dia, em
+   cinco casos de cinco. Ausência **antes** do certame é anomalia e pede
+   conferência na fonte; lote de Licitação Aberta que **permanece** dois dias
+   após o certame, também. E `+1` dia não significa arremate: três de quatro
+   lotes não voltaram, mas um voltou em cinco dias como Venda Online.
+
    **A regra das duas rodadas é obrigatória.** O `--quarentena` a aplica: a
    primeira ausência não vale saída, fica pendente; confirma-se quando o lote
    falta em duas rodadas consecutivas. Reaparecendo, sai da quarentena sem ter

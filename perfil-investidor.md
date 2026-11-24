@@ -169,6 +169,9 @@ depois:
 
 As duas de 21/10 foram anunciadas em 15/10 e repetidas em cinco rodadas, com a
 data da saída prevista antes de ocorrer. **Sete previsões, sete confirmações.**
+A oitava foi feita em 24/11/2026 e está em aberto: ou o lote de Aririú da
+Formiga permanece fora da lista, ou reaparece em Venda Online até cerca de
+29/11. Ver a seção daquela data.
 
 A sétima é a de maior valor probatório da série, por três razões. Foi a única
 **anunciada dois dias antes** do fato, em 03/11, e repetida em três rodadas. Foi
@@ -201,6 +204,9 @@ arremate, suspensão, retirada e purgação da mora são indistinguíveis daqui.
 | Piso na saída, sobre a avaliação | mediana 60,0% (n=16) | mantida |
 | Saída exatamente no piso do 2º leilão | 10 de 16 | mantida |
 | Atraso do portal entre certame e baixa | **~1 dia, 7 vezes** — 3 delas previstas | **reforçada em 10/10** |
+| Saída posterior ao certame | **19 de 21** | **medida em 24/11** |
+| Licitação Aberta: saída em `+1` dia do certame único | **5 de 5** | **medida em 24/11** |
+| Saída em `+1` dia significa arremate | 3 de 4 não voltaram | **não se afirma — n pequeno** |
 | Saiu somente depois de esgotar as duas datas | 14 de 16 | **DERRUBADA — 2 casos contrários** |
 
 Uma retratação a registrar. Em 02/10 anotei como saída o lote de Venda Online do
@@ -577,6 +583,95 @@ descartada em silêncio — justamente o dado que mede quantas vezes um lote rod
 sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
+
+### A saída tem hora marcada, e ela é o dia seguinte ao certame — 24/11/2026
+
+Coleta íntegra: 20 lotes em Palhoça, 27 no 2º anel, 47 no total. Dois movimentos,
+e os dois confirmam regras — um de modo tão pontual que permitiu medir uma
+regularidade que eu vinha registrando sem ter contado.
+
+**O lote `844442969692-3` saiu da lista.** Apartamento de 45,82 m² na Rua
+Natalino Campos Schaimann, 1150, Aririú da Formiga, Palhoça — Licitação Aberta,
+R$ 142.037,17 contra avaliação de R$ 235.000,00, 39,56% de desconto. Era o
+**primeiro colocado da triagem de ontem**, com prioridade 60,7. **Seu certame
+foi em 23/11, ontem; a ausência é de hoje.**
+
+**O lote `000001015918-6` voltou**, pelo preço idêntico, como Venda Online — o
+terreno da Fazenda Santo Antônio que havia desaparecido na rodada de ontem. A
+regra que o manteve fora do histórico de saídas provou-se em doze horas: Venda
+Online não tem certame, ausência sem data marcada não é saída, e supor arremate
+ali teria sido erro registrado em arquivo permanente.
+
+#### A regularidade, agora contada e não apenas notada
+
+Classifiquei as vinte e uma saídas confirmadas pela data do certame, e o
+resultado é mais nítido do que eu supunha:
+
+| Relação entre a saída e o certame | Casos |
+|---|---|
+| **Depois** do certame | **19 de 21** |
+| Antes de todo certame | 2 de 21 |
+
+E o intervalo não é difuso — ele se agrupa por modalidade:
+
+| Modalidade | Intervalo entre o certame e a saída | Casos |
+|---|---|---|
+| Leilão SFI (dois certames) | **+5 a +7 dias** do 1º leilão, isto é, depois do 2º | 15 |
+| Licitação Aberta (certame único) | **+1 dia**, exatamente | **5 de 5** |
+
+Os cinco casos de Licitação Aberta — 30/09, 30/10, 05/11, 13/11 e o de hoje —
+caem todos em `+1`, sem uma exceção. **A saída do lote em Licitação Aberta não é
+evento aleatório: é o dia seguinte ao certame.** Serve de calendário, e serve de
+alarme: lote de Licitação Aberta que *continua* na lista dois dias após o
+certame é anomalia que merece ser olhada.
+
+#### Mas sair no dia seguinte não quer dizer vendido
+
+Fui ver o que houve depois de cada uma das quatro saídas anteriores de Licitação
+Aberta, e aqui a amostra ainda é pequena e deve ser tratada como tal:
+
+| Lote | Saiu | O que houve depois |
+|---|---|---|
+| `844442822457-2` | 30/09 | não voltou em 55 dias |
+| `144442282177-5` | 30/10 | não voltou em 25 dias |
+| `844441802944-0` | 05/11 | não voltou em 19 dias |
+| `000001015918-6` | 13/11 | **voltou em 5 dias, como Venda Online** |
+
+Três de quatro não voltaram; um voltou, e rápido, descendo a escada de
+modalidades. **A ausência de `+1 dia` significa que o certame encerrou aquela
+etapa — não que houve arremate.** O desfecho só se conhece depois: se o lote
+volta em Venda Online, o certame fracassou; se não volta, provavelmente vendeu.
+
+**Previsão registrada, para ser cobrada.** O lote de Aririú da Formiga ou
+permanece fora — e então o certame de 23/11 o resolveu — ou reaparece em Venda
+Online até cerca de **29/11/2026**, cinco dias, que é o único prazo de retorno
+já observado nesta modalidade. A regra das duas rodadas o mantém em quarentena
+até lá, e não registro saída confirmada antes disso. São oito previsões feitas
+nesta série; sete foram confirmadas e esta é a oitava em aberto.
+
+#### Nenhuma oportunidade se perdeu, e isto também se mede
+
+Como o lote que saiu era o primeiro da triagem, cabe dizer com números se a
+praça perdeu algo. **Não perdeu.**
+
+| | Valor |
+|---|---|
+| Preço pedido | R$ 142.037,17 |
+| VVR (45,82 m² × R$ 5.913 × 0,88) | R$ 238.421,62 |
+| CTA | R$ 217.813,59 |
+| **Margem sobre o CTA** | **2,89%** |
+| Lance máximo para margem de 25% | R$ 106.762 |
+| Lance máximo pelo capital disponível | R$ 34.149 |
+
+Reprovava por margem com folga de vinte e dois pontos, e estava quatro vezes
+acima do que o caixa alcança. **A primeira colocação na triagem media
+atratividade bruta — desconto, bairro, tipologia —, não viabilidade.** Vale
+reter a distinção: a triagem ordena candidatos, a viabilidade decide. Confundir
+as duas é tomar a fila pela aprovação.
+
+**O estoque remanescente:** dez aprovados na triagem, todos em Leilão SFI, todos
+reprovando na margem; nenhum lote novo; comparáveis de mercado com **sessenta e
+dois dias**, e a renovação barrada outra vez com HTTP 403.
 
 ### O vendedor baixa o preço de quem fica, e agora se sabe o passo — 23/11/2026
 
