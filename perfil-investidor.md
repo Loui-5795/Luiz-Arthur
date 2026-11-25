@@ -584,6 +584,77 @@ sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
 
+### Os três voltaram, e a ausência da Venda Online tem hora do dia — 25/11/2026
+
+Coleta íntegra: 20 lotes em Palhoça, 29 no 2º anel, 49 no total. **A previsão de
+ontem resolveu-se na primeira rodada seguinte, e do modo mais limpo possível.**
+
+**Os três lotes de Venda Online que haviam desaparecido voltaram — todos,
+pelos preços idênticos, sem exceção.** Voltou ainda um quarto, o apartamento
+`144440299841-6` do Centro de Florianópolis, que também já tinha histórico de
+ausências. **Era oscilação do portal, como a regra supunha e eu não afirmava.**
+
+#### A regra que impede contar essa ausência como saída tem agora um balanço
+
+| | |
+|---|---|
+| Ausências registradas em Venda Online | **11** |
+| Lotes distintos envolvidos | **5** |
+| Desses cinco, quantos estão na lista hoje | **5** |
+| Saídas reais em Venda Online em toda a série | **zero** |
+
+**Onze ausências, nenhuma saída.** Se a regra não existisse, o histórico teria
+onze saídas falsas — e cada uma delas contaminaria a estatística de piso de
+arremate, que é justamente o número que calibra lance futuro. A regra nasceu de
+uma retratação em 02/10/2026, por um único caso; hoje tem onze.
+
+#### E a ausência não é aleatória no tempo: ela tem hora
+
+Contadas as onze pelo horário da rodada em que ocorreram:
+
+| Rodada | Ausências |
+|---|---|
+| 19h | **10** |
+| 07h | 1 |
+
+As coletas estão perfeitamente equilibradas — **sessenta e sete rodadas às 07h e
+sessenta e sete às 19h** —, de modo que não há viés de amostragem a invocar. Se o
+horário fosse irrelevante, a probabilidade de dez ou mais das onze caírem na
+rodada da noite seria de **0,59%**.
+
+**A conclusão é sobre o portal, não sobre o mercado: a busca da noite omite lote
+de Venda Online com frequência que a da manhã não tem.** Isto deixa de ser
+ambiguidade e passa a ser defeito conhecido, com assinatura horária — e lote de
+Venda Online ausente numa rodada das 19h deve ser lido, por padrão, como falha de
+listagem.
+
+#### Duas retificações que esta rodada impõe
+
+**A primeira, minha, de ontem.** Escrevi que o degrau de −2,50% do lote do
+Estreito havia sido seguido da saída do lote, e que por isso a hipótese de
+degraus repetidos "perdeu apoio". **O lote não saiu: oscilou, e está na lista
+hoje, ao preço reduzido.** A ressalva que fiz era prudente na forma — registrei
+que com uma observação não se distingue —, mas a premissa de fato que a motivou
+era falsa. **Retiro-a.** O estado da questão volta a ser o de 23/11: um degrau
+observado, cadência desconhecida. O que não muda, e não dependia disso, é que a
+espera não serve de alavanca.
+
+**A segunda, de método, e vale mais que a primeira.** Tentei construir um
+controle melhor que a quarentena: consultar diretamente a página de detalhe do
+lote ausente, para saber se ele ainda existe no sistema. **Não funciona, e fica
+registrado para que ninguém volte a tentar.** O endpoint de detalhe só devolve a
+ficha quando a busca da cidade, na mesma sessão, registrou aquele lote; consultado
+isoladamente, devolve a página genérica de 25 KB, igual para lote existente e para
+lote que saiu de verdade — testei com os dois casos e os resultados são
+indistinguíveis. **Quer dizer: o portal não tem consulta por identificador
+independente da busca, e por isso ausência na busca é a única informação
+disponível.** A quarentena não é um paliativo à espera de instrumento melhor; é o
+instrumento.
+
+**O estoque:** dez aprovados na triagem, todos em Leilão SFI, todos reprovando na
+margem; nenhuma alteração de preço; nenhuma saída. Comparáveis de mercado com
+**sessenta e três dias** e nova recusa da fonte com HTTP 403.
+
 ### A reoferta mediu-se pela quinta vez, e o degrau de ontem ficou sem lote — 24/11/2026, 19h
 
 Coleta íntegra: 20 lotes em Palhoça, 25 no 2º anel, 45 no total. A rodada traz

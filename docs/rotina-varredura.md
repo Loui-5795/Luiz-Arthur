@@ -246,3 +246,23 @@ portal. Abaixo disso, lentidão do servidor é classificada como falha.
 Ao reportar uma rodada perdida, cite o **código de estado HTTP** e a origem da
 página de erro. "Não voltou nada" é diagnóstico pobre; "HTTP 504 da borda, com
 página de erro da Azion" diz de quem é o problema.
+
+## Ausência de Venda Online na rodada das 19h é defeito de listagem
+
+Medido em 25/11/2026 sobre onze ausências de lote em Venda Online: **dez
+ocorreram na rodada das 19h e uma na das 07h**, com as coletas equilibradas em
+sessenta e sete rodadas de cada horário. Por acaso, a chance de dez ou mais
+caírem à noite seria de 0,59%. Dos cinco lotes já ausentes alguma vez, **os cinco
+estão na lista**: onze ausências, **nenhuma saída real**.
+
+Portanto: lote de Venda Online que falta numa rodada das 19h deve ser lido, por
+padrão, como **omissão da busca**, não como movimento do vendedor. O registro
+segue indo para `ausencias-venda-online.csv`, e nunca para o histórico de saídas.
+
+**Não se tente substituir a quarentena por consulta direta à página de detalhe.**
+Testado em 25/11/2026: o endpoint `detalhe-imovel.asp` só devolve a ficha quando
+a busca da cidade, na mesma sessão, registrou aquele lote. Consultado por
+identificador isolado, devolve a página genérica de ~25 KB — idêntica para lote
+existente e para lote que saiu de verdade. O portal não tem consulta por
+identificador independente da busca, e por isso a ausência na busca é a única
+informação disponível.
