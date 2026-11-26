@@ -525,7 +525,9 @@ desconto de **−58,38%**, isto é, um prêmio de 58% sobre o valor avaliado.
 
 Não é erro de coleta: é o mecanismo do SFI. O piso do 2º leilão não é um
 percentual da avaliação, e sim **o valor da dívida consolidada somada aos
-encargos e às despesas do procedimento** (Lei 9.514/1997, art. 27, §2º, II).
+encargos e às despesas do procedimento** (Lei 9.514/1997, art. 27, §2º, II, na
+redação original — **a Lei 14.711/2023 alterou esse parágrafo e o texto vigente
+não pôde ser conferido; ver a ressalva na seção de 25/11/2026**).
 Quando a dívida supera o valor do imóvel — exatamente o caso de uma garantia que
 se deteriorou mais rápido que o saldo devedor —, o piso legal sobe acima da
 avaliação, e o portal exibe desconto negativo.
@@ -583,6 +585,87 @@ descartada em silêncio — justamente o dado que mede quantas vezes um lote rod
 sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
+
+### A lei de preços do Leilão SFI, medida por inteiro — 25/11/2026, 19h
+
+Coleta íntegra: 20 lotes em Palhoça, 31 no 2º anel, 51 no total. Nenhuma saída,
+nenhuma alteração de preço, e **dois lotes novos** — `844441253376-7`
+(apartamento de 59,29 m²) e `844441910448-9` (casa de 60,91 m²), ambos em
+Potecas, São José, ambos do edital inédito **0063/0226 - CPA/RE**, ambos a
+0,600000 da avaliação, com certames em **25/01 e 29/01/2027**. Fora da
+praça-alvo; a triagem os descarta por bairro, corretamente.
+
+A rodada serviu para outra coisa. Ao conferir qual preço o coletor registra em
+lote com dois leilões, deparei-me com a estrutura completa de preços do Leilão
+SFI, que até aqui eu conhecia pela metade.
+
+#### O que o campo `Preco` contém, e por que isso importa
+
+O coletor grava `preço único **ou** 2º leilão **ou** 1º leilão`, nessa ordem —
+isto é, **o piso efetivo de entrada**. Em lote de Leilão SFI, portanto, o
+`Preco` do dossiê é o mínimo do **2º** leilão, e é essa a base de todos os
+descontos já reportados. Confirmado: está correto, e é o número que interessa a
+quem quer arrematar. Mas as colunas `Preco 1o leilao` e `Preco 2o leilao`
+estavam ali, coletadas e nunca medidas.
+
+#### Medidas as duas, a regra aparece inteira — 57 lotes
+
+| Fator do **1º leilão** (preço ÷ avaliação) | Lotes |
+|---|---|
+| **1,000000 exato** | **51** |
+| de 1,000037 a 1,084908 | 6 |
+
+| Fator do **2º leilão** | Lotes |
+|---|---|
+| **0,600000 exato** | 33 |
+| acima de 0,600000 (até 1,583840) | 24 |
+| **abaixo de 0,600000** | **zero** |
+
+**O 1º leilão pede a avaliação — exatamente ela, em cinquenta e um de cinquenta
+e sete lotes.** Nos seis restantes pede um pouco mais, e esses seis são
+precisamente os lotes cuja dívida consolidada excede a avaliação. **O 2º leilão
+nunca desce de 60% da avaliação, em nenhum dos cinquenta e sete.**
+
+A regra, então, é esta — e explica todo o estoque observado:
+
+> **1º leilão = o maior entre a avaliação e a dívida consolidada.**
+> **2º leilão = o maior entre 60% da avaliação e a dívida consolidada.**
+
+É o que produz, de uma vez, os trinta e três lotes parados no 0,600000 (dívida
+abaixo de 60% da avaliação) e os vinte e quatro acima dele, inclusive o caso do
+desconto negativo a 1,583840 (dívida muito acima). **Não há dois regimes: há uma
+fórmula com um piso.**
+
+#### Uma correção ao que escrevi, e uma dúvida que não posso resolver daqui
+
+Registrei em 03/10 que os 0,600000 são "o piso legal do 2º leilão". **A
+expressão é imprecisa e precisa ser retificada em dois pontos.**
+
+O primeiro: pelo art. 27 da Lei 9.514/1997 na redação original, o piso do 2º
+leilão é **o valor da dívida e encargos** — não um percentual da avaliação. Nos
+trinta e três lotes em que a dívida é menor, os 60% são, portanto, **piso
+comercial da Caixa, acima do mínimo legal**, e não exigência da lei. A distinção
+tem consequência prática: **piso de lei não se discute; piso de política, em
+tese, muda** — por decisão do vendedor, não por insistência do arrematante.
+
+O segundo, e é aqui que paro: **a Lei 14.711/2023 alterou o § 2º do art. 27**, e
+pesquisa em fontes secundárias indica que passou a haver referência a percentual
+da avaliação, além de haver decisão do STJ (REsp 2.096.465/SP, rel. min. Ricardo
+Villas Bôas Cueva) no sentido de que, após essa lei, não se aceita no 2º leilão
+lance inferior à **metade do valor de avaliação**, ainda que superior à dívida.
+
+**Não afirmo o conteúdo do dispositivo vigente, porque não consegui lê-lo.** O
+`planalto.gov.br` não está entre os domínios permitidos do ambiente, e a
+tentativa de acesso falhou na resolução do nome. **Citar artigo de lei a partir
+de resumo de terceiro, num dossiê que a senhora pode levar a juízo, seria
+exatamente o vício que este arquivo existe para evitar** — e pior do que não
+citar.
+
+Fica, pois, assim consignado: **a estrutura de preços está medida e é fato
+observado; a sua fundamentação legal está parcialmente em aberto**, por falta de
+acesso ao texto oficial. Pedi a liberação do domínio e aguardo a decisão. Nada
+do que foi calculado nesta série depende dessa resposta: os descontos, os CTA e
+as margens saem dos preços publicados, não da interpretação do artigo.
 
 ### Os três voltaram, e a ausência da Venda Online tem hora do dia — 25/11/2026
 
@@ -1011,8 +1094,12 @@ decimal, entre lotes de editais, cidades e tipos diferentes.
 | Licitação Aberta / Venda Online | **0,583884** | **41,61%** | 3 |
 | Licitação Aberta | 0,604413 | 39,56% | 1 |
 
-Os 0,600000 exatos em vinte e dois lotes são o piso legal do 2º leilão, a 60% da
-avaliação. Os 0,583884 e 0,637314, repetidos a seis decimais em lotes sem
+Os 0,600000 exatos em vinte e dois lotes são o piso do 2º leilão, a 60% da
+avaliação. **Chamei-o de "piso legal" até 25/11/2026, e isto foi retificado**:
+pela redação original do art. 27 da Lei 9.514/1997 o mínimo legal é a dívida, e
+os 60% são piso comercial da Caixa quando a dívida é menor. Ver a seção de
+25/11, que mede a regra inteira e consigna o que depende de texto legal a que
+não tenho acesso. Os 0,583884 e 0,637314, repetidos a seis decimais em lotes sem
 nenhuma relação entre si, **não são preço de mercado: são parâmetro
 administrativo do vendedor.** Não arrisco a fórmula que os produz; registro o
 fato, que é verificável e já se repetiu oito vezes.
@@ -1169,7 +1256,9 @@ O piso do 2º leilão em Bela Vista, a 60% da avaliação, equivale a cerca de
 **R$ 2.295/m²**. **A Caixa pede 50% acima do que o mandato admite.**
 
 Isso não é característica de um lote nem azar de uma rodada: é a relação entre o
-piso legal do 2º leilão e a margem exigida, nesta praça, com estas premissas.
+piso de 60% praticado pela Caixa no 2º leilão e a margem exigida, nesta praça,
+com estas premissas. (Em Bela Vista a dívida fica abaixo dos 60%, de modo que o
+piso aplicável é **comercial**, não legal — retificado em 25/11/2026.)
 Enquanto as três grandezas não mudarem, **nenhum lote de Bela Vista passará** —
 e a varredura seguirá reprovando por aritmética, não por falta de oportunidade.
 
