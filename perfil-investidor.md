@@ -586,6 +586,60 @@ sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
 
+### A pauta de dezembro, e vinte saídas previstas com data — 26/11/2026, 19h
+
+Duas rodadas sem movimento algum: as trinta e seis colunas dos cinquenta e um
+lotes são idênticas às de 25/11 à noite. Nenhum lote novo, nenhuma saída, nenhum
+preço nem certame alterado.
+
+O que a rodada revelou não está no diff: **está no calendário.** Levantada a
+pauta dos certames, a praça entra na semana mais densa de toda a série, e a regra
+medida em 24/11 permite converter essa pauta em **datas de saída previstas** —
+porque a saída se dá na manhã seguinte ao último certame do lote.
+
+| Último certame | Saída prevista | Lotes | Dos quais em Bela Vista |
+|---|---|---|---|
+| 27/11 | **28/11** | 4 (São José) | — |
+| 30/11 | **01/12** | 5 | — |
+| 04/12 | **05/12** | 5 | **2** |
+| 07/12 | **08/12** | 6 | **3** |
+
+**Vinte lotes devem deixar a lista em onze dias**, cinco deles em Bela Vista —
+o que significa que o estoque do núcleo da praça-alvo se renova por inteiro neste
+intervalo. Os cinco de Bela Vista:
+
+| Lote | Preço | Último certame | Saída prevista |
+|---|---|---|---|
+| `878770638651-9` | R$ 151.200,00 | 04/12 | 05/12 |
+| `878771176139-0` | R$ 153.000,00 | 04/12 | 05/12 |
+| `144442535280-6` | R$ 378.992,73 | 07/12 | 08/12 |
+| `878771582725-5` | R$ 177.004,48 | 07/12 | 08/12 |
+| `878771868753-5` | R$ 206.197,55 | 07/12 | 08/12 |
+
+O `878771176139-0` é o lote de melhor margem já apurada na série — **+2,6%**, em
+06/10 —, e portanto o que mais se aproximou do mandato sem o alcançar. **Se
+fracassarem os dois leilões, a escada o reofertará, e aqui a aritmética já está
+feita:** ele está no piso de 0,600000 sobre avaliação de R$ 255.000, e o melhor
+fator de reoferta observado, 0,583884, daria R$ 148.890 — **R$ 4.110 abaixo do
+preço atual, ou 2,7%.** A reoferta não o traz para o alcance do mandato, que
+exige R$ 100.541. Vale consignar para que ninguém espere dela o que ela não dá.
+
+**Uma correção de leitura do próprio dado, para quem for usar os CSV.** As duas
+datas de certame do Leilão SFI vêm **juntas no campo `Data certame`**, no formato
+`01/12/2026 / 07/12/2026`, e as colunas `Data 1 leilao` e `Data 2 leilao` ficam
+vazias nesses lotes — ao contrário do que o nome delas sugere. Quem ler só as
+colunas numeradas conclui que o lote não tem certame marcado. **A data está lá;
+o campo é que não é o esperado.**
+
+**Em teste neste momento:** oito lotes já passaram do 1º leilão (23 e 24/11) e
+seguem listados, aguardando o 2º. É a constatação de `13 de 13` — nenhum lote sai
+entre o 1º e o 2º leilão — sendo exercitada em oito casos simultâneos, o maior
+teste que ela já teve.
+
+**O estoque:** dez aprovados na triagem, todos em Leilão SFI, todos reprovando na
+margem. Comparáveis de mercado com **sessenta e quatro dias** e nova recusa com
+HTTP 403.
+
 ### A lei de preços do Leilão SFI, medida por inteiro — 25/11/2026, 19h
 
 Coleta íntegra: 20 lotes em Palhoça, 31 no 2º anel, 51 no total. Nenhuma saída,
