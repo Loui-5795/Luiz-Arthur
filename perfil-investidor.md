@@ -171,7 +171,10 @@ As duas de 21/10 foram anunciadas em 15/10 e repetidas em cinco rodadas, com a
 data da saída prevista antes de ocorrer. **Sete previsões, sete confirmações.**
 A oitava foi feita em 24/11/2026 e está em aberto: ou o lote de Aririú da
 Formiga permanece fora da lista, ou reaparece em Venda Online até cerca de
-29/11. Ver a seção daquela data.
+29/11. Ver a seção daquela data. **A nona falhou**, e está registrada na seção
+de 27/11: um lote previsto para sair em 08/12 saiu em 27/11, antes do próprio
+1º leilão. **Placar: nove previsões, sete confirmações, uma em aberto, uma
+falhada.**
 
 A sétima é a de maior valor probatório da série, por três razões. Foi a única
 **anunciada dois dias antes** do fato, em 03/11, e repetida em três rodadas. Foi
@@ -585,6 +588,74 @@ descartada em silêncio — justamente o dado que mede quantas vezes um lote rod
 sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
+
+### Lote novo em Bela Vista, e a primeira previsão da pauta que furou — 27/11/2026, 19h
+
+Coleta íntegra: 20 lotes em Palhoça, 30 no 2º anel, 50 no total. Três movimentos,
+e um deles desmente previsão que fiz ontem.
+
+#### O lote novo, precificado
+
+**`878771270783-6`** — apartamento de 2 quartos e vaga, **43,80 m² privativos**,
+na **Rua Sebastião Alzemiro dos Santos, 2100, apto. 202, bl. 11**, Bela Vista.
+Leilão SFI do edital inédito **0064/0226 - CPA/RE**, certames em **26/01 e
+01/02/2027**. Aceita FGTS; não aceita financiamento. Ocupação **não declarada**.
+
+| | Valor |
+|---|---|
+| Preço (2º leilão) | R$ 160.498,16 |
+| Avaliação | R$ 237.709,96 |
+| Fator preço/avaliação | **0,675185** |
+| Desconto anunciado | 32,48% |
+| 1º leilão | R$ 237.709,96 — **a avaliação exata** |
+
+O 1º leilão idêntico à avaliação é a **quinquagésima segunda** confirmação da
+regra medida em 25/11. E o fator de 0,675185, acima do piso de 0,600000, informa
+que aqui **a dívida consolidada é que manda** — ela está em torno de R$ 160.498,
+isto é, 67,5% da avaliação.
+
+**A viabilidade, com as premissas do mandato:**
+
+| | Valor |
+|---|---|
+| VVR (43,80 m² × R$ 5.913 × 0,88) | R$ 227.910,67 |
+| CTA | R$ 236.861,99 |
+| **Margem sobre o CTA** | **−9,6%** |
+| Lance máximo para margem de 25% | **R$ 100.541** |
+| Lance máximo pelo capital disponível | R$ 35.167 |
+
+**Reprova.** Passa na triagem — é o nono lote de Bela Vista na lista —, e o
+preço pedido está **59,6% acima** do que o mandato admite. É o mesmo teto de
+R$ 100.541 que já se apurou para toda unidade de 43,80 m² no bairro: o número
+não se move porque a área, o R$/m² e as premissas não se movem.
+
+#### A previsão que furou, e não vou dourá-la
+
+Ontem anunciei vinte saídas com data. **A primeira a se resolver resolveu-se
+contra mim.** O lote `844440744670-3` (São Sebastião, Palhoça), para o qual eu
+previ saída em **08/12**, desapareceu da lista **hoje** — isto é, **onze dias
+antes**, e **quatro dias antes do seu próprio 1º leilão**, marcado para 01/12.
+
+O controle criado em 24/11 o apanhou e o classificou corretamente: `−4 dia(s) do
+1º certame (01/12/2026) — ANTES do certame, conferir na fonte`. **Foi para a
+quarentena, não para o histórico**, e a confirmação depende da próxima rodada.
+
+Ponho a previsão no seu devido lugar. Ela vale **para o lote que vai a certame**,
+e não é uma garantia de que o lote chegue ao certame. **Saída antes do certame é
+rara — três casos em vinte e três —, mas existe**, e as causas possíveis são
+conhecidas e indistinguíveis daqui: purgação da mora pelo devedor, suspensão
+judicial, retirada administrativa. A pauta, portanto, prevê **quando a janela se
+fecha se nada a interromper**; não prevê que nada a interrompa. Fica assim
+consignado, e o placar da série passa a **nove previsões, sete confirmações, uma
+em aberto, uma falhada**.
+
+**A terceira ausência** é o apartamento `144440299841-6` do Centro de
+Florianópolis, em Venda Online, numa rodada das 19h — a décima segunda ausência
+dessa modalidade e a **décima primeira ocorrida à noite**. O padrão medido em
+25/11 segue se reproduzindo.
+
+**O estoque:** onze aprovados na triagem, nove deles em Bela Vista, todos
+reprovando na margem. Comparáveis de mercado com **sessenta e cinco dias**.
 
 ### A pauta de dezembro, e vinte saídas previstas com data — 26/11/2026, 19h
 
