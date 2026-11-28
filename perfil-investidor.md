@@ -203,7 +203,7 @@ arremate, suspensão, retirada e purgação da mora são indistinguíveis daqui.
 
 | Constatação | n | Situação |
 |---|---|---|
-| Nenhum lote saiu entre o 1º e o 2º leilão | **13 de 13** (dos que têm duas datas) | **mantida — 6 previstas** |
+| Nenhum lote saiu entre o 1º e o 2º leilão | **15 de 15** (dos que chegaram ao 1º leilão) | **recontada em 28/11** |
 | Piso na saída, sobre a avaliação | mediana 60,0% (n=16) | mantida |
 | Saída exatamente no piso do 2º leilão | 10 de 16 | mantida |
 | Atraso do portal entre certame e baixa | **~1 dia, 7 vezes** — 3 delas previstas | **reforçada em 10/10** |
@@ -588,6 +588,68 @@ descartada em silêncio — justamente o dado que mede quantas vezes um lote rod
 sem ser arrematado. A chave passou a ser **(data, lote)**, e o caso foi testado
 nos dois sentidos: duas saídas do mesmo lote em datas distintas entram ambas;
 a repetição exata continua sendo descartada.
+
+### Quatro em quatro: a pauta cumpriu-se à data — 28/11/2026
+
+Coleta íntegra: 20 lotes em Palhoça, 27 no 2º anel, 47 no total.
+
+**Os quatro lotes cuja saída eu havia previsto para hoje saíram hoje, todos os
+quatro.** Último certame em 27/11; ausência na rodada das 07h de 28/11 — a manhã
+seguinte, exatamente como a regra prevê:
+
+| Lote | Bairro | Preço | Certames | Previsto | Observado |
+|---|---|---|---|---|---|
+| `144441718579-3` | Sertão do Maruim | R$ 798.000,00 | 23 e 27/11 | 28/11 | **28/11** |
+| `855550750226-7` | Forquilhinha | R$ 195.000,00 | 23 e 27/11 | 28/11 | **28/11** |
+| `855553340804-3` | Real Parque | R$ 183.000,00 | 23 e 27/11 | 28/11 | **28/11** |
+| `878771317103-4` | Sertão do Maruim | R$ 152.483,93 | 23 e 27/11 | 28/11 | **28/11** |
+
+O controle anunciou os quatro com a mesma medida: `+5 dia(s) do 1º certame
+(23/11/2026) — curso esperado`. Estão em quarentena, e a confirmação vem na
+rodada das 19h, pela regra das duas rodadas.
+
+**O placar da série passa a treze previsões: onze confirmações, uma em aberto,
+uma falhada.** E vale dizer o que a falha de ontem e os acertos de hoje, juntos,
+ensinam: **a regra acerta o dia em que a janela se fecha; não acerta se a janela
+vai ser interrompida antes.** São duas perguntas, e só a primeira tem resposta
+medida.
+
+#### A constatação da janela, recontada com rigor
+
+Recontei do histórico, e não de memória. Dos **vinte e três** lotes com saída
+confirmada, **dezoito têm duas datas de certame**:
+
+| Quando saiu | Lotes |
+|---|---|
+| Depois do 2º leilão | **15** |
+| **Entre o 1º e o 2º leilão** | **zero** |
+| Antes do 1º leilão | 3 |
+
+A constatação, portanto, deve ser enunciada assim — e corrijo a redação anterior,
+que dizia `13 de 13` sem explicitar o denominador: **de quinze lotes que
+chegaram ao 1º leilão, nenhum saiu antes do 2º. Quinze de quinze.** Os outros
+três nunca entraram na janela: saíram antes do 1º certame. **Confirmadas as
+quatro de hoje, serão dezenove de dezenove.**
+
+A consequência prática é a de sempre, e agora mais firme: **o 2º leilão é o único
+momento de entrada que esta praça oferece ao arrematante.** Não há vantagem em
+acompanhar o 1º — o preço dele é a avaliação, conforme medido em 25/11 —, nem
+risco de o lote escapar entre as duas datas.
+
+#### A saída anterior ao certame confirmou-se
+
+O lote `844440744670-3` (São Sebastião), ausente desde ontem, faltou pela segunda
+vez e **entrou no histórico como saída confirmada**, com a marca que importa:
+`ANTES do certame`. Seus leilões, 01/12 e 07/12, nunca ocorreram. É o terceiro
+caso em vinte e três, e o primeiro que o controle automático apanhou no ato.
+
+**O Centro de Florianópolis voltou**, como das outras vezes: o `144440299841-6`
+esteve ausente na rodada das 19h de ontem e reapareceu nesta manhã, pelo mesmo
+preço. Décima segunda ausência em Venda Online, décimo segundo retorno,
+**nenhuma saída**.
+
+**O estoque:** onze aprovados na triagem, nove em Bela Vista, todos reprovando na
+margem. Comparáveis de mercado com **sessenta e seis dias**.
 
 ### Lote novo em Bela Vista, e a primeira previsão da pauta que furou — 27/11/2026, 19h
 
